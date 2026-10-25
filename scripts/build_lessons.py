@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """一次性生成「跟讀學粵語」的離線音頻。
 
-流程：整篇文本 → Qwen-Audio-3.0-TTS-Plus（帶字級時間戳）→ 按「，」切段 → 寫 wav + lessons.json
+流程：整篇文本 → Qwen-Audio-3.0-TTS-Plus（帶字級時間戳）→ 按「，」「！」切段 → 寫 wav + lessons.json
 用法：python scripts/build_lessons.py
 """
 
@@ -111,7 +111,7 @@ def cut_points(text: str, words: list[dict], total_ms: int) -> list[int]:
 
     cuts = [0]
     offset = 0
-    for seg in re.split(r"(?<=，)", text)[:-1]:
+    for seg in re.split(r"(?<=[，！])", text)[:-1]:
         offset += len(seg)
         cuts.append(time_at(offset))
     cuts.append(total_ms)
@@ -144,8 +144,8 @@ async def build() -> None:
     lessons = {"model": MODEL, "voice": VOICE, "instruction": INSTRUCTION, "articles": []}
     for ai, art in enumerate(articles):
         text = art["text"]
-        jy_segments = [s for s in re.split(r"(?<=,)\s*", art["jyutping"]) if s]
-        text_segments = [s for s in re.split(r"(?<=，)", text) if s]
+        jy_segments = [s for s in re.split(r"(?<=[,!])\s*", art["jyutping"]) if s]
+        text_segments = [s for s in re.split(r"(?<=[，！])", text) if s]
         assert len(jy_segments) == len(text_segments), (art["title"], len(jy_segments), len(text_segments))
 
         print(f"[{ai+1}/{len(articles)}] {art['title']} …", flush=True)
