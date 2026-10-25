@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>粵語 TTS 實驗室 · Cantonese TTS Playground</title>
+<meta name="description" content="貼一段文字，用不同開源 TTS 項目讀出粵語，即時對比音色。" />
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>" />
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">20261025 · Cantonese TTS</div>
+    <h1>同一個句子，<em>聽聽不同開源 TTS</em> 講粵語</h1>
+    <p class="lede">
+      貼上一段文字，逐個引擎合成，即時對比音色、語速與自然度。
+      支援在線音色、離線合成與自建模型服務。
+    </p>
+    <div class="hero-stats">
+      <span><strong id="statEngines">–</strong> 個引擎可用</span>
+      <span class="sep"></span>
+      <span><strong>12</strong> 個粵語項目已調研</span>
+      <span class="sep"></span>
+      <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="composer" aria-label="輸入文字">
+    <div class="composer-head">
+      <label for="text">測試文本</label>
+      <span class="counter"><span id="count">0</span> / 2000</span>
+    </div>
+    <textarea id="text" spellcheck="false" placeholder="喺度貼上你想測試嘅粵語文字……">你好，我係阿明，今日天氣好好，不如一齊去飲茶？</textarea>
+
+    <div class="samples" id="samples" aria-label="範例文本"></div>
+
+    <div class="actions">
+      <button id="runAll" class="btn primary" type="button">
+        <span class="spinner" hidden></span><span class="label">全部合成</span>
+      </button>
+      <button id="playAll" class="btn ghost" type="button" disabled>依次試聽</button>
+      <button id="clear" class="btn ghost" type="button">清空</button>
+      <span class="hint">Ctrl / ⌘ + Enter 快速合成</span>
+    </div>
+  </section>
+
+  <section class="grid" id="engines" aria-live="polite">
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+  </section>
+
+  <section class="notes">
+    <h2>點用呢個頁面？</h2>
+    <div class="note-grid">
+      <div><h3>1 · 同一段文字</h3><p>所有引擎讀同一段輸入，方便比較斷句、變調同懶音處理。</p></div>
+      <div><h3>2 · 逐個合成</h3><p>每張卡獨立合成，失敗不影響其他引擎；重複文本會命中快取。</p></div>
+      <div><h3>3 · 盲聽對比</h3><p>先按「全部合成」，再用「依次試聽」順序播放，減少先入為主。</p></div>
+    </div>
+    <p class="disclaimer">
+      edge-tts 音色由微軟在線服務提供，需聯網且受其條款約束；eSpeak NG 為本地共振峰合成，音質僅作基線參考。
+    </p>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>粵語 TTS 實驗室</span>
+  <span class="dot">·</span>
+  <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">源碼</a>
+  <span class="dot">·</span>
+  <a href="https://github.com/leon7786/20261025-Cantonese#粵語-tts-項目-star-排行" target="_blank" rel="noreferrer">粵語 TTS Star 排行</a>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
