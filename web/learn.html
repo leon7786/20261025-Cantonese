@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#f7f4ee" />
 <title>跟讀學粵語 · Cantonese TTS</title>
 <meta name="description" content="整篇粵語短文，點邊句聽邊句，粵拼標在字上面。音頻已離線生成。" />
-<link rel="stylesheet" href="/styles.css?v=20261027c" />
+<link rel="stylesheet" href="/styles.css?v=20261027e" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>" />
 </head>
 <body>
@@ -34,10 +34,13 @@
 
     <section class="learn-main">
       <div class="controlbar">
-        <button id="playPause" class="btn primary" type="button">播放</button>
-        <button id="stop" class="btn ghost" type="button">停止</button>
-        <button id="replay" class="btn ghost" type="button">重播</button>
-        <span class="hint" id="status">點句子即播放</span>
+        <div class="controls-row">
+          <button id="playPause" class="btn primary" type="button">播放</button>
+          <button id="stop" class="btn ghost" type="button">停止</button>
+          <button id="replay" class="btn ghost" type="button">重播</button>
+          <span class="hint" id="status">點句子即播放</span>
+        </div>
+        <audio id="player" class="learn-player" controls preload="none"></audio>
       </div>
 
       <article class="learn-article">
@@ -47,7 +50,6 @@
           <span class="article-meta" id="artMeta"></span>
         </header>
         <div class="prose" id="prose"></div>
-        <audio id="player" class="learn-player" controls preload="none" hidden></audio>
       </article>
 
       <p class="disclaimer">
@@ -66,6 +68,6 @@
   <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">源碼</a>
 </footer>
 
-<script src="/learn.js?v=20261027c" defer></script>
+<script src="/learn.js?v=20261027e" defer></script>
 </body>
 </html>

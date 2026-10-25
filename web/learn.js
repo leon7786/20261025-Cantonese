@@ -13,6 +13,11 @@
   const replayBtn = $("replay");
 
   const PUNCT = /[，。！？；：、,.!?;:]/;
+  const LS = {
+    art: "cantonese.learn.article",
+    visited: "cantonese.learn.visited",
+    last: "cantonese.learn.last",
+  };
   const state = {
     articles: [],
     art: 0,
@@ -20,7 +25,36 @@
     paused: false,
     single: false,      // 單句模式：播完即停
     index: 0,
+    visited: {},        // { articleIndex: [segIndex, ...] }
+    last: null,         // { art, seg }
   };
+
+  function loadState() {
+    try {
+      const art = Number(localStorage.getItem(LS.art));
+      if (Number.isInteger(art) && art >= 0 && art < state.articles.length) state.art = art;
+      state.visited = JSON.parse(localStorage.getItem(LS.visited) || "{}") || {};
+      state.last = JSON.parse(localStorage.getItem(LS.last) || "null");
+    } catch { /* ignore */ }
+  }
+
+  function saveArt() {
+    try { localStorage.setItem(LS.art, String(state.art)); } catch { /* ignore */ }
+  }
+
+  function markVisited(i) {
+    const key = String(state.art);
+    const list = state.visited[key] || [];
+    if (!list.includes(i)) list.push(i);
+    state.visited[key] = list;
+    state.last = { art: state.art, seg: i };
+    try {
+      localStorage.setItem(LS.visited, JSON.stringify(state.visited));
+      localStorage.setItem(LS.last, JSON.stringify(state.last));
+    } catch { /* ignore */ }
+    const node = segEl(i);
+    if (node) node.classList.add("is-visited");
+  }
 
   const el = (tag, cls, text) => {
     const n = document.createElement(tag);
@@ -46,7 +80,7 @@
       const btn = el("button", "side-item" + (i === state.art ? " active" : ""));
       btn.type = "button";
       btn.append(el("span", "t", art.title), el("span", "c", `${art.segments.length} 句 · ${art.duration}s`));
-      btn.addEventListener("click", () => selectArticle(i));
+      btn.addEventListener("click", () => selectArticle(i, true));
       sidebarEl.append(btn);
     });
   }
@@ -75,14 +109,35 @@
       });
       proseEl.append(span);
     });
+
+    const visited = state.visited[String(state.art)] || [];
+    visited.forEach((i) => {
+      const node = segEl(i);
+      if (node) node.classList.add("is-visited");
+    });
+
+    if (state.last && state.last.art === state.art) {
+      const node = segEl(state.last.seg);
+      if (node) setTimeout(() => node.scrollIntoView({ block: "center", behavior: "smooth" }), 60);
+    }
   }
 
-  function selectArticle(i) {
+  function selectArticle(i, autoplay = false) {
     stopPlayback({ quiet: true });
     state.art = i;
+    saveArt();
     renderSidebar();
     renderArticle();
-    setStatus("點句子即播放");
+    if (autoplay) {
+      playWhole();
+    } else {
+      setStatus("點句子即播放");
+    }
+  }
+
+  function playWhole() {
+    stopPlayback({ quiet: true });
+    playSegment(0, false);
   }
 
   function segEl(i) {
@@ -101,13 +156,13 @@
     if (!seg) return;
 
     state.index = i;
+    if (single) markVisited(i);
     state.single = Boolean(single);
     state.playing = true;
     state.paused = false;
     syncButton();
 
     highlight(i);
-    player.hidden = false;
     player.src = seg.audio;
     player.play().catch(() => {});
     setStatus(`第 ${i + 1} / ${art.segments.length} 句`);
@@ -143,7 +198,7 @@
       setStatus(`第 ${state.index + 1} / ${current().segments.length} 句`);
       return;
     }
-    playSegment(0, false);
+    playWhole();
   }
 
   function stopPlayback({ quiet = false } = {}) {
@@ -153,15 +208,13 @@
     state.index = 0;
     player.pause();
     player.removeAttribute("src");
-    player.hidden = true;
     highlight(-1);
     syncButton();
     if (!quiet) setStatus("已停止");
   }
 
   function replay() {
-    stopPlayback({ quiet: true });
-    playSegment(0, false);
+    playWhole();
   }
 
   async function init() {
@@ -177,6 +230,7 @@
       setStatus("未找到文章", "error");
       return;
     }
+    loadState();
     renderSidebar();
     renderArticle();
     syncButton();
