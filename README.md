@@ -47,7 +47,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 | 引擎 | 類型 | 費用 | 粵語來源 | 開箱可用 |
 |---|---|---|---|---|
 | [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 免費 | 微軟 `zh-HK` 三個音色（曉曼／曉佳／雲龍） | ✅（需聯網） |
-| [canto-tts](https://github.com/typangaa/canto-tts) | 本地 | 免費 | 港式粵語專用模型（MOSS-TTS-Nano 微調），粵拼前端 | 安裝後 ✅（首次下載 730 MB） |
+| [canto-tts](https://github.com/typangaa/canto-tts) | 本地 | 免費 | 港式粵語專用模型（MOSS-TTS-Nano 微調），粵拼前端；支援自訂音色 | 安裝後 ✅（首次下載 730 MB） |
 | [gTTS](https://github.com/pndurette/gTTS) | 在線 | 免費 | Google 翻譯粵語（`tl=yue`），非官方接口、會限流 | ✅（需聯網） |
 | [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | 本地 | 免費 | 官方粵語 VITS（xiaomaiiwn），ONNX Runtime 純 CPU | 安裝後 ✅（首次下載 108 MB） |
 | [eSpeak NG](https://github.com/espeak-ng/espeak-ng) | 本地 | 免費 | 內建 `yue` 語音，另有粵拼輸入變體 | 安裝後 ✅ |
@@ -178,6 +178,20 @@ docs/
 | High-Logic/Genie-TTS | 1.8k | GPT-SoVITS 的 ONNX 推理引擎，官方語言只列 ja/en/zh/ko，粵語未確認 |
 
 > Star 數反映熱度，不代表粵語效果。榜上第 6／7／11 名本質是在線服務封裝或傳統合成，音質與神經網絡模型不在同一層級。
+
+## canto-tts 的多音色
+
+官方 ONNX bundle 只有一個 baked voice，但 runtime 仍然以 `prompt_audio_codes` 作為條件。這裡用模型自帶的 audio tokenizer 把參考音頻編碼成 codes，每次合成前切換，就得到多個音色：
+
+| 音色 | 來源 |
+|---|---|
+| 預設音色 | 模型自帶 |
+| 女聲 | Common Voice 22 粵語參考（CC0 1.0） |
+| 男聲 | Common Voice 22 粵語參考（CC0 1.0） |
+
+參考音頻放在 `assets/voices/*.wav`，**放入新的 48 kHz 立體聲 WAV 就自動多一個音色**（檔名即音色 id，重啟後生效）。
+
+> 這是推理期的條件切換，不是重新訓練；0.1B 模型的克隆能力有限，音色差異主要在音高與音質，咬字仍由同一個聲學模型決定。
 
 ## 注意事項
 
