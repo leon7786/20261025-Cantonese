@@ -37,7 +37,7 @@ class OpenAICompatEngine(Engine):
         return Probe(True, f"接口已連接（{detail}）", voices)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:
         if not config.OPENAI_TTS_URL:
             raise TTSError("OpenAI 兼容接口未配置")

@@ -24,6 +24,7 @@ class TTSRequest(BaseModel):
     voice: str = Field(default="", max_length=128)
     rate: int = Field(default=0, ge=-50, le=50)
     pitch: int = Field(default=0, ge=-50, le=50)
+    api_key: str = Field(default="", max_length=256)
 
 
 @app.get("/api/health")
@@ -59,7 +60,8 @@ async def tts(req: TTSRequest) -> JSONResponse:
 
     try:
         audio, mime, ext = await asyncio.wait_for(
-            engine.synth(text, voice, req.rate, req.pitch), timeout=config.SYNTH_TIMEOUT
+            engine.synth(text, voice, req.rate, req.pitch, api_key=req.api_key),
+            timeout=config.SYNTH_TIMEOUT,
         )
     except asyncio.TimeoutError:
         raise HTTPException(504, f"{engine.name} 合成超時（>{config.SYNTH_TIMEOUT:.0f}s）")

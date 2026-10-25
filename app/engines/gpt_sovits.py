@@ -30,7 +30,7 @@ class GptSovitsEngine(Engine):
         return Probe(True, f"api_v2 已連接（{detail}）", voices)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:
         if not config.GPT_SOVITS_URL or not config.GPT_SOVITS_REF:
             raise TTSError("GPT-SoVITS 未配置")

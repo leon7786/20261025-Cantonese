@@ -36,7 +36,7 @@ class CosyVoiceEngine(Engine):
         return Probe(True, f"FastAPI 服務已連接（{detail}）", voices)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:
         if not config.COSYVOICE_URL:
             raise TTSError("CosyVoice 未配置")

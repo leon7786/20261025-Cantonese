@@ -124,6 +124,24 @@ function makeCard(engine) {
     controls.append(field);
   }
 
+  let keyInput = null;
+  if (engine.accepts_key) {
+    const keyField = el("label", "field");
+    keyField.append(el("span", null, "Key"));
+    keyInput = el("input");
+    keyInput.type = "password";
+    keyInput.placeholder = "DashScope API Key（只存本機）";
+    keyInput.autocomplete = "off";
+    try {
+      keyInput.value = localStorage.getItem(`cantonese.key.${engine.id}`) || "";
+    } catch { /* ignore */ }
+    keyInput.addEventListener("input", () => {
+      try { localStorage.setItem(`cantonese.key.${engine.id}`, keyInput.value); } catch { /* ignore */ }
+    });
+    keyField.append(keyInput);
+    controls.append(keyField);
+  }
+
   const foot = el("div", "card-foot");
   const btn = el("button", "btn primary", engine.id === "browser" ? "朗讀" : "合成");
   btn.type = "button";
@@ -145,7 +163,7 @@ function makeCard(engine) {
     select.disabled = true;
     if (rateInput) rateInput.disabled = true;
   }
-  card._refs = { btn, meta, audio, error, select, rateInput, status };
+  card._refs = { btn, meta, audio, error, select, rateInput, status, keyInput };
 
   btn.addEventListener("click", () => handleSynth(card, engine));
 
@@ -177,6 +195,9 @@ async function handleSynth(card, engine, { fromAll = false } = {}) {
       voice: card._refs.select.value,
       rate: card._refs.rateInput ? Number(card._refs.rateInput.value) : 0,
     };
+    if (engine.accepts_key && card._refs.keyInput) {
+      payload.api_key = card._refs.keyInput.value.trim();
+    }
     const resp = await fetch("/api/tts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -324,6 +324,24 @@ select {
 select:focus { border-color: rgba(15, 118, 110, 0.5); box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); }
 select:disabled { background: #faf8f3; color: #9aa3af; }
 
+input[type="password"] {
+  width: 100%;
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 7px 9px;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input[type="password"]:focus {
+  border-color: rgba(15, 118, 110, 0.5);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+input[type="password"]::placeholder { color: #a7a094; }
+
 .range-row { display: flex; align-items: center; gap: 10px; }
 input[type="range"] {
   -webkit-appearance: none;

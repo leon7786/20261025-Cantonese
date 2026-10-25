@@ -115,7 +115,7 @@ class SherpaEngine(Engine):
         return Probe(True, "本地 VITS，首次合成會下載約 108 MB 模型", VOICES)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:
         speed = max(0.5, min(2.0, 1 + rate / 100))
 

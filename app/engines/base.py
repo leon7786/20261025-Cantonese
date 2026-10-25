@@ -34,6 +34,7 @@ class Engine:
     category: str = "ready"          # quality | baseline | selfhost | paid
     free: bool = True
     requires_key: bool = False
+    accepts_key: bool = False
     description: str = ""
     homepage: str = ""
     supports_rate: bool = False
@@ -43,7 +44,7 @@ class Engine:
         raise NotImplementedError
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:  # pragma: no cover - interface only
         """Return (audio bytes, mime type, file extension)."""
         raise NotImplementedError
@@ -57,6 +58,7 @@ class Engine:
             "category": self.category,
             "free": self.free,
             "requires_key": self.requires_key,
+            "accepts_key": self.accepts_key,
             "description": self.description,
             "homepage": self.homepage,
             "supports_rate": self.supports_rate,

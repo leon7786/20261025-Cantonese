@@ -14,7 +14,7 @@ GitHub 上「支援粵語」的 TTS 專案不少，但質素、部署成本、�
 
 ## 功能
 
-- **多引擎並排**：edge-tts、canto-tts、gTTS、sherpa-onnx、eSpeak NG、Ekho、瀏覽器 Web Speech，加上可選的 GPT-SoVITS / CosyVoice 3 / OpenAI 兼容服務
+- **多引擎並排**：edge-tts、canto-tts、gTTS、sherpa-onnx、eSpeak NG、Ekho、瀏覽器 Web Speech，以及可填 Key 的 Qwen3-TTS，加上可選的 GPT-SoVITS / CosyVoice 3 / OpenAI 兼容服務
 - **一鍵全部合成**：逐個引擎排隊合成，任何一個失敗都不影響其他卡片
 - **依次試聽**：按順序自動播放，適合做盲聽對比
 - **內容哈希快取**：同一段文字 + 同一組參數只合成一次
@@ -55,6 +55,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 | 瀏覽器 Web Speech | 本地 | 免費 | 作業系統 `zh-HK` 語音 | 視系統而定 |
 | [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | 免費（自架） | `text_lang=yue` + 參考音頻 | 需配置 |
 | [CosyVoice 3](https://github.com/FunAudioLLM/CosyVoice) | 遠端 | 免費（自架） | 18+ 中文方言（含粵語） | 需配置 |
+| [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) | 在線 API | 需 API Key（有免費額度） | 阿里雲百煉 `qwen3-tts-flash`，頁面直接填 Key | 填 Key 即用 |
 | OpenAI 兼容接口 | 遠端 | 需 API Key | 由服務決定 | 需配置 |
 
 頁面按**音質與費用**分區排列：**推薦音質（edge-tts / canto-tts / gTTS）→ 基線對照（sherpa-onnx / eSpeak NG / Ekho / 瀏覽器）→ 免費但需自行部署 → 需要 API Key（置底）**。
@@ -192,6 +193,18 @@ docs/
 參考音頻放在 `assets/voices/*.wav`，**放入新的 48 kHz 立體聲 WAV 就自動多一個音色**（檔名即音色 id，重啟後生效）。
 
 > 這是推理期的條件切換，不是重新訓練；0.1B 模型的克隆能力有限，音色差異主要在音高與音質，咬字仍由同一個聲學模型決定。
+
+## 在頁面填 API Key
+
+Qwen3-TTS 卡片帶一個 Key 輸入框：
+
+- Key 只存在瀏覽器 `localStorage`（`cantonese.key.qwen-tts`），隨請求發給本機後端，**不會寫入伺服器或快取**
+- 也可以在 `.env` 設 `CANTONESE_DASHSCOPE_KEY`，頁面留空時使用環境變數
+- 模型／端點可換：`CANTONESE_QWEN_MODEL`、`CANTONESE_QWEN_URL`、`CANTONESE_QWEN_LANG`
+- 北京與新加坡區域的 Key 不通用，預設走北京 `dashscope.aliyuncs.com`
+- 需要 Key 的引擎不參與「全部合成」，避免誤觸計費
+
+> ⚠️ Qwen3-TTS 官方 `language_type` 只有中／英／日／韓／德／法／俄／西／葡／意，**沒有粵語**，粵字會用普通話音色讀。放進來是為了對照「普通話模型讀粵語」的效果。
 
 ## 注意事項
 

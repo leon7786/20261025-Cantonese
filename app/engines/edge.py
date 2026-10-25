@@ -38,7 +38,7 @@ class EdgeEngine(Engine):
         return Probe(True, "微軟在線粵語音色，共 3 個", VOICES)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:
         voice = voice or VOICES[0].id
         rate_s = f"{rate:+d}%"

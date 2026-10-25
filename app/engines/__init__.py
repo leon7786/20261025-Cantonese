@@ -14,6 +14,7 @@ from .espeak import EspeakEngine
 from .gpt_sovits import GptSovitsEngine
 from .gtts import GTtsEngine
 from .openai_compat import OpenAICompatEngine
+from .qwen import QwenEngine
 from .sherpa import SherpaEngine
 
 ENGINES: dict[str, Engine] = {
@@ -27,6 +28,7 @@ ENGINES: dict[str, Engine] = {
         EkhoEngine(),
         GptSovitsEngine(),
         CosyVoiceEngine(),
+        QwenEngine(),
         OpenAICompatEngine(),
     )
 }
