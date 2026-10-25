@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """一次性生成「跟讀學粵語」的離線音頻。
 
-流程：整篇文本 → Qwen-Audio-3.0-TTS-Plus（帶字級時間戳）→ 按「，」「！」切段 → 寫 wav + lessons.json
+流程：整篇文本 → Qwen-Audio-3.0-TTS-Plus（帶字級時間戳）→ 按「。」「，」「！」切段，少於 4 字合併 → 寫 wav + lessons.json
 用法：python scripts/build_lessons.py
 """
 
@@ -91,6 +91,32 @@ async def synth(text: str, env: dict) -> tuple[bytes, list[dict]]:
         return bytes(pcm), words
 
 
+PUNCT_RE = re.compile(r"[，。！？；：、,.!?;:]")
+
+
+def char_count(text: str) -> int:
+    return len([c for c in text if not PUNCT_RE.match(c)])
+
+
+def segments_of(text: str) -> list[str]:
+    """按「。」「，」「！」切；不足 4 字的與下一段合併（末段則併回上一段）。"""
+    raw = [s for s in re.split(r"(?<=[。，！])", text) if s.strip()]
+    merged: list[str] = []
+    i = 0
+    while i < len(raw):
+        seg = raw[i]
+        if char_count(seg) < 4 and i + 1 < len(raw):
+            merged.append(seg + raw[i + 1])
+            i += 2
+        else:
+            merged.append(seg)
+            i += 1
+    if len(merged) > 1 and char_count(merged[-1]) < 4:
+        merged[-2] += merged[-1]
+        merged.pop()
+    return merged
+
+
 def cut_points(text: str, words: list[dict], total_ms: int) -> list[int]:
     """按「，」切點，用字級時間戳換算成毫秒。words 可能把多字合成一個 token，
     所以用累加字數建立 span，而不是依賴 begin_index。"""
@@ -109,12 +135,14 @@ def cut_points(text: str, words: list[dict], total_ms: int) -> list[int]:
                 return int(word["begin_time"])
         return total_ms
 
+    segments = segments_of(text)
     cuts = [0]
     offset = 0
-    for seg in re.split(r"(?<=[，！])", text)[:-1]:
+    for seg in segments[:-1]:
         offset += len(seg)
         cuts.append(time_at(offset))
     cuts.append(total_ms)
+    assert len(cuts) == len(segments) + 1, (len(cuts), len(segments))
 
     # 保證單調遞增，避免 0 時長片段
     for i in range(1, len(cuts)):
@@ -144,7 +172,7 @@ async def build() -> None:
     lessons = {"model": MODEL, "voice": VOICE, "instruction": INSTRUCTION, "articles": []}
     for ai, art in enumerate(articles):
         text = art["text"]
-        text_segments = [s for s in re.split(r"(?<=[，！])", text) if s]
+        text_segments = segments_of(text)
         # 粵拼按「非標點字數」分配，避免頓號（、）在粵拼裡也是逗號而造成錯位
         jy_tokens = [t for t in art["jyutping"].split() if not re.fullmatch(r"[，。！？；：、,.!?;:]+", t)]
         jy_segments, cursor = [], 0
