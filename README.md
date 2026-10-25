@@ -202,7 +202,7 @@ Qwen3-TTS 卡片帶一個 Key 輸入框：
 - 也可以在 `.env` 設 `CANTONESE_DASHSCOPE_KEY`，頁面留空時使用環境變數
 - 走百煉 WebSocket inference：`run-task → task-started → continue-task → finish-task → task-finished`，PCM 拼成 WAV
 - 音色可**手動輸入**（3.0-plus 系統音色：`longanlingxin` 女、`longanlufeng` 男）
-- 「指令」欄控制方言／情緒／角色，預設 `用廣東話朗讀`；留空則用 `CANTONESE_QWEN_INSTRUCTION`
+- 「指令」欄控制方言／情緒／角色，預設 `请用广东话表达。`（官方句式）；留空則用 `CANTONESE_QWEN_INSTRUCTION`
 - 相關環境變數：`CANTONESE_QWEN_MODEL`、`CANTONESE_QWEN_VOICE`、`CANTONESE_QWEN_INSTRUCTION`、`CANTONESE_QWEN_LANG_HINTS`、`CANTONESE_QWEN_PROTOCOL`（`ws`/`http`）、`CANTONESE_QWEN_WS_URL`、`CANTONESE_QWEN_WORKSPACE`
 - 新舊域名：預設走 `wss://dashscope.aliyuncs.com/api-ws/v1/inference`；百煉建議用業務空間專屬域名 `wss://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/api-ws/v1/inference`，可用 `CANTONESE_QWEN_WS_URL` + `CANTONESE_QWEN_WORKSPACE` 切換
 - 北京與新加坡區域的 Key 不通用，預設走北京 `dashscope.aliyuncs.com`
@@ -211,6 +211,30 @@ Qwen3-TTS 卡片帶一個 Key 輸入框：
 沒有 Key 也可以測協議：`python scripts/mock_qwen_ws.py` 會起一個本地模擬 realtime 服務（回 1 秒正弦波），再用 `CANTONESE_QWEN_WS_URL=ws://127.0.0.1:8765/api-ws/v1/realtime` 啟動應用即可走完整條鏈路。
 
 > ⚠️ Qwen3-TTS 官方 `language_type` 只有中／英／日／韓／德／法／俄／西／葡／意，**沒有粵語**，粵字會用普通話音色讀。放進來是為了對照「普通話模型讀粵語」的效果。
+
+### 百煉 WebSocket 調用要點
+
+```
+wss://dashscope.aliyuncs.com/api-ws/v1/inference      # 或 {WorkspaceId}.cn-beijing.maas.aliyuncs.com
+Authorization: Bearer <API_KEY>
+```
+
+```jsonc
+// 1) run-task
+{"header":{"action":"run-task","task_id":"<uuid>","streaming":"duplex"},
+ "payload":{"task_group":"audio","task":"tts","function":"SpeechSynthesizer",
+  "model":"qwen-audio-3.0-tts-plus",
+  "parameters":{"text_type":"PlainText","voice":"longanlingxin","format":"pcm",
+                "sample_rate":24000,"volume":50,"rate":1,"pitch":1,
+                "enable_ssml":false,"instruction":"请用广东话表达。"},
+  "input":{}}}
+// 2) 收到 task-started 後
+{"header":{"action":"continue-task","task_id":"<uuid>","streaming":"duplex"},"payload":{"input":{"text":"你好"}}}
+{"header":{"action":"finish-task","task_id":"<uuid>","streaming":"duplex"},"payload":{"input":{}}}
+// 3) 每個 result-generated 事件後跟一幀 binary 音頻；收 task-finished 即完成
+```
+
+音色：`longanlingxin`（女）、`longanlufeng`（男），另有 500+ 復刻音色。方言靠 `instruction`，`language_hints` 只有 zh/en/ja 等，**沒有粵語代碼**。費用 1.4 元/萬字符，RPM 180。
 
 ## 注意事項
 

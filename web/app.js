@@ -168,7 +168,7 @@ function makeCard(engine) {
     instructionInput = el("input");
     instructionInput.type = "text";
     instructionInput.autocomplete = "off";
-    instructionInput.placeholder = "例如：用廣東話朗讀";
+    instructionInput.placeholder = "例如：请用广东话表达。";
     try {
       instructionInput.value = localStorage.getItem(`cantonese.instruction.${engine.id}`) || "";
     } catch { /* ignore */ }
