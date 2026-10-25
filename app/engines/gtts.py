@@ -6,7 +6,10 @@ import httpx
 
 from .base import Engine, Probe, TTSError, Voice
 
-VOICES = [Voice("yue", "Google 粵語", note="單一音色，較自然")]
+VOICES = [
+    Voice("normal", "Google 粵語 · 正常", note="預設語速"),
+    Voice("slow", "Google 粵語 · 慢速", note="ttsspeed=0.24，適合學習"),
+]
 ENDPOINT = "https://translate.google.com/translate_tts"
 HEADERS = {
     "User-Agent": (
@@ -31,8 +34,8 @@ def _chunks(text: str, limit: int = 160) -> list[str]:
     return [p for p in parts if p]
 
 
-async def _fetch(client: httpx.AsyncClient, text: str) -> bytes:
-    params = {"ie": "UTF-8", "q": text, "tl": "yue", "client": "tw-ob", "ttsspeed": "1"}
+async def _fetch(client: httpx.AsyncClient, text: str, speed: str = "1") -> bytes:
+    params = {"ie": "UTF-8", "q": text, "tl": "yue", "client": "tw-ob", "ttsspeed": speed}
     resp = await client.get(ENDPOINT, params=params, headers=HEADERS, timeout=25)
     if resp.status_code == 429:
         raise TTSError("Google 返回 429：請求過於頻繁，請稍後再試")
@@ -47,7 +50,7 @@ class GTtsEngine(Engine):
     vendor = "Google 翻譯（粵語）"
     kind = "online"
     category = "quality"
-    description = "Google 翻譯的粵語音色，免費、自然度不錯；非官方接口，有頻率限制。"
+    description = "Google 翻譯的粵語音色，提供正常／慢速兩檔；非官方接口，有頻率限制。"
     homepage = "https://github.com/pndurette/gTTS"
     supports_rate = False
     supports_pitch = False
@@ -66,9 +69,10 @@ class GTtsEngine(Engine):
         self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = "", instruction: str = ""
     ) -> tuple[bytes, str, str]:
         chunks = _chunks(text)
+        speed = "0.24" if voice == "slow" else "1"
         try:
             async with httpx.AsyncClient(follow_redirects=True) as client:
-                audio = b"".join([await _fetch(client, c) for c in chunks])
+                audio = b"".join([await _fetch(client, c, speed) for c in chunks])
         except TTSError:
             raise
         except Exception as exc:
