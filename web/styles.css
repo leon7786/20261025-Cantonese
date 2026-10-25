@@ -30,7 +30,7 @@
 
 * { box-sizing: border-box; }
 
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; max-width: 100%; overflow-x: clip; }
 
 body {
   min-height: 100vh;
@@ -262,7 +262,7 @@ textarea::placeholder { color: #a7a094; }
 /* ---------- engine grid ---------- */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
   gap: 18px;
 }
 .section .grid { margin-top: 0; }
@@ -403,7 +403,7 @@ input[type="range"]::-moz-range-thumb {
 .meta { color: var(--dim); font-size: 11.5px; font-variant-numeric: tabular-nums; }
 .meta .cached { color: var(--warm); }
 
-audio { width: 100%; height: 36px; margin-top: 2px; }
+audio { width: 100%; max-width: 100%; min-width: 0; height: 36px; margin-top: 2px; }
 
 .error {
   font-size: 12px;
@@ -596,6 +596,7 @@ audio { width: 100%; height: 36px; margin-top: 2px; }
 }
 .seg-jy {
   display: block;
+  overflow-wrap: anywhere;
   font-size: 11.5px;
   line-height: 1.5;
   color: var(--dim);
@@ -676,20 +677,135 @@ audio { width: 100%; height: 36px; margin-top: 2px; }
 .controlbar .learn-player { margin-top: 2px; }
 .learn-main { min-width: 0; }
 
-@media (max-width: 860px) {
-  .learn-layout { grid-template-columns: 1fr; }
-  .lesson-sidebar {
-    position: static;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 8px;
-  }
-  .side-item { min-width: 150px; }
-  .controlbar .hint { margin-left: 0; flex-basis: 100%; }
-}
+
 
 /* visited marker */
 .prose .seg.is-visited:not(.is-playing) {
   background: #f7faf8;
   box-shadow: inset 3px 0 0 #cfe6df;
+}
+
+
+/* ==========================================================================
+   Responsive pass — PC / iPad (landscape+portrait) / iPhone / Android
+   Breakpoints: 1200 / 1024 / 900 / 768 / 600 / 420 / 360
+   ========================================================================== */
+
+/* iPad landscape & small laptops: tighten outer padding */
+@media (max-width: 1100px) {
+  .hero { padding: 64px 20px 6px; }
+  .wrap { padding: 24px 20px 0; }
+  .foot { padding: 20px 20px 32px; }
+}
+
+/* iPad portrait: keep two columns but narrower sidebar */
+@media (max-width: 1024px) {
+  .learn-layout { grid-template-columns: 200px minmax(0, 1fr); gap: 16px; }
+  .side-item { padding: 9px 10px; }
+  .side-item .t { font-size: 13px; }
+  .prose { font-size: 19px; line-height: 2.9; }
+}
+
+/* Phones: sidebar becomes a horizontal strip */
+@media (max-width: 767px) {
+  .learn-layout { grid-template-columns: 1fr; }
+  .lesson-sidebar {
+    position: static;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .lesson-sidebar::-webkit-scrollbar { height: 6px; }
+  .lesson-sidebar::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
+  .side-item { flex: 0 0 auto; min-width: 140px; }
+  .controlbar .hint { margin-left: 0; flex-basis: 100%; }
+  .hero { padding-top: 52px; }
+  h1 { font-size: clamp(28px, 5.2vw, 44px); }
+  .lede { font-size: 15px; }
+}
+
+/* Phones landscape & small tablets: compact cards */
+@media (max-width: 768px) {
+  .hero { padding: 44px 16px 4px; }
+  .wrap { padding: 20px 16px 0; }
+  .composer { padding: 16px; }
+  .card { padding: 15px; }
+  .learn-article { padding: 18px 16px 10px; }
+  .article-head h2 { font-size: 18px; }
+  .prose { font-size: 18px; line-height: 2.75; }
+  .prose .seg { padding: 8px 10px; }
+  .seg-zh { font-size: 17px; line-height: 1.7; }
+  .seg-jy { font-size: 11px; }
+  .note-grid { grid-template-columns: 1fr; }
+  .foot { flex-wrap: wrap; padding: 18px 16px 28px; }
+}
+
+/* Phones: single column controls, larger tap targets */
+@media (max-width: 600px) {
+  .hero-stats { flex-wrap: wrap; gap: 10px; font-size: 12.5px; }
+  .hero-stats .sep { display: none; }
+  h1 { font-size: clamp(24px, 7vw, 34px); }
+  .lede { font-size: 14.5px; line-height: 1.65; }
+  .kicker { font-size: 10.5px; letter-spacing: 0.16em; }
+  .composer { padding: 14px; }
+  textarea { min-height: 104px; padding: 12px; font-size: 15.5px; }
+  .actions { gap: 8px; }
+  .btn { min-height: 42px; padding: 9px 14px; font-size: 13.5px; }
+  .hint { flex-basis: 100%; margin-left: 0; order: 9; }
+  .tabs { gap: 6px; }
+  .tab { padding: 7px 10px; }
+  .tab-title { font-size: 12.5px; }
+  .controlbar { padding: 12px; }
+  .controls-row { gap: 8px; }
+  .controls-row .btn { flex: 1 1 auto; justify-content: center; }
+  .learn-player { height: 40px; }
+  .learn-article { padding: 16px 12px 8px; border-radius: 14px; }
+  .article-head { gap: 8px; }
+  .article-meta { margin-left: 0; flex-basis: 100%; font-size: 11.5px; }
+  .prose { margin: 12px 0 14px; }
+  .prose .seg { padding: 7px 8px; }
+  .seg-zh { font-size: 16px; }
+  .seg-jy { font-size: 10.5px; line-height: 1.45; }
+  .side-item { min-width: 126px; padding: 8px 10px; }
+  .side-item .t { font-size: 12.5px; }
+  .side-item .c { font-size: 10.5px; }
+  .notes h2 { font-size: 16px; }
+  .disclaimer { font-size: 11.5px; }
+}
+
+/* Small Android / iPhone SE */
+@media (max-width: 420px) {
+  .wrap { padding-left: 12px; padding-right: 12px; }
+  .hero { padding-left: 12px; padding-right: 12px; }
+  .composer { padding: 12px; border-radius: 14px; }
+  .btn { font-size: 13px; padding: 8px 12px; }
+  .controls-row .btn { flex: 1 1 0; min-width: 0; }
+  .seg-zh { font-size: 15.5px; }
+  .seg-jy { font-size: 10px; }
+  .article-head h2 { font-size: 17px; }
+  .article-tag { font-size: 11px; }
+  audio { height: 40px; }
+}
+
+/* Very narrow (320px) */
+@media (max-width: 360px) {
+  .kicker { display: none; }
+  .seg-jy { font-size: 9.5px; }
+  .seg-zh { font-size: 15px; }
+  .side-item { min-width: 112px; }
+}
+
+/* Landscape phones: reclaim vertical space */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { padding-top: 24px; padding-bottom: 4px; }
+  .hero h1 { font-size: 26px; margin: 10px 0 8px; }
+  .lede { display: none; }
+  .learn-layout { grid-template-columns: 170px minmax(0, 1fr); }
+  .lesson-sidebar { position: static; flex-direction: column; overflow: visible; }
+  .side-item { min-width: 0; }
+  .prose { line-height: 2.4; }
 }
