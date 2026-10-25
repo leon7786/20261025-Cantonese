@@ -460,6 +460,7 @@ async function boot() {
     { id: "baseline", title: "免費 · 基線對照", note: "小模型或傳統合成，音質明顯較舊，僅作對照。" },
     { id: "selfhost", title: "免費 · 需自行部署", note: "開源模型，需先啟動服務並在 .env 填入地址。" },
     { id: "paid", title: "需要 API Key · 非免費", note: "按調用量收費，預設不參與「全部合成」。" },
+    { id: "last", title: "表現較差 · 置底", note: "實測音質明顯偏弱，僅保留作對照。" },
   ];
 
   for (const group of GROUPS) {

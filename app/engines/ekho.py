@@ -23,7 +23,7 @@ class EkhoEngine(Engine):
     name = "Ekho"
     vendor = "eGuideDog（余音）"
     kind = "local"
-    category = "baseline"
+    category = "last"
     description = "老牌粵語引擎，粵拼詞典 + 共振峰合成，體積細、完全離線，音質偏舊、固定語速。"
     homepage = "https://github.com/hgneng/ekho"
     supports_rate = False

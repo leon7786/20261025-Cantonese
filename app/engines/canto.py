@@ -124,7 +124,7 @@ class CantoEngine(Engine):
     name = "canto-tts"
     vendor = "typangaa（香港粵語）"
     kind = "local"
-    category = "quality"
+    category = "last"
     description = "專為港式粵語訓練的 0.1B ONNX 模型，純 CPU 可跑；另以參考音頻擴充女聲／男聲。"
     homepage = "https://github.com/typangaa/canto-tts"
     supports_rate = False

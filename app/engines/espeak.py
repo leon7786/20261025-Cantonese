@@ -20,7 +20,7 @@ class EspeakEngine(Engine):
     name = "eSpeak NG"
     vendor = "eSpeak NG"
     kind = "local"
-    category = "baseline"
+    category = "last"
     description = "純離線共振峰合成，體積僅幾 MB，音質明顯機械，適合做對照基線。"
     homepage = "https://github.com/espeak-ng/espeak-ng"
     supports_rate = True

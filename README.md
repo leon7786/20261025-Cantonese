@@ -58,7 +58,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 | [Qwen-Audio-3.0-TTS-Plus](https://www.alibabacloud.com/help/zh/model-studio/qwen-audio-3-0-tts-plus) | 在線 API | 需 API Key（1.4 元/萬字符） | 百煉 WebSocket inference，`instruction` 控制方言（如「用廣東話朗讀」） | 填 Key 即用 |
 | OpenAI 兼容接口 | 遠端 | 需 API Key | 由服務決定 | 需配置 |
 
-頁面按**音質與費用**分區排列：**推薦音質（edge-tts / canto-tts / gTTS）→ 基線對照（sherpa-onnx / eSpeak NG / Ekho / 瀏覽器）→ 免費但需自行部署 → 需要 API Key（置底）**。
+頁面按**實測表現**分區排列：**推薦音質（edge-tts / gTTS）→ 基線對照（sherpa-onnx / 瀏覽器）→ 免費但需自行部署 → 需要 API Key → 表現較差置底（canto-tts / eSpeak NG / Ekho）**。
 
 sherpa-onnx 是 108 MB 的小型 VITS，eSpeak NG 與 Ekho 屬上一代共振峰合成，三者音質明顯較舊，放在「基線對照」只作參考；需要 Key 的引擎預設不參與「全部合成」。
 
