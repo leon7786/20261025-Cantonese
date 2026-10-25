@@ -6,6 +6,7 @@ import asyncio
 import time
 
 from .base import Engine, Probe, TTSError
+from .canto import CantoEngine
 from .cosyvoice import CosyVoiceEngine
 from .edge import EdgeEngine
 from .espeak import EspeakEngine
@@ -16,6 +17,7 @@ ENGINES: dict[str, Engine] = {
     e.id: e
     for e in (
         EdgeEngine(),
+        CantoEngine(),
         EspeakEngine(),
         GptSovitsEngine(),
         CosyVoiceEngine(),

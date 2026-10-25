@@ -14,7 +14,7 @@ GitHub 上「支援粵語」的 TTS 專案不少，但質素、部署成本、�
 
 ## 功能
 
-- **多引擎並排**：edge-tts、eSpeak NG、瀏覽器 Web Speech，加上可選的 GPT-SoVITS / CosyVoice 3 / OpenAI 兼容服務
+- **多引擎並排**：edge-tts、canto-tts、eSpeak NG、瀏覽器 Web Speech，加上可選的 GPT-SoVITS / CosyVoice 3 / OpenAI 兼容服務
 - **一鍵全部合成**：逐個引擎排隊合成，任何一個失敗都不影響其他卡片
 - **依次試聽**：按順序自動播放，適合做盲聽對比
 - **內容哈希快取**：同一段文字 + 同一組參數只合成一次
@@ -34,6 +34,7 @@ python3 -m venv .venv
 
 # 可選：離線引擎
 sudo apt install espeak-ng        # macOS: brew install espeak-ng
+./.venv/bin/pip install -r requirements-canto.txt   # 港式粵語 canto-tts（純 CPU）
 
 HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 ```
@@ -45,6 +46,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 | 引擎 | 類型 | 費用 | 粵語來源 | 開箱可用 |
 |---|---|---|---|---|
 | [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 免費 | 微軟 `zh-HK` 三個音色（曉曼／曉佳／雲龍） | ✅（需聯網） |
+| [canto-tts](https://github.com/typangaa/canto-tts) | 本地 | 免費 | 港式粵語專用模型（MOSS-TTS-Nano 微調），粵拼前端 | 安裝後 ✅（首次下載 730 MB） |
 | [eSpeak NG](https://github.com/espeak-ng/espeak-ng) | 本地 | 免費 | 內建 `yue` 語音，另有粵拼輸入變體 | 安裝後 ✅ |
 | 瀏覽器 Web Speech | 本地 | 免費 | 作業系統 `zh-HK` 語音 | 視系統而定 |
 | [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | 免費（自架） | `text_lang=yue` + 參考音頻 | 需配置 |
@@ -131,24 +133,43 @@ docs/
 
 ## 粵語 TTS 項目 Star 排行
 
-以下為 2026-10-25 以 GitHub API 抓取的數據，僅列出**官方文檔確認支援粵語**的 TTS 專案：
+> 數據抓取於 2026-10-25（GitHub API + Hugging Face API）。只收錄**官方文檔明確支援粵語**的專案，Star 數會變動。
 
-| # | 項目 | Stars | 粵語支持方式 |
-|---|---|---|---|
-| 1 | [RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 63.7k | `yue` 原生語言代碼，訓練集含粵語 |
-| 2 | [OpenBMB/VoxCPM](https://github.com/OpenBMB/VoxCPM) | 40.6k | VoxCPM2 方言列表含粵語 |
-| 3 | [FunAudioLLM/CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | 24.1k | CosyVoice 3 覆蓋 18+ 方言（含廣東/粵語） |
-| 4 | [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | 15.5k | 官方 `vits-cantonese` ONNX 模型，可端側 |
-| 5 | [PaddlePaddle/PaddleSpeech](https://github.com/PaddlePaddle/PaddleSpeech) | 12.7k | `examples/canton/tts3` 粵語配方 |
-| 6 | [rany2/edge-tts](https://github.com/rany2/edge-tts) | 12.4k | 微軟 `zh-HK` 音色 |
-| 7 | [espeak-ng/espeak-ng](https://github.com/espeak-ng/espeak-ng) | 7.0k | 內建 `yue` 語音 |
-| 8 | [OpenMOSS/MOSS-TTS](https://github.com/OpenMOSS/MOSS-TTS) | 4.2k | 31 語言含 `yue` |
-| 9 | [Soul-AILab/SoulX-Podcast](https://github.com/Soul-AILab/SoulX-Podcast) | 3.6k | 支援粵語／四川話／河南話播客 |
-| 10 | [Edge0-AI/Audio8_TTS](https://github.com/Edge0-AI/Audio8_TTS) | 1.9k | 語言表含粵語 |
-| 11 | [hgneng/ekho](https://github.com/hgneng/ekho) | 1.2k | 粵拼驅動的離線引擎 |
-| 12 | [stepfun-ai/Step-Audio-EditX](https://github.com/stepfun-ai/Step-Audio-EditX) | 991 | 零樣本克隆支援粵語 |
+| # | 項目 | Stars | 許可 | 粵語支持方式 |
+|---|---|---|---|---|
+| 1 | [RVC-Boss/GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 63.7k | MIT | `yue` 原生語言代碼，訓練集含粵語 |
+| 2 | [OpenBMB/VoxCPM](https://github.com/OpenBMB/VoxCPM) | 40.6k | Apache-2.0 | VoxCPM2：30 語言 + 9 方言，方言含粵語 |
+| 3 | [QwenAudio/CosyVoice](https://github.com/QwenAudio/CosyVoice) | 24.1k | Apache-2.0 | 倉庫 topics 含 `cantonese`；CosyVoice 3 覆蓋 18+ 方言（含粵語） |
+| 4 | [k2-fsa/sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | 15.5k | Apache-2.0 | 官方 `vits-cantonese` ONNX 模型，可端側 |
+| 5 | [PaddlePaddle/PaddleSpeech](https://github.com/PaddlePaddle/PaddleSpeech) | 12.7k | Apache-2.0 | `examples/canton/tts3` 粵語配方 |
+| 6 | [rany2/edge-tts](https://github.com/rany2/edge-tts) | 12.4k | 開源客戶端 | 微軟 `zh-HK` 音色 |
+| 7 | [eSpeak NG](https://github.com/espeak-ng/espeak-ng) | 7.0k | GPL-3.0 | 內建 `yue` 語音 |
+| 8 | [OpenMOSS/MOSS-TTS](https://github.com/OpenMOSS/MOSS-TTS) | 4.2k | Apache-2.0 | 31 語言含 `yue`，官方明示粵語繼續訓練 |
+| 9 | [Soul-AILab/SoulX-Podcast](https://github.com/Soul-AILab/SoulX-Podcast) | 3.6k | Apache-2.0 | 支援粵語／四川話／河南話播客 |
+| 10 | [Edge0-AI/Audio8_TTS](https://github.com/Edge0-AI/Audio8_TTS) | 1.9k | Apache-2.0 | 語言表含粵語 |
+| 11 | [hgneng/ekho](https://github.com/hgneng/ekho) | 1.2k | GPL-2.0 | 粵拼驅動的離線引擎 |
+| 12 | [stepfun-ai/Step-Audio-EditX](https://github.com/stepfun-ai/Step-Audio-EditX) | 991 | Apache-2.0 | 零樣本克隆支援粵語，前綴 `[Cantonese]` |
+| 13 | [inclusionAI/Ming-3.0-tts](https://github.com/inclusionAI/Ming-3.0-tts) | 251 | MIT | `task="DIALECT"` + `controls={"dialect":"cantonese"}`，0.5B 粵語 CER SOTA |
+| 14 | [typangaa/canto-tts](https://github.com/typangaa/canto-tts) | 16 | Apache-2.0 | 港式粵語專用，MOSS-TTS-Nano 微調，ONNX 純 CPU |
 
-未列入的高星專案（官方語言表無粵語）：VibeVoice 55.0k、fish-speech 33.4k、index-tts 24.7k、Qwen3-TTS 14.0k、ChatTTS、Spark-TTS、MegaTTS3、F5-TTS、Chatterbox 等。
+### 粵語專用模型（Hugging Face，無 GitHub Star 可比）
+
+| 模型 | 說明 |
+|---|---|
+| [ASLP-lab/Cosyvoice2-Yue](https://huggingface.co/ASLP-lab/Cosyvoice2-Yue) | 基於 CosyVoice2 的粵語 TTS 基座，Apache-2.0 |
+| [ASLP-lab/Cosyvoice2-Yue-ZoengJyutGaai](https://huggingface.co/ASLP-lab/Cosyvoice2-Yue-ZoengJyutGaai) | 上述模型的「更自然」微調版（粵語：將粵嫁） |
+| [ASLP-lab/WSYue-TTS](https://huggingface.co/ASLP-lab/WSYue-TTS) | WenetSpeech-Yue 配套粵語 TTS |
+| [typangaa/canto-tts-nano](https://huggingface.co/typangaa/canto-tts-nano) | 0.1B 港式粵語權重，粵拼輸入、支援中英夾雜 |
+
+### 未確認 / 不支援粵語（高星但官方語言表沒有）
+
+| 項目 | Stars | 情況 |
+|---|---|---|
+| microsoft/VibeVoice | 55.0k | 僅中／英 |
+| fishaudio/fish-speech | 33.4k | S2 Pro 宣稱 80+ 語言但清單無 `yue`；授權為 Fish Audio Community License（研究／非商用免費，商用需授權） |
+| index-tts/index-tts | 24.7k | 語言選項無粵語 |
+| QwenLM/Qwen3-TTS | 14.0k | 10 語言 + 北京／四川方言音色，無粵語 |
+| High-Logic/Genie-TTS | 1.8k | GPT-SoVITS 的 ONNX 推理引擎，官方語言只列 ja/en/zh/ko，粵語未確認 |
 
 > Star 數反映熱度，不代表粵語效果。榜上第 6／7／11 名本質是在線服務封裝或傳統合成，音質與神經網絡模型不在同一層級。
 
