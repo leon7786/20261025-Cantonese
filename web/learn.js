@@ -1,18 +1,26 @@
-/* 跟讀學粵語 — 離線音頻、粵拼 ruby、點句播放 */
+/* 跟讀學粵語 — 左側文章、右側全文播放控制、離線音頻 */
 (() => {
   const $ = (id) => document.getElementById(id);
   const player = $("player");
   const statusEl = $("status");
-  const tabsEl = $("tabs");
+  const sidebarEl = $("sidebar");
   const proseEl = $("prose");
   const titleEl = $("artTitle");
   const tagEl = $("artTag");
   const metaEl = $("artMeta");
-  const playAllBtn = $("playAll");
+  const playBtn = $("playPause");
   const stopBtn = $("stop");
+  const replayBtn = $("replay");
 
   const PUNCT = /[，。！？；：、,.!?;:]/;
-  const state = { articles: [], art: 0, playing: false, stop: false, current: null };
+  const state = {
+    articles: [],
+    art: 0,
+    playing: false,     // 正在播（含「整篇」與「單句」）
+    paused: false,
+    single: false,      // 單句模式：播完即停
+    index: 0,
+  };
 
   const el = (tag, cls, text) => {
     const n = document.createElement(tag);
@@ -21,31 +29,30 @@
     return n;
   };
 
+  const current = () => state.articles[state.art];
+
   function setStatus(text, kind = "") {
     statusEl.textContent = text;
     statusEl.dataset.kind = kind;
   }
 
-  function renderTabs() {
-    tabsEl.innerHTML = "";
+  function syncButton() {
+    playBtn.textContent = state.playing && !state.paused ? "暫停" : "播放";
+  }
+
+  function renderSidebar() {
+    sidebarEl.innerHTML = "";
     state.articles.forEach((art, i) => {
-      const btn = el("button", "tab" + (i === state.art ? " active" : ""));
+      const btn = el("button", "side-item" + (i === state.art ? " active" : ""));
       btn.type = "button";
-      btn.setAttribute("role", "tab");
-      btn.setAttribute("aria-selected", String(i === state.art));
-      btn.append(el("span", "tab-title", art.title), el("span", "tab-count", `${art.segments.length} 句`));
+      btn.append(el("span", "t", art.title), el("span", "c", `${art.segments.length} 句 · ${art.duration}s`));
       btn.addEventListener("click", () => selectArticle(i));
-      tabsEl.append(btn);
+      sidebarEl.append(btn);
     });
   }
 
-  function renderSegment(span, zh, jy) {
-    span.append(el("span", "seg-jy", jy.trim()));
-    span.append(el("span", "seg-zh", zh));
-  }
-
   function renderArticle() {
-    const art = state.articles[state.art];
+    const art = current();
     if (!art) return;
     titleEl.textContent = art.title;
     tagEl.textContent = art.tag;
@@ -58,12 +65,12 @@
       span.setAttribute("role", "button");
       span.setAttribute("aria-label", `播放第 ${i + 1} 句`);
       span.dataset.i = String(i);
-      renderSegment(span, seg.zh, seg.jy);
-      span.addEventListener("click", () => playOne(i));
+      span.append(el("span", "seg-jy", seg.jy.trim()), el("span", "seg-zh", seg.zh));
+      span.addEventListener("click", () => playSegment(i, true));
       span.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          playOne(i);
+          playSegment(i, true);
         }
       });
       proseEl.append(span);
@@ -71,9 +78,9 @@
   }
 
   function selectArticle(i) {
-    stopPlayback();
+    stopPlayback({ quiet: true });
     state.art = i;
-    renderTabs();
+    renderSidebar();
     renderArticle();
     setStatus("點句子即播放");
   }
@@ -88,71 +95,73 @@
     if (node) node.classList.add("is-playing");
   }
 
-  function playFile(url) {
-    return new Promise((resolve) => {
-      player.hidden = false;
-      player.src = url;
-      const done = () => {
-        player.onended = null;
-        player.onerror = null;
-        player.onpause = null;
-        resolve();
-      };
-      player.onended = done;
-      player.onerror = done;
-      player.onpause = done;
-      player.play().catch(done);
-    });
-  }
-
-  async function playOne(i, { chain = false } = {}) {
-    if (state.playing && !chain) return;
-    const art = state.articles[state.art];
-    const seg = art.segments[i];
+  function playSegment(i, single) {
+    const art = current();
+    const seg = art && art.segments[i];
     if (!seg) return;
 
-    state.current = i;
-    highlight(i);
-    setStatus(`第 ${i + 1} / ${art.segments.length} 句`);
-    if (!chain) stopBtn.disabled = false;
-
-    await playFile(seg.audio);
-
-    if (!chain) {
-      stopBtn.disabled = true;
-      if (!state.stop) setStatus("點句子即播放");
-      if (!state.stop) highlight(-1);
-    }
-  }
-
-  async function playAll() {
-    if (state.playing) return;
+    state.index = i;
+    state.single = Boolean(single);
     state.playing = true;
-    state.stop = false;
-    playAllBtn.disabled = true;
-    stopBtn.disabled = false;
+    state.paused = false;
+    syncButton();
 
-    const total = state.articles[state.art].segments.length;
-    for (let i = 0; i < total; i++) {
-      if (state.stop) break;
-      await playOne(i, { chain: true });
-    }
-    state.playing = false;
-    playAllBtn.disabled = false;
-    stopBtn.disabled = true;
-    highlight(-1);
-    if (!state.stop) setStatus("全篇播放完畢");
+    highlight(i);
+    player.hidden = false;
+    player.src = seg.audio;
+    player.play().catch(() => {});
+    setStatus(`第 ${i + 1} / ${art.segments.length} 句`);
   }
 
-  function stopPlayback() {
-    state.stop = true;
+  function onEnded() {
+    const art = current();
+    if (!state.playing) return;
+
+    if (state.single || state.index + 1 >= art.segments.length) {
+      state.playing = false;
+      state.paused = false;
+      highlight(-1);
+      syncButton();
+      setStatus(state.single ? "點句子即播放" : "全篇播放完畢");
+      return;
+    }
+    playSegment(state.index + 1, false);
+  }
+
+  function togglePlay() {
+    if (state.playing && !state.paused) {
+      player.pause();
+      state.paused = true;
+      syncButton();
+      setStatus("已暫停");
+      return;
+    }
+    if (state.paused && player.src) {
+      state.paused = false;
+      player.play().catch(() => {});
+      syncButton();
+      setStatus(`第 ${state.index + 1} / ${current().segments.length} 句`);
+      return;
+    }
+    playSegment(0, false);
+  }
+
+  function stopPlayback({ quiet = false } = {}) {
     state.playing = false;
+    state.paused = false;
+    state.single = false;
+    state.index = 0;
     player.pause();
     player.removeAttribute("src");
     player.hidden = true;
     highlight(-1);
-    playAllBtn.disabled = false;
-    stopBtn.disabled = true;
+    syncButton();
+    if (!quiet) setStatus("已停止");
+  }
+
+  function replay() {
+    stopPlayback({ quiet: true });
+    playSegment(0, false);
   }
 
   async function init() {
@@ -168,14 +177,17 @@
       setStatus("未找到文章", "error");
       return;
     }
-    renderTabs();
+    renderSidebar();
     renderArticle();
-    playAllBtn.addEventListener("click", playAll);
-    stopBtn.addEventListener("click", () => {
-      stopPlayback();
-      setStatus("已停止");
+    syncButton();
+
+    playBtn.addEventListener("click", togglePlay);
+    stopBtn.addEventListener("click", () => stopPlayback());
+    replayBtn.addEventListener("click", replay);
+    player.addEventListener("ended", onEnded);
+    player.addEventListener("play", () => {
+      if (!state.paused) setStatus(`第 ${state.index + 1} / ${current().segments.length} 句`);
     });
-    player.addEventListener("play", () => setStatus("播放中…"));
   }
 
   init();

@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#f7f4ee" />
 <title>跟讀學粵語 · Cantonese TTS</title>
 <meta name="description" content="整篇粵語短文，點邊句聽邊句，粵拼標在字上面。音頻已離線生成。" />
-<link rel="stylesheet" href="/styles.css?v=20261026d" />
+<link rel="stylesheet" href="/styles.css?v=20261026e" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>" />
 </head>
 <body>
@@ -29,29 +29,33 @@
 </header>
 
 <main class="wrap">
-  <section class="composer learn-toolbar">
-    <div class="learn-controls">
-      <button id="playAll" class="btn primary" type="button">播放全篇</button>
-      <button id="stop" class="btn ghost" type="button" disabled>停止</button>
-      <span class="hint" id="status">點句子即播放</span>
-    </div>
-    <div class="tabs" id="tabs" role="tablist"></div>
-    <audio id="player" class="learn-player" controls preload="none" hidden></audio>
-  </section>
+  <div class="learn-layout">
+    <aside class="lesson-sidebar" id="sidebar" aria-label="文章列表"></aside>
 
-  <section class="learn-article">
-    <header class="article-head">
-      <h2 id="artTitle"></h2>
-      <span class="article-tag" id="artTag"></span>
-      <span class="article-meta" id="artMeta"></span>
-    </header>
-    <p class="prose" id="prose"></p>
-  </section>
+    <section class="learn-main">
+      <div class="controlbar">
+        <button id="playPause" class="btn primary" type="button">播放</button>
+        <button id="stop" class="btn ghost" type="button">停止</button>
+        <button id="replay" class="btn ghost" type="button">重播</button>
+        <span class="hint" id="status">點句子即播放</span>
+      </div>
 
-  <p class="disclaimer">
-    音頻由 Qwen-Audio-3.0-TTS-Plus（女聲）一次性生成整篇，再按逗號切段，已存放在本機，瀏覽時不呼叫 API。
-    粵拼只作發音提示，個別字讀音可能有出入。
-  </p>
+      <article class="learn-article">
+        <header class="article-head">
+          <h2 id="artTitle"></h2>
+          <span class="article-tag" id="artTag"></span>
+          <span class="article-meta" id="artMeta"></span>
+        </header>
+        <div class="prose" id="prose"></div>
+        <audio id="player" class="learn-player" controls preload="none" hidden></audio>
+      </article>
+
+      <p class="disclaimer">
+        音頻由 Qwen-Audio-3.0-TTS-Plus（女聲）一次性生成整篇，再按逗號切段，已存放在本機，瀏覽時不呼叫 API。
+        粵拼只作發音提示，個別字讀音可能有出入。
+      </p>
+    </section>
+  </div>
 </main>
 
 <footer class="foot">
@@ -62,6 +66,6 @@
   <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">源碼</a>
 </footer>
 
-<script src="/learn.js?v=20261026d" defer></script>
+<script src="/learn.js?v=20261026e" defer></script>
 </body>
 </html>
