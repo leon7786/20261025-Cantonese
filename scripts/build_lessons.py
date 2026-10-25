@@ -91,11 +91,16 @@ async def synth(text: str, env: dict) -> tuple[bytes, list[dict]]:
         return bytes(pcm), words
 
 
-PUNCT_RE = re.compile(r"[，。！？；：、,.!?;:]")
+PUNCT_RE = re.compile(r"[，。！？；：、,.!?;:;；\"'“”‘’《》〈〉（）()「」『』…—]")
+
+
+LATIN_RE = re.compile(r"[A-Za-z0-9]+")
 
 
 def char_count(text: str) -> int:
-    return len([c for c in text if not PUNCT_RE.match(c)])
+    """中文字逐字算 1；連續英文字母／數字算 1 個（對應粵拼的一個 token）。"""
+    stripped = PUNCT_RE.sub("", text)
+    return len(LATIN_RE.sub("X", stripped))
 
 
 def segments_of(text: str) -> list[str]:
@@ -174,10 +179,10 @@ async def build() -> None:
         text = art["text"]
         text_segments = segments_of(text)
         # 粵拼按「非標點字數」分配，避免頓號（、）在粵拼裡也是逗號而造成錯位
-        jy_tokens = [t for t in art["jyutping"].split() if not re.fullmatch(r"[，。！？；：、,.!?;:]+", t)]
+        jy_tokens = [t for t in art["jyutping"].split() if not re.fullmatch(r"[，。！？；：、,.!?;:;；\"'“”‘’《》〈〉（）()…—]+", t)]
         jy_segments, cursor = [], 0
         for seg in text_segments:
-            count = len([c for c in seg if not re.match(r"[，。！？；：、,.!?;:]", c)])
+            count = char_count(seg)
             jy_segments.append(" ".join(jy_tokens[cursor:cursor + count]))
             cursor += count
         assert cursor == len(jy_tokens), (art["title"], cursor, len(jy_tokens))
