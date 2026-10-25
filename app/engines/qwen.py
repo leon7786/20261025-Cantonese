@@ -232,6 +232,11 @@ class QwenEngine(Engine):
         key = (api_key or config.DASHSCOPE_KEY).strip()
         if not key:
             raise TTSError("請先在卡片填入百煉 API Key")
+        if key.startswith("sk-sp-"):
+            raise TTSError(
+                "這把 Key 屬 Coding Plan（sk-sp-…），其端點 coding.dashscope.aliyuncs.com 不提供語音合成；"
+                "請改用百煉控制台簽發的標準 API Key（sk-…）"
+            )
 
         voice = voice or config.QWEN_VOICE
         instruction = (instruction or config.QWEN_INSTRUCTION).strip()

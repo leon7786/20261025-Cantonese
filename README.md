@@ -210,6 +210,8 @@ Qwen3-TTS 卡片帶一個 Key 輸入框：
 
 沒有 Key 也可以測協議：`python scripts/mock_qwen_ws.py` 會起一個本地模擬 realtime 服務（回 1 秒正弦波），再用 `CANTONESE_QWEN_WS_URL=ws://127.0.0.1:8765/api-ws/v1/realtime` 啟動應用即可走完整條鏈路。
 
+> ⚠️ 如果你手上是 `sk-sp-…` 開頭的 Key，那是 **Coding Plan** 專用金鑰（端點 `coding.dashscope.aliyuncs.com`），只有編碼類模型、**不提供語音合成**；語音要用百煉控制台簽發的標準 `sk-…` Key。
+>
 > ⚠️ Qwen3-TTS 官方 `language_type` 只有中／英／日／韓／德／法／俄／西／葡／意，**沒有粵語**，粵字會用普通話音色讀。放進來是為了對照「普通話模型讀粵語」的效果。
 
 ### 百煉 WebSocket 調用要點
