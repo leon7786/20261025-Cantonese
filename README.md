@@ -22,7 +22,7 @@ GitHub 上「支援粵語」的 TTS 專案不少，但質素、部署成本、�
 - **遠端模型適配器**：把自建模型服務接進來，毋須改前端
 
 > 📓 開發過程中的踩坑、實測數據與取捨，都記在 [docs/NOTES.md](docs/NOTES.md)。
-> 🚀 線上部署與運維記錄：[docs/DEPLOY.md](docs/DEPLOY.md)。
+> 🚀 線上部署與運維記錄：[docs/DEPLOY.md](docs/DEPLOY.md)（線上目前只發佈跟讀頁，純靜態）。
 
 ## 兩個頁面
 
