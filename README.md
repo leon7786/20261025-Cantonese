@@ -14,7 +14,7 @@ GitHub 上「支援粵語」的 TTS 專案不少，但質素、部署成本、�
 
 ## 功能
 
-- **多引擎並排**：edge-tts、canto-tts、eSpeak NG、瀏覽器 Web Speech，加上可選的 GPT-SoVITS / CosyVoice 3 / OpenAI 兼容服務
+- **多引擎並排**：edge-tts、canto-tts、sherpa-onnx、eSpeak NG、瀏覽器 Web Speech，加上可選的 GPT-SoVITS / CosyVoice 3 / OpenAI 兼容服務
 - **一鍵全部合成**：逐個引擎排隊合成，任何一個失敗都不影響其他卡片
 - **依次試聽**：按順序自動播放，適合做盲聽對比
 - **內容哈希快取**：同一段文字 + 同一組參數只合成一次
@@ -47,6 +47,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 |---|---|---|---|---|
 | [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 免費 | 微軟 `zh-HK` 三個音色（曉曼／曉佳／雲龍） | ✅（需聯網） |
 | [canto-tts](https://github.com/typangaa/canto-tts) | 本地 | 免費 | 港式粵語專用模型（MOSS-TTS-Nano 微調），粵拼前端 | 安裝後 ✅（首次下載 730 MB） |
+| [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | 本地 | 免費 | 官方粵語 VITS（xiaomaiiwn），ONNX Runtime 純 CPU | 安裝後 ✅（首次下載 108 MB） |
 | [eSpeak NG](https://github.com/espeak-ng/espeak-ng) | 本地 | 免費 | 內建 `yue` 語音，另有粵拼輸入變體 | 安裝後 ✅ |
 | 瀏覽器 Web Speech | 本地 | 免費 | 作業系統 `zh-HK` 語音 | 視系統而定 |
 | [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | 免費（自架） | `text_lang=yue` + 參考音頻 | 需配置 |

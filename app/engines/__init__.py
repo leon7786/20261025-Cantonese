@@ -12,12 +12,14 @@ from .edge import EdgeEngine
 from .espeak import EspeakEngine
 from .gpt_sovits import GptSovitsEngine
 from .openai_compat import OpenAICompatEngine
+from .sherpa import SherpaEngine
 
 ENGINES: dict[str, Engine] = {
     e.id: e
     for e in (
         EdgeEngine(),
         CantoEngine(),
+        SherpaEngine(),
         EspeakEngine(),
         GptSovitsEngine(),
         CosyVoiceEngine(),

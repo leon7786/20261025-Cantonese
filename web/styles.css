@@ -251,6 +251,34 @@ textarea::placeholder { color: #a7a094; }
 }
 .section[data-group="paid"] .card:hover { box-shadow: none; border-color: var(--line-strong); }
 
+/* ---------- wide (client-side) card ---------- */
+.card.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-areas:
+    "head head"
+    "desc controls"
+    "status controls"
+    "foot controls";
+  align-items: start;
+  column-gap: 24px;
+  row-gap: 8px;
+}
+.card.wide .card-head { grid-area: head; }
+.card.wide .desc { grid-area: desc; min-height: 0; }
+.card.wide .status { grid-area: status; }
+.card.wide .controls { grid-area: controls; align-self: center; }
+.card.wide .card-foot { grid-area: foot; }
+.card.wide audio { display: none; }
+
+@media (max-width: 700px) {
+  .card.wide {
+    grid-template-columns: 1fr;
+    grid-template-areas: "head" "desc" "status" "controls" "foot";
+  }
+}
+
 /* ---------- engine grid ---------- */
 .grid {
   display: grid;
