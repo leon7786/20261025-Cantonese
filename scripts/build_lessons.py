@@ -144,9 +144,15 @@ async def build() -> None:
     lessons = {"model": MODEL, "voice": VOICE, "instruction": INSTRUCTION, "articles": []}
     for ai, art in enumerate(articles):
         text = art["text"]
-        jy_segments = [s for s in re.split(r"(?<=[,!])\s*", art["jyutping"]) if s]
         text_segments = [s for s in re.split(r"(?<=[，！])", text) if s]
-        assert len(jy_segments) == len(text_segments), (art["title"], len(jy_segments), len(text_segments))
+        # 粵拼按「非標點字數」分配，避免頓號（、）在粵拼裡也是逗號而造成錯位
+        jy_tokens = [t for t in art["jyutping"].split() if not re.fullmatch(r"[，。！？；：、,.!?;:]+", t)]
+        jy_segments, cursor = [], 0
+        for seg in text_segments:
+            count = len([c for c in seg if not re.match(r"[，。！？；：、,.!?;:]", c)])
+            jy_segments.append(" ".join(jy_tokens[cursor:cursor + count]))
+            cursor += count
+        assert cursor == len(jy_tokens), (art["title"], cursor, len(jy_tokens))
 
         print(f"[{ai+1}/{len(articles)}] {art['title']} …", flush=True)
         pcm, words = await synth(text, env)
