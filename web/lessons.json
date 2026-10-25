@@ -1,0 +1,281 @@
+{
+ "model": "qwen-audio-3.0-tts-plus",
+ "voice": "longanlingxin",
+ "instruction": "请用广东话表达。",
+ "articles": [
+  {
+   "title": "深宵大排档",
+   "tag": "生活烟火气 · 语速中慢",
+   "segments": [
+    {
+     "zh": "成日喺办公室对着部电脑，",
+     "jy": "seng4 jat6 hai2 baan6 gung1 sat1 deoi3 zyu6 bou6 din6 nou5,",
+     "audio": "/lessons/audio/a0s0.wav",
+     "dur": 2.16
+    },
+    {
+     "zh": "个人真系会闷到发霉㗎。所以一到礼拜五夜晚，",
+     "jy": "go3 jan4 zan1 hai6 wui5 mun6 dou3 faat3 mui4 gaa3. so2 ji5 jat1 dou3 lai5 baai3 ng5 je6 maan5,",
+     "audio": "/lessons/audio/a0s1.wav",
+     "dur": 3.76
+    },
+    {
+     "zh": "我最中意约埋三五知己，",
+     "jy": "ngo5 zeoi3 zung1 ji3 joek3 maai4 saam1 ng5 zi1 gei2,",
+     "audio": "/lessons/audio/a0s2.wav",
+     "dur": 1.92
+    },
+    {
+     "zh": "落楼下大排档坐低。叫返碟够晒镬气嘅干炒牛河，",
+     "jy": "lok6 lau4 haa6 daai6 paai4 dong3 co5 dai1. giu3 faan1 dip6 gau3 saai3 wok6 hei3 ge3 gon1 caau2 ngau4 ho2,",
+     "audio": "/lessons/audio/a0s3.wav",
+     "dur": 4.56
+    },
+    {
+     "zh": "再加一打冻啤酒。大家唔使讲咩人生大道理，",
+     "jy": "zoi3 gaa1 jat1 daa1 dung3 be1 zau2. daai6 gaa1 m4 sai2 gong2 me1 jan4 sang1 daai6 dou6 lei5,",
+     "audio": "/lessons/audio/a0s4.wav",
+     "dur": 4.08
+    },
+    {
+     "zh": "吹下水，",
+     "jy": "ceoi1 haa5 seoi2,",
+     "audio": "/lessons/audio/a0s5.wav",
+     "dur": 0.8
+    },
+    {
+     "zh": "呻下老细有几烦，",
+     "jy": "san3 haa5 lou5 sai3 jau5 gei2 faan4,",
+     "audio": "/lessons/audio/a0s6.wav",
+     "dur": 1.68
+    },
+    {
+     "zh": "听住隔离台猜枚嘅声，",
+     "jy": "teng1 zyu6 gaak3 lei4 toi2 caai1 mui2 ge3 seng1,",
+     "audio": "/lessons/audio/a0s7.wav",
+     "dur": 2.0
+    },
+    {
+     "zh": "成个礼拜嘅压力，",
+     "jy": "seng4 go3 lai5 baai3 ge3 aat3 lik6,",
+     "audio": "/lessons/audio/a0s8.wav",
+     "dur": 1.36
+    },
+    {
+     "zh": "即刻冇晒！",
+     "jy": "zik1 hak1 mou5 saai3!",
+     "audio": "/lessons/audio/a0s9.wav",
+     "dur": 1.33
+    }
+   ],
+   "duration": 23.65
+  },
+  {
+   "title": "广东人嘅执着",
+   "tag": "幽默调侃风 · 语速中快",
+   "segments": [
+    {
+     "zh": "喺广东生活久咗，",
+     "jy": "hai2 gwong2 dung1 sang1 wut6 gau2 zo2,",
+     "audio": "/lessons/audio/a1s0.wav",
+     "dur": 1.67
+    },
+    {
+     "zh": "你就会发现广东人有三大执着：第一，",
+     "jy": "nei5 zau6 wui5 faat3 jin6 gwong2 dung1 jan4 jau5 saam1 daai6 zap1 zoek6: dai6 jat1,",
+     "audio": "/lessons/audio/a1s1.wav",
+     "dur": 3.58
+    },
+    {
+     "zh": "无论出面几热都好，",
+     "jy": "mou4 leon6 ceot1 min6 gei2 jit6 dou1 hou2,",
+     "audio": "/lessons/audio/a1s2.wav",
+     "dur": 1.91
+    },
+    {
+     "zh": "阿妈永远觉得你热气，",
+     "jy": "aa3 maa1 wing5 jyun5 gok3 dak1 nei5 jit6 hei3,",
+     "audio": "/lessons/audio/a1s3.wav",
+     "dur": 2.15
+    },
+    {
+     "zh": "逼你饮苦茶同埋老火靓汤；第二，",
+     "jy": "bik1 nei5 jam2 fu2 caa4 tung4 maai4 lou5 fo2 leng3 tong1; dai6 ji6,",
+     "audio": "/lessons/audio/a1s4.wav",
+     "dur": 3.1
+    },
+    {
+     "zh": "食鸡一定要有鸡味，",
+     "jy": "sik6 gai1 jat1 ding6 jiu3 jau5 gai1 mei6,",
+     "audio": "/lessons/audio/a1s5.wav",
+     "dur": 1.91
+    },
+    {
+     "zh": "煮鱼一定要够生猛，",
+     "jy": "zyu2 jyu2 jat1 ding6 jiu3 gau3 saang1 maang5,",
+     "audio": "/lessons/audio/a1s6.wav",
+     "dur": 1.91
+    },
+    {
+     "zh": "少一分鲜味都会俾人嫌弃；第三，",
+     "jy": "siu2 jat1 fan1 sin1 mei6 dou1 wui5 bei2 jan4 jim4 hei3; dai6 saam1,",
+     "audio": "/lessons/audio/a1s7.wav",
+     "dur": 3.1
+    },
+    {
+     "zh": "问路千万唔好讲东南西北，",
+     "jy": "man6 lou6 cin1 maan6 m4 hou2 gong2 dung1 naam4 sai1 bak1,",
+     "audio": "/lessons/audio/a1s8.wav",
+     "dur": 2.62
+    },
+    {
+     "zh": "你直接话转左定系转右，",
+     "jy": "nei5 zik6 zip3 waa6 zyun3 zo2 ding6 hai6 zyun3 jau6,",
+     "audio": "/lessons/audio/a1s9.wav",
+     "dur": 2.39
+    },
+    {
+     "zh": "行前定系退后，",
+     "jy": "haang4 cin4 ding6 hai6 teoi3 hau6,",
+     "audio": "/lessons/audio/a1s10.wav",
+     "dur": 1.43
+    },
+    {
+     "zh": "如果唔系，",
+     "jy": "jyu4 gwo2 m4 hai6,",
+     "audio": "/lessons/audio/a1s11.wav",
+     "dur": 0.95
+    },
+    {
+     "zh": "大家一齐喺街头迷路！",
+     "jy": "daai6 gaa1 jat1 cai4 hai2 gaai1 tau4 mai4 lou6!",
+     "audio": "/lessons/audio/a1s12.wav",
+     "dur": 2.2
+    }
+   ],
+   "duration": 28.93
+  },
+  {
+   "title": "搭错车嘅乌龙",
+   "tag": "叙事吐槽风 · 语速偏快",
+   "segments": [
+    {
+     "zh": "今日赶住去见客，",
+     "jy": "gam1 jat6 gon2 zyu6 heoi3 gin3 haak3,",
+     "audio": "/lessons/audio/a2s0.wav",
+     "dur": 1.68
+    },
+    {
+     "zh": "一出地铁站见到架巴士埋站，",
+     "jy": "jat1 ceot1 dei6 tit3 zaam6 gin3 dou2 gaa3 baa1 si2 maai4 zaam6,",
+     "audio": "/lessons/audio/a2s1.wav",
+     "dur": 3.12
+    },
+    {
+     "zh": "我连号码都未睇清楚，",
+     "jy": "ngo5 lin4 hou6 maa5 dou1 mei6 tai2 cing1 co2,",
+     "audio": "/lessons/audio/a2s2.wav",
+     "dur": 1.84
+    },
+    {
+     "zh": "就一支箭咁冲咗上去。坐低玩咗十分钟手机，",
+     "jy": "zau6 jat1 zi1 zin3 gam2 cung1 zo2 soeng5 heoi3. co5 dai1 waan2 zo2 sap6 fan1 zung1 sau2 gei1,",
+     "audio": "/lessons/audio/a2s3.wav",
+     "dur": 4.32
+    },
+    {
+     "zh": "抬头一望，",
+     "jy": "toi4 tau4 jat1 mong6,",
+     "audio": "/lessons/audio/a2s4.wav",
+     "dur": 1.04
+    },
+    {
+     "zh": "咦？点解周围啲风景咁陌生嘅？我慌失失走去问司机大佬，",
+     "jy": "ji2? dim2 gaai2 zau1 wai4 di1 fung1 ging2 gam3 mak6 sang1 ge2? ngo5 fong1 sat1 sat1 zau2 heoi3 man6 si1 gei1 daai6 lou2,",
+     "audio": "/lessons/audio/a2s5.wav",
+     "dur": 5.68
+    },
+    {
+     "zh": "先知道自己搭咗反方向！最惨系呢架系快线，",
+     "jy": "sin1 zi1 dou3 zi6 gei2 daap3 zo2 faan2 fong1 hoeng3! zeoi3 caam2 hai6 ni1 gaa3 hai6 faai3 sin3,",
+     "audio": "/lessons/audio/a2s6.wav",
+     "dur": 4.56
+    },
+    {
+     "zh": "下一站要去到十公里之外先有得落车。唉，",
+     "jy": "haa6 jat1 zaam6 jiu3 heoi3 dou3 sap6 gung1 lei5 zi1 ngoi6 sin1 jau5 dak1 lok6 ce1. aai1,",
+     "audio": "/lessons/audio/a2s7.wav",
+     "dur": 3.68
+    },
+    {
+     "zh": "真系欲速则不达！",
+     "jy": "zan1 hai6 juk6 cuk1 zak1 bat1 daat6!",
+     "audio": "/lessons/audio/a2s8.wav",
+     "dur": 1.65
+    }
+   ],
+   "duration": 27.57
+  },
+  {
+   "title": "落雨天嘅思绪",
+   "tag": "港产电影独白风 · 语速慢、重感情",
+   "segments": [
+    {
+     "zh": "唔知点解，",
+     "jy": "m4 zi1 dim2 gaai2,",
+     "audio": "/lessons/audio/a3s0.wav",
+     "dur": 0.88
+    },
+    {
+     "zh": "我特别中意落雨嘅夜晚。企喺窗边，",
+     "jy": "ngo5 dak6 bit6 zung1 ji3 lok6 jyu5 ge3 je6 maan5. kei5 hai2 coeng1 bin1,",
+     "audio": "/lessons/audio/a3s1.wav",
+     "dur": 2.88
+    },
+    {
+     "zh": "望住街上面五颜六色嘅霓虹灯，",
+     "jy": "mong6 zyu6 gaai1 soeng6 min6 ng5 ngaan4 luk6 sik1 ge3 ngai4 hung4 dang1,",
+     "audio": "/lessons/audio/a3s2.wav",
+     "dur": 2.64
+    },
+    {
+     "zh": "倒影喺湿漉漉嘅马路上面。行人匆匆忙忙咁担住遮行过，",
+     "jy": "dou2 jing2 hai2 sap1 luk1 luk1 ge3 maa5 lou6 soeng6 min6. hang4 jan4 cung1 cung1 mong4 mong4 gam2 daam1 zyu6 ze1 haang4 gwo3,",
+     "audio": "/lessons/audio/a3s3.wav",
+     "dur": 5.04
+    },
+    {
+     "zh": "每个人都有自己要去嘅地方。呢个城市节奏太快啦，",
+     "jy": "mui5 go3 jan4 dou1 jau5 zi6 gei2 jiu3 heoi3 ge3 dei6 fong1. ni1 go3 sing4 si5 zit3 zau3 taai3 faai3 laa1,",
+     "audio": "/lessons/audio/a3s4.wav",
+     "dur": 4.48
+    },
+    {
+     "zh": "快到我哋成日忘记咗停低唞下气。其实偶尔发下呆，",
+     "jy": "faai3 dou3 ngo5 dei6 seng4 jat6 mong4 gei3 zo2 ting4 dai1 tau2 haa5 hei3. kei4 sat6 ngau5 ji5 faat3 haa5 ngoi4,",
+     "audio": "/lessons/audio/a3s5.wav",
+     "dur": 4.64
+    },
+    {
+     "zh": "听下歌，",
+     "jy": "teng1 haa5 go1,",
+     "audio": "/lessons/audio/a3s6.wav",
+     "dur": 0.96
+    },
+    {
+     "zh": "乜都唔谂，",
+     "jy": "mat1 dou1 m4 nam2,",
+     "audio": "/lessons/audio/a3s7.wav",
+     "dur": 0.88
+    },
+    {
+     "zh": "已经系一种好难得嘅幸福。",
+     "jy": "ji5 ging1 hai6 jat1 zung2 hou2 naan4 dak1 ge3 hang6 fuk1.",
+     "audio": "/lessons/audio/a3s8.wav",
+     "dur": 2.21
+    }
+   ],
+   "duration": 24.61
+  }
+ ]
+}

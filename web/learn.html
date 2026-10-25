@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#f7f4ee" />
 <title>跟讀學粵語 · Cantonese TTS</title>
-<meta name="description" content="點一句聽一句，跟住粵拼學粵語。語音由 Qwen-Audio-3.0-TTS-Plus 生成。" />
-<link rel="stylesheet" href="/styles.css?v=20261026b" />
+<meta name="description" content="整篇粵語短文，點邊句聽邊句，粵拼標在字上面。音頻已離線生成。" />
+<link rel="stylesheet" href="/styles.css?v=20261026d" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>" />
 </head>
 <body>
@@ -23,8 +23,7 @@
     </nav>
     <h1>跟讀學粵語</h1>
     <p class="lede">
-      點一句、聽一句，跟住粵拼慢慢讀。四篇文章由淺入深，涵蓋生活、吐槽、敘事與獨白。
-      語音由 <strong>Qwen-Audio-3.0-TTS-Plus（女聲）</strong> 生成。
+      整篇短文一次過顯示，粵拼標在字上面。點邊一句就播邊一句，音頻已經離線生成，唔使等、唔使 Key。
     </p>
   </div>
 </header>
@@ -32,13 +31,6 @@
 <main class="wrap">
   <section class="composer learn-toolbar">
     <div class="learn-controls">
-      <div class="inline-field">
-        <span>語速</span>
-        <div class="segmented" id="speed" role="group" aria-label="語速">
-          <button type="button" data-speed="normal" class="active">正常</button>
-          <button type="button" data-speed="slow">慢速</button>
-        </div>
-      </div>
       <button id="playAll" class="btn primary" type="button">播放全篇</button>
       <button id="stop" class="btn ghost" type="button" disabled>停止</button>
       <span class="hint" id="status">點句子即播放</span>
@@ -51,13 +43,14 @@
     <header class="article-head">
       <h2 id="artTitle"></h2>
       <span class="article-tag" id="artTag"></span>
+      <span class="article-meta" id="artMeta"></span>
     </header>
-    <ol class="sentences" id="sentences"></ol>
+    <p class="prose" id="prose"></p>
   </section>
 
   <p class="disclaimer">
-    首次生成每句約 10 秒（Qwen 實時合成），之後同一句會命中伺服器快取。
-    粵拼只作發音提示，實際以音頻為準；如個別字讀音有出入，歡迎回報。
+    音頻由 Qwen-Audio-3.0-TTS-Plus（女聲）一次性生成整篇，再按逗號切段，已存放在本機，瀏覽時不呼叫 API。
+    粵拼只作發音提示，個別字讀音可能有出入。
   </p>
 </main>
 
@@ -69,8 +62,6 @@
   <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">源碼</a>
 </footer>
 
-
-<script src="/articles.js?v=20261026b"></script>
-<script src="/learn.js?v=20261026b" defer></script>
+<script src="/learn.js?v=20261026d" defer></script>
 </body>
 </html>
