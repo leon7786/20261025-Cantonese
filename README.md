@@ -46,7 +46,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 
 | 引擎 | 類型 | 費用 | 粵語來源 | 開箱可用 |
 |---|---|---|---|---|
-| [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 免費 | 微軟 `zh-HK` 三個音色（曉曼／曉佳／雲龍） | ✅（需聯網） |
+| [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 免費 | 微軟 `zh-HK` 三個粵語音色，另加 `zh-TW`／`zh-CN`／東北／陝西共 14 個作對照 | ✅（需聯網） |
 | [canto-tts](https://github.com/typangaa/canto-tts) | 本地 | 免費 | 港式粵語專用模型（MOSS-TTS-Nano 微調），粵拼前端；支援自訂音色 | 安裝後 ✅（首次下載 730 MB） |
 | [gTTS](https://github.com/pndurette/gTTS) | 在線 | 免費 | Google 翻譯粵語（`tl=yue`），正常／慢速兩檔，非官方接口、會限流 | ✅（需聯網） |
 | [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) | 本地 | 免費 | 官方粵語 VITS（xiaomaiiwn），ONNX Runtime 純 CPU | 安裝後 ✅（首次下載 108 MB） |
