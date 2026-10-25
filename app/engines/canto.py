@@ -143,7 +143,7 @@ class CantoEngine(Engine):
         return Probe(True, "本地 ONNX，首次合成會下載約 730 MB 模型", voices)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = "", instruction: str = ""
     ) -> tuple[bytes, str, str]:
         def run() -> bytes:
             model = _load_model()

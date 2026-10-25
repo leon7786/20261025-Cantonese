@@ -55,7 +55,7 @@ class EkhoEngine(Engine):
         return Probe(True, f"本地合成，{exe}", VOICES)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = "", instruction: str = ""
     ) -> tuple[bytes, str, str]:
         exe = binary()
         if not exe:

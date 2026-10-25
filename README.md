@@ -55,7 +55,7 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 | 瀏覽器 Web Speech | 本地 | 免費 | 作業系統 `zh-HK` 語音 | 視系統而定 |
 | [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | 免費（自架） | `text_lang=yue` + 參考音頻 | 需配置 |
 | [CosyVoice 3](https://github.com/FunAudioLLM/CosyVoice) | 遠端 | 免費（自架） | 18+ 中文方言（含粵語） | 需配置 |
-| [Qwen-Audio-3.0-TTS-Plus](https://www.alibabacloud.com/help/en/model-studio/qwen-audio-3-0-tts-plus) | 在線 API | 需 API Key（按字計費） | 阿里雲百煉 `qwen-audio-3.0-tts-plus`，頁面填 Key、音色可手填 | 填 Key 即用 |
+| [Qwen-Audio-3.0-TTS-Plus](https://www.alibabacloud.com/help/zh/model-studio/qwen-audio-3-0-tts-plus) | 在線 API | 需 API Key（1.4 元/萬字符） | 百煉 WebSocket inference，`instruction` 控制方言（如「用廣東話朗讀」） | 填 Key 即用 |
 | OpenAI 兼容接口 | 遠端 | 需 API Key | 由服務決定 | 需配置 |
 
 頁面按**音質與費用**分區排列：**推薦音質（edge-tts / canto-tts / gTTS）→ 基線對照（sherpa-onnx / eSpeak NG / Ekho / 瀏覽器）→ 免費但需自行部署 → 需要 API Key（置底）**。
@@ -200,9 +200,11 @@ Qwen3-TTS 卡片帶一個 Key 輸入框：
 
 - Key 只存在瀏覽器 `localStorage`（`cantonese.key.qwen-tts`），隨請求發給本機後端，**不會寫入伺服器或快取**
 - 也可以在 `.env` 設 `CANTONESE_DASHSCOPE_KEY`，頁面留空時使用環境變數
-- 音色可**手動輸入**（預設 `longanlingxin`），不局限於下拉清單
-- 兩種傳輸自動選擇：先試 HTTP `multimodal-generation`，模型／音色不被接受時回退到 Realtime WebSocket（PCM 拼 WAV）
-- 相關環境變數：`CANTONESE_QWEN_MODEL`、`CANTONESE_QWEN_VOICE`、`CANTONESE_QWEN_LANG`、`CANTONESE_QWEN_PROTOCOL`（`auto`/`http`/`realtime`）、`CANTONESE_QWEN_HTTP_URL`、`CANTONESE_QWEN_WS_URL`
+- 走百煉 WebSocket inference：`run-task → task-started → continue-task → finish-task → task-finished`，PCM 拼成 WAV
+- 音色可**手動輸入**（3.0-plus 系統音色：`longanlingxin` 女、`longanlufeng` 男）
+- 「指令」欄控制方言／情緒／角色，預設 `用廣東話朗讀`；留空則用 `CANTONESE_QWEN_INSTRUCTION`
+- 相關環境變數：`CANTONESE_QWEN_MODEL`、`CANTONESE_QWEN_VOICE`、`CANTONESE_QWEN_INSTRUCTION`、`CANTONESE_QWEN_LANG_HINTS`、`CANTONESE_QWEN_PROTOCOL`（`ws`/`http`）、`CANTONESE_QWEN_WS_URL`、`CANTONESE_QWEN_WORKSPACE`
+- 新舊域名：預設走 `wss://dashscope.aliyuncs.com/api-ws/v1/inference`；百煉建議用業務空間專屬域名 `wss://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/api-ws/v1/inference`，可用 `CANTONESE_QWEN_WS_URL` + `CANTONESE_QWEN_WORKSPACE` 切換
 - 北京與新加坡區域的 Key 不通用，預設走北京 `dashscope.aliyuncs.com`
 - 需要 Key 的引擎不參與「全部合成」，避免誤觸計費
 

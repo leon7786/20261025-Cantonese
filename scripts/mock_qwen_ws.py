@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-"""Mock Qwen3-TTS-Realtime WebSocket server for local testing without an API key.
+"""Mock 百煉 WebSocket inference server for local tests (no API key needed).
 
-Usage:
-    python scripts/mock_qwen_ws.py            # listens on 127.0.0.1:8765
-    CANTONESE_QWEN_WS_URL=ws://127.0.0.1:8765/api-ws/v1/realtime python -m app
+    python scripts/mock_qwen_ws.py
+    CANTONESE_QWEN_WS_URL=ws://127.0.0.1:8765/api-ws/v1/inference python -m app
 
-Sends a 1 kHz tone as PCM; text containing "ERROR" triggers an error event.
+Speaks a 1 s tone as PCM; text containing "ERROR" triggers task-failed.
 """
 
 from __future__ import annotations
 
 import asyncio
-import base64
 import json
 import math
 import struct
@@ -29,53 +27,64 @@ def tone(seconds: float = 1.0, freq: int = 440) -> bytes:
 
 
 async def handler(ws) -> None:
-    configured = False
+    try:
+        await _serve(ws)
+    except websockets.ConnectionClosed:
+        pass
+
+
+async def _serve(ws) -> None:
+    task_id = None
     text = ""
-    await ws.send(json.dumps({
-        "type": "session.created",
-        "session": {"id": "sess_mock", "sample_rate": SR, "voice": "Cherry"},
-    }))
-
     async for raw in ws:
+        if isinstance(raw, bytes):
+            continue
         event = json.loads(raw)
-        kind = event.get("type")
+        header = event.get("header") or {}
+        action = header.get("action")
 
-        if kind == "session.update":
-            configured = True
-            print("session.update:", event.get("session"), flush=True)
-            await ws.send(json.dumps({"type": "session.updated", "session": {"id": "sess_mock"}}))
+        if action == "run-task":
+            task_id = header.get("task_id")
+            payload = event.get("payload") or {}
+            print("run-task:", payload.get("model"), payload.get("parameters"), flush=True)
+            await ws.send(json.dumps({
+                "header": {"event": "task-started", "task_id": task_id},
+                "payload": {},
+            }))
 
-        elif kind == "input_text_buffer.append":
-            assert configured, "append received before session.update"
-            text += event.get("text", "")
+        elif action == "continue-task":
+            text += ((event.get("payload") or {}).get("input") or {}).get("text", "")
 
-        elif kind == "input_text_buffer.commit":
-            print("commit:", text, flush=True)
+        elif action == "finish-task":
             if "ERROR" in text:
                 await ws.send(json.dumps({
-                    "type": "error",
-                    "error": {"code": "InvalidParameter", "message": "mock failure"},
+                    "header": {
+                        "event": "task-failed",
+                        "task_id": task_id,
+                        "error_code": "InvalidParameter",
+                        "error_message": "mock failure",
+                    },
+                    "payload": {},
                 }))
                 continue
-            await ws.send(json.dumps({"type": "response.created", "response": {"id": "resp_1"}}))
             pcm = tone(1.0)
             step = len(pcm) // 4
             for i in range(0, len(pcm), step):
-                await ws.send(json.dumps({
-                    "type": "response.audio.delta",
-                    "delta": base64.b64encode(pcm[i:i + step]).decode(),
-                }))
-            await ws.send(json.dumps({"type": "response.audio.done"}))
-            await ws.send(json.dumps({"type": "response.done", "response": {"id": "resp_1"}}))
-
-        elif kind == "session.finish":
-            await ws.send(json.dumps({"type": "session.finished"}))
-            break
+                await ws.send(pcm[i:i + step])
+            await ws.send(json.dumps({
+                "header": {"event": "result-generated", "task_id": task_id},
+                "payload": {"output": {"finish_reason": "stop"}},
+            }))
+            await ws.send(json.dumps({
+                "header": {"event": "task-finished", "task_id": task_id},
+                "payload": {"output": {}},
+            }))
+            print("finished:", text, flush=True)
 
 
 async def main() -> None:
     async with websockets.serve(handler, "127.0.0.1", 8765):
-        print("mock Qwen realtime listening on ws://127.0.0.1:8765", flush=True)
+        print("mock 百煉 inference listening on ws://127.0.0.1:8765", flush=True)
         await asyncio.Future()
 
 

@@ -63,7 +63,7 @@ class GTtsEngine(Engine):
         return Probe(True, "Google 在線粵語音色", VOICES)
 
     async def synth(
-        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
+        self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = "", instruction: str = ""
     ) -> tuple[bytes, str, str]:
         chunks = _chunks(text)
         try:

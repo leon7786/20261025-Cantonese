@@ -161,6 +161,24 @@ function makeCard(engine) {
     controls.append(keyField);
   }
 
+  let instructionInput = null;
+  if (engine.accepts_instruction) {
+    const insField = el("label", "field");
+    insField.append(el("span", null, "指令"));
+    instructionInput = el("input");
+    instructionInput.type = "text";
+    instructionInput.autocomplete = "off";
+    instructionInput.placeholder = "例如：用廣東話朗讀";
+    try {
+      instructionInput.value = localStorage.getItem(`cantonese.instruction.${engine.id}`) || "";
+    } catch { /* ignore */ }
+    instructionInput.addEventListener("input", () => {
+      try { localStorage.setItem(`cantonese.instruction.${engine.id}`, instructionInput.value); } catch { /* ignore */ }
+    });
+    insField.append(instructionInput);
+    controls.append(insField);
+  }
+
   const foot = el("div", "card-foot");
   const btn = el("button", "btn primary", engine.id === "browser" ? "朗讀" : "合成");
   btn.type = "button";
@@ -182,7 +200,7 @@ function makeCard(engine) {
     select.disabled = true;
     if (rateInput) rateInput.disabled = true;
   }
-  card._refs = { btn, meta, audio, error, select, rateInput, status, keyInput };
+  card._refs = { btn, meta, audio, error, select, rateInput, status, keyInput, instructionInput };
 
   btn.addEventListener("click", () => handleSynth(card, engine));
 
@@ -216,6 +234,9 @@ async function handleSynth(card, engine, { fromAll = false } = {}) {
     };
     if (engine.accepts_key && card._refs.keyInput) {
       payload.api_key = card._refs.keyInput.value.trim();
+    }
+    if (engine.accepts_instruction && card._refs.instructionInput) {
+      payload.instruction = card._refs.instructionInput.value.trim();
     }
     const resp = await fetch("/api/tts", {
       method: "POST",

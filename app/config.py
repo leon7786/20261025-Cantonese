@@ -45,8 +45,11 @@ COSYVOICE_SPK = env("CANTONESE_COSYVOICE_SPK", "中文女")
 # Qwen3-TTS on Alibaba Cloud DashScope (Beijing region by default).
 DASHSCOPE_KEY = env("CANTONESE_DASHSCOPE_KEY") or env("DASHSCOPE_API_KEY")
 QWEN_WS_URL = env(
-    "CANTONESE_QWEN_WS_URL", "wss://dashscope.aliyuncs.com/api-ws/v1/realtime"
+    "CANTONESE_QWEN_WS_URL", "wss://dashscope.aliyuncs.com/api-ws/v1/inference"
 )
+QWEN_WORKSPACE = env("CANTONESE_QWEN_WORKSPACE")
+QWEN_INSTRUCTION = env("CANTONESE_QWEN_INSTRUCTION", "用廣東話朗讀")
+QWEN_LANG_HINTS = env("CANTONESE_QWEN_LANG_HINTS", "zh")
 QWEN_HTTP_URL = env(
     "CANTONESE_QWEN_HTTP_URL",
     "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
@@ -54,7 +57,7 @@ QWEN_HTTP_URL = env(
 QWEN_MODEL = env("CANTONESE_QWEN_MODEL", "qwen-audio-3.0-tts-plus")
 QWEN_VOICE = env("CANTONESE_QWEN_VOICE", "longanlingxin")
 QWEN_LANG = env("CANTONESE_QWEN_LANG", "Auto")
-QWEN_PROTOCOL = env("CANTONESE_QWEN_PROTOCOL", "auto")
+QWEN_PROTOCOL = env("CANTONESE_QWEN_PROTOCOL", "ws")
 
 OPENAI_TTS_URL = env("CANTONESE_OPENAI_URL")
 OPENAI_TTS_KEY = env("CANTONESE_OPENAI_KEY")

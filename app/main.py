@@ -25,6 +25,7 @@ class TTSRequest(BaseModel):
     rate: int = Field(default=0, ge=-50, le=50)
     pitch: int = Field(default=0, ge=-50, le=50)
     api_key: str = Field(default="", max_length=256)
+    instruction: str = Field(default="", max_length=200)
 
 
 @app.get("/api/health")
@@ -49,7 +50,7 @@ async def tts(req: TTSRequest) -> JSONResponse:
         raise HTTPException(503, f"{engine.name} 不可用：{probe.detail}")
 
     voice = req.voice or (probe.voices[0].id if probe.voices else "")
-    key = cache.key_for(engine.id, voice, req.rate, req.pitch, text)
+    key = cache.key_for(engine.id, voice, req.rate, req.pitch, req.instruction, text)
     started = time.perf_counter()
 
     cached = cache.read(key, "mp3") or cache.read(key, "wav")
@@ -60,7 +61,7 @@ async def tts(req: TTSRequest) -> JSONResponse:
 
     try:
         audio, mime, ext = await asyncio.wait_for(
-            engine.synth(text, voice, req.rate, req.pitch, api_key=req.api_key),
+            engine.synth(text, voice, req.rate, req.pitch, api_key=req.api_key, instruction=req.instruction),
             timeout=config.SYNTH_TIMEOUT,
         )
     except asyncio.TimeoutError:
