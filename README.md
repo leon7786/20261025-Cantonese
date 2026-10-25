@@ -21,6 +21,8 @@ GitHub 上「支援粵語」的 TTS 專案不少，但質素、部署成本、�
 - **純靜態前端**：HTML/CSS/JS 無構建步驟，後端只有 FastAPI
 - **遠端模型適配器**：把自建模型服務接進來，毋須改前端
 
+> 📓 開發過程中的踩坑、實測數據與取捨，都記在 [docs/NOTES.md](docs/NOTES.md)。
+
 ## 兩個頁面
 
 | 頁面 | 用途 |
@@ -163,7 +165,7 @@ app/
   main.py           # FastAPI 路由
 web/                # 無構建前端（index.html / app.js / styles.css）
 scripts/smoke_test.py
-docs/
+docs/            截圖與開發筆記（NOTES.md）
 ```
 
 新增引擎只需繼承 `app/engines/base.py` 的 `Engine`，實作 `probe()` 與 `synth()`，再註冊到 `app/engines/__init__.py`。
