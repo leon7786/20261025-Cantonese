@@ -276,9 +276,7 @@ function buildBrowserCard() {
         : "系統未安裝 zh-HK 粵語語音（可於系統設定新增）",
     voices: voices.map((v) => ({ id: v.name, label: `${v.name} (${v.lang})`, note: v.localService ? "離線" : "在線" })),
   };
-  const card = makeCard(engine);
-  card.classList.add("wide");
-  return card;
+  return makeCard(engine);
 }
 
 /* ---------------- orchestration ---------------- */

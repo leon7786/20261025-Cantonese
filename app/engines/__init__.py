@@ -9,6 +9,7 @@ from .base import Engine, Probe, TTSError
 from .canto import CantoEngine
 from .cosyvoice import CosyVoiceEngine
 from .edge import EdgeEngine
+from .ekho import EkhoEngine
 from .espeak import EspeakEngine
 from .gpt_sovits import GptSovitsEngine
 from .openai_compat import OpenAICompatEngine
@@ -21,6 +22,7 @@ ENGINES: dict[str, Engine] = {
         CantoEngine(),
         SherpaEngine(),
         EspeakEngine(),
+        EkhoEngine(),
         GptSovitsEngine(),
         CosyVoiceEngine(),
         OpenAICompatEngine(),
