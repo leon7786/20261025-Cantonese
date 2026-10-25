@@ -7,6 +7,9 @@ import time
 
 from .base import Engine, Probe, TTSError
 from .canto import CantoEngine
+from .cantonese_ai import CantoneseAIEngine
+from .elevenlabs import ElevenLabsEngine
+from .google_tts import GoogleTTSEngine
 from .cosyvoice import CosyVoiceEngine
 from .edge import EdgeEngine
 from .ekho import EkhoEngine
@@ -29,6 +32,9 @@ ENGINES: dict[str, Engine] = {
         GptSovitsEngine(),
         CosyVoiceEngine(),
         QwenEngine(),
+        GoogleTTSEngine(),
+        ElevenLabsEngine(),
+        CantoneseAIEngine(),
         OpenAICompatEngine(),
     )
 }

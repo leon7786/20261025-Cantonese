@@ -160,7 +160,7 @@ function makeCard(engine) {
     keyField.append(el("span", null, "Key"));
     keyInput = el("input");
     keyInput.type = "password";
-    keyInput.placeholder = "DashScope API Key（只存本機）";
+    keyInput.placeholder = "API Key（只存本機）";
     keyInput.autocomplete = "off";
     try {
       keyInput.value = localStorage.getItem(`cantonese.key.${engine.id}`) || "";

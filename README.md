@@ -56,6 +56,9 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 | [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | 免費（自架） | `text_lang=yue` + 參考音頻 | 需配置 |
 | [CosyVoice 3](https://github.com/FunAudioLLM/CosyVoice) | 遠端 | 免費（自架） | 18+ 中文方言（含粵語） | 需配置 |
 | [Qwen-Audio-3.0-TTS-Plus](https://www.alibabacloud.com/help/zh/model-studio/qwen-audio-3-0-tts-plus) | 在線 API | 需 API Key（1.4 元/萬字符） | 百煉 WebSocket inference，`instruction` 控制方言（如「用廣東話朗讀」） | 填 Key 即用 |
+| [Google Cloud TTS](https://cloud.google.com/text-to-speech) | 在線 API | 需 API Key | `yue-HK-Standard-A~D` | 填 Key 即用 |
+| [ElevenLabs](https://elevenlabs.io/docs) | 在線 API | 需 API Key | 官方語言表含 `yue`，音色 ID 可自訂 | 填 Key 即用 |
+| [cantonese.ai](https://docs.cantonese.ai/text-to-speech) | 在線 API | 需 API Key | 粵語專用（V8.3），支援粵拼提示 | 填 Key 即用 |
 | OpenAI 兼容接口 | 遠端 | 需 API Key | 由服務決定 | 需配置 |
 
 頁面按**實測表現**分區排列：**推薦音質（edge-tts / gTTS）→ 基線對照（sherpa-onnx / 瀏覽器）→ 免費但需自行部署 → 需要 API Key → 表現較差置底（canto-tts / eSpeak NG / Ekho）**。
@@ -238,6 +241,16 @@ Authorization: Bearer <API_KEY>
 ```
 
 音色：`longanlingxin`（女）、`longanlufeng`（男），另有 500+ 復刻音色。方言靠 `instruction`，`language_hints` 只有 zh/en/ja 等，**沒有粵語代碼**。費用 1.4 元/萬字符，RPM 180。
+
+### 未接入的服務
+
+| 服務 | 未接入原因 |
+|---|---|
+| Microsoft Azure Speech | 三個 zh-HK 音色與 edge-tts 完全相同（同一批神經語音），接入只會重複 |
+| 騰訊雲對話式 TTS | 需要 SecretId/SecretKey + TC3 簽名，非單一 Key，暫不適配 |
+| 阿里雲智能語音（桃子） | 需 Token 換取，且 Qwen-Audio-3.0-TTS-Plus 已覆蓋阿里系 |
+| CosyVoice-Cantonese | 是基於 CosyVoice 的 Web UI，非標準 API；已有 CosyVoice 自建適配 |
+| Canto-Gen | 異步 job + 輪詢、服務較新，暫不接入 |
 
 ## 注意事項
 
