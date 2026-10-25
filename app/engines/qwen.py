@@ -1,15 +1,15 @@
-"""Qwen3-TTS Realtime via Alibaba Cloud DashScope WebSocket API.
+"""Qwen-Audio-3.0-TTS-Plus on Alibaba Cloud Model Studio (DashScope).
 
-Protocol (Model Studio "Qwen-TTS-Realtime WebSocket API"):
-  wss://dashscope.aliyuncs.com/api-ws/v1/realtime?model=qwen3-tts-flash-realtime
-  Authorization: Bearer <key>
-  -> session.update {mode, voice, language_type, response_format:"pcm", sample_rate}
-  -> input_text_buffer.append {text}
-  -> input_text_buffer.commit
-  <- response.audio.delta (base64 PCM) ... response.done
+The model family exposes two transports; we support both and pick at runtime:
 
-The API key can be supplied per request from the web UI (kept in the browser
-only) or via CANTONESE_DASHSCOPE_KEY.
+* HTTP  — POST /api/v1/services/aigc/multimodal-generation/generation
+          {"model": ..., "input": {"text", "voice", "language_type"}}
+          returns {"output": {"audio": {"url" | "data"}}}
+* WS    — wss://.../api-ws/v1/realtime?model=...
+          session.update -> append -> commit -> response.audio.delta (PCM)
+
+Set CANTONESE_QWEN_PROTOCOL=http|realtime|auto (default auto: try HTTP first,
+fall back to WS when the endpoint rejects the model/voice).
 """
 
 from __future__ import annotations
@@ -20,6 +20,7 @@ import io
 import json
 import wave
 
+import httpx
 import websockets
 from websockets.exceptions import InvalidStatus
 
@@ -27,16 +28,11 @@ from .base import Engine, Probe, TTSError, Voice
 from .. import config
 
 VOICES = [
+    Voice("longanlingxin", "longanlingxin · 龍安靈心"),
     Voice("Cherry", "Cherry · 女聲"),
     Voice("Serena", "Serena · 女聲"),
     Voice("Ethan", "Ethan · 男聲"),
     Voice("Chelsie", "Chelsie · 女聲"),
-    Voice("Dylan", "Dylan · 北京男聲"),
-    Voice("Eric", "Eric · 四川男聲"),
-    Voice("Ryan", "Ryan · 男聲"),
-    Voice("Aiden", "Aiden · 男聲"),
-    Voice("Ono_Anna", "Ono Anna · 日語女聲"),
-    Voice("Sohee", "Sohee · 韓語女聲"),
 ]
 
 
@@ -50,19 +46,53 @@ def _pcm_to_wav(pcm: bytes, sample_rate: int = 24000) -> bytes:
     return buf.getvalue()
 
 
-async def _connect(url: str, headers: dict):
+def _looks_like_model_error(exc: TTSError) -> bool:
+    text = str(exc).lower()
+    return any(k in text for k in ("model", "voice", "unsupported", "invalidparameter", "404"))
+
+
+async def _http_synth(text: str, voice: str, key: str) -> bytes:
+    payload = {
+        "model": config.QWEN_MODEL,
+        "input": {
+            "text": text,
+            "voice": voice,
+            "language_type": config.QWEN_LANG,
+        },
+    }
+    headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
     try:
-        return await websockets.connect(
-            url, additional_headers=headers, max_size=None, open_timeout=20
-        )
-    except TypeError:  # websockets < 13
-        return await websockets.connect(
-            url, extra_headers=headers, max_size=None, open_timeout=20
-        )
+        async with httpx.AsyncClient(timeout=90) as client:
+            resp = await client.post(config.QWEN_HTTP_URL, json=payload, headers=headers)
+    except Exception as exc:
+        raise TTSError(f"千問 HTTP 連接失敗：{exc}") from exc
+
+    if resp.status_code != 200:
+        detail = ""
+        try:
+            body = resp.json()
+            detail = body.get("message") or body.get("code") or ""
+        except Exception:
+            detail = resp.text[:160]
+        if resp.status_code in (401, 403):
+            raise TTSError(f"API Key 無效或無權限（HTTP {resp.status_code}）：{detail}")
+        raise TTSError(f"千問 HTTP {resp.status_code}：{detail}")
+
+    audio = ((resp.json().get("output") or {}).get("audio")) or {}
+    if audio.get("data"):
+        return base64.b64decode(audio["data"])
+    if audio.get("url"):
+        try:
+            async with httpx.AsyncClient(timeout=90, follow_redirects=True) as client:
+                dl = await client.get(audio["url"])
+            dl.raise_for_status()
+            return dl.content
+        except Exception as exc:
+            raise TTSError(f"下載千問音頻失敗：{exc}") from exc
+    raise TTSError("千問 HTTP 未返回音頻")
 
 
 async def _wait_event(ws, wanted: str, timeout: float = 20.0) -> dict:
-    """Read events until `wanted` arrives; return the matching event."""
     while True:
         raw = await asyncio.wait_for(ws.recv(), timeout=timeout)
         if isinstance(raw, bytes):
@@ -75,11 +105,21 @@ async def _wait_event(ws, wanted: str, timeout: float = 20.0) -> dict:
             raise TTSError(f"千問 API 錯誤：{err.get('message') or err.get('code') or err}")
 
 
-async def _synthesize(text: str, voice: str, key: str) -> bytes:
-    url = f"{config.QWEN_WS_URL}?model={config.QWEN_MODEL}"
-    headers = {"Authorization": f"Bearer {key}"}
+async def _connect(url: str, headers: dict):
     try:
-        ws = await _connect(url, headers)
+        return await websockets.connect(
+            url, additional_headers=headers, max_size=None, open_timeout=20
+        )
+    except TypeError:  # websockets < 13
+        return await websockets.connect(
+            url, extra_headers=headers, max_size=None, open_timeout=20
+        )
+
+
+async def _ws_synth(text: str, voice: str, key: str) -> bytes:
+    url = f"{config.QWEN_WS_URL}?model={config.QWEN_MODEL}"
+    try:
+        ws = await _connect(url, {"Authorization": f"Bearer {key}"})
     except InvalidStatus as exc:
         code = getattr(exc.response, "status_code", "?")
         raise TTSError(f"API Key 無效或無權限（HTTP {code}）") from exc
@@ -90,9 +130,7 @@ async def _synthesize(text: str, voice: str, key: str) -> bytes:
     sample_rate = 24000
     try:
         async with ws:
-            # Handshake: wait for session.created before configuring the session.
             await _wait_event(ws, "session.created")
-
             await ws.send(json.dumps({
                 "type": "session.update",
                 "session": {
@@ -103,7 +141,6 @@ async def _synthesize(text: str, voice: str, key: str) -> bytes:
                     "sample_rate": 24000,
                 },
             }))
-            # session.updated is optional; proceed if the server does not emit it.
             try:
                 await _wait_event(ws, "session.updated", timeout=5.0)
             except asyncio.TimeoutError:
@@ -118,7 +155,6 @@ async def _synthesize(text: str, voice: str, key: str) -> bytes:
                     continue
                 event = json.loads(raw)
                 kind = event.get("type", "")
-
                 if kind == "session.created":
                     sample_rate = (event.get("session") or {}).get("sample_rate", sample_rate)
                 elif kind == "response.audio.delta":
@@ -151,15 +187,16 @@ async def _synthesize(text: str, voice: str, key: str) -> bytes:
 
 class QwenEngine(Engine):
     id = "qwen-tts"
-    name = "Qwen3-TTS Realtime"
+    name = "Qwen-Audio-3.0-TTS-Plus"
     vendor = "阿里雲百煉（DashScope）"
     kind = "api"
     category = "paid"
     free = False
     requires_key = True
     accepts_key = True
-    description = "千問實時語音合成（qwen3-tts-flash-realtime，WebSocket）。官方語言清單未含粵語。"
-    homepage = "https://github.com/QwenLM/Qwen3-TTS"
+    voice_free_text = True
+    description = "千問語音合成，官方稱加強中文方言（含粵語）真實度。需 DashScope API Key，音色可手填。"
+    homepage = "https://www.alibabacloud.com/help/en/model-studio/qwen-audio-3-0-tts-plus"
 
     async def probe(self) -> Probe:
         if config.DASHSCOPE_KEY:
@@ -176,7 +213,21 @@ class QwenEngine(Engine):
         if not key:
             raise TTSError("請先在卡片填入 DashScope API Key")
 
-        audio = await _synthesize(text, voice, key)
+        voice = voice or config.QWEN_VOICE
+        protocol = config.QWEN_PROTOCOL
+
+        if protocol == "http":
+            audio = await _http_synth(text, voice, key)
+        elif protocol == "realtime":
+            audio = await _ws_synth(text, voice, key)
+        else:
+            try:
+                audio = await _http_synth(text, voice, key)
+            except TTSError as exc:
+                if not _looks_like_model_error(exc):
+                    raise
+                audio = await _ws_synth(text, voice, key)
+
         if len(audio) < 1000:
             raise TTSError("千問 API 返回的音頻為空")
         return audio, "audio/wav", "wav"

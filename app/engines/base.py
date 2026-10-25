@@ -35,6 +35,7 @@ class Engine:
     free: bool = True
     requires_key: bool = False
     accepts_key: bool = False
+    voice_free_text: bool = False
     description: str = ""
     homepage: str = ""
     supports_rate: bool = False
@@ -59,6 +60,7 @@ class Engine:
             "free": self.free,
             "requires_key": self.requires_key,
             "accepts_key": self.accepts_key,
+            "voice_free_text": self.voice_free_text,
             "description": self.description,
             "homepage": self.homepage,
             "supports_rate": self.supports_rate,

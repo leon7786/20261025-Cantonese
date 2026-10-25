@@ -324,7 +324,7 @@ select {
 select:focus { border-color: rgba(15, 118, 110, 0.5); box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); }
 select:disabled { background: #faf8f3; color: #9aa3af; }
 
-input[type="password"] {
+input[type="password"], input[type="text"] {
   width: 100%;
   background: #fff;
   color: var(--text);
@@ -336,11 +336,11 @@ input[type="password"] {
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
-input[type="password"]:focus {
+input[type="password"]:focus, input[type="text"]:focus {
   border-color: rgba(15, 118, 110, 0.5);
   box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
 }
-input[type="password"]::placeholder { color: #a7a094; }
+input[type="password"]::placeholder, input[type="text"]::placeholder { color: #a7a094; }
 
 .range-row { display: flex; align-items: center; gap: 10px; }
 input[type="range"] {

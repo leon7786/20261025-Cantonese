@@ -47,8 +47,14 @@ DASHSCOPE_KEY = env("CANTONESE_DASHSCOPE_KEY") or env("DASHSCOPE_API_KEY")
 QWEN_WS_URL = env(
     "CANTONESE_QWEN_WS_URL", "wss://dashscope.aliyuncs.com/api-ws/v1/realtime"
 )
-QWEN_MODEL = env("CANTONESE_QWEN_MODEL", "qwen3-tts-flash-realtime")
-QWEN_LANG = env("CANTONESE_QWEN_LANG", "Chinese")
+QWEN_HTTP_URL = env(
+    "CANTONESE_QWEN_HTTP_URL",
+    "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+)
+QWEN_MODEL = env("CANTONESE_QWEN_MODEL", "qwen-audio-3.0-tts-plus")
+QWEN_VOICE = env("CANTONESE_QWEN_VOICE", "longanlingxin")
+QWEN_LANG = env("CANTONESE_QWEN_LANG", "Auto")
+QWEN_PROTOCOL = env("CANTONESE_QWEN_PROTOCOL", "auto")
 
 OPENAI_TTS_URL = env("CANTONESE_OPENAI_URL")
 OPENAI_TTS_KEY = env("CANTONESE_OPENAI_KEY")

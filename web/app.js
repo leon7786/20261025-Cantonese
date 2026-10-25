@@ -94,14 +94,33 @@ function makeCard(engine) {
   // voice select
   const voiceField = el("label", "field");
   voiceField.append(el("span", null, "音色"));
-  const select = el("select");
-  (engine.voices || []).forEach((v, i) => {
-    const opt = el("option", null, v.label + (v.note ? ` · ${v.note}` : ""));
-    opt.value = v.id;
-    if (i === 0) opt.selected = true;
-    select.append(opt);
-  });
-  voiceField.append(select);
+  let select;
+  if (engine.voice_free_text) {
+    select = el("input");
+    select.type = "text";
+    select.autocomplete = "off";
+    select.placeholder = (engine.voices && engine.voices[0] && engine.voices[0].id) || "voice name";
+    select.value = (engine.voices && engine.voices[0] && engine.voices[0].id) || "";
+    const listId = `voices-${engine.id}`;
+    select.setAttribute("list", listId);
+    const datalist = el("datalist");
+    datalist.id = listId;
+    (engine.voices || []).forEach((v) => {
+      const opt = el("option");
+      opt.value = v.id;
+      datalist.append(opt);
+    });
+    voiceField.append(select, datalist);
+  } else {
+    select = el("select");
+    (engine.voices || []).forEach((v, i) => {
+      const opt = el("option", null, v.label + (v.note ? ` · ${v.note}` : ""));
+      opt.value = v.id;
+      if (i === 0) opt.selected = true;
+      select.append(opt);
+    });
+    voiceField.append(select);
+  }
   controls.append(voiceField);
 
   // rate slider
