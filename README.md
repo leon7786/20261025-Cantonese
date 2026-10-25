@@ -203,6 +203,7 @@ Qwen3-TTS 卡片帶一個 Key 輸入框：
 - 走百煉 WebSocket inference：`run-task → task-started → continue-task → finish-task → task-finished`，PCM 拼成 WAV
 - 音色可**手動輸入**（3.0-plus 系統音色：`longanlingxin` 女、`longanlufeng` 男）
 - 「指令」欄控制方言／情緒／角色，預設 `请用广东话表达。`（官方句式）；留空則用 `CANTONESE_QWEN_INSTRUCTION`
+- 音色與指令收在「進階」摺疊區，預設隱藏，只留 Key 與合成按鈕
 - 相關環境變數：`CANTONESE_QWEN_MODEL`、`CANTONESE_QWEN_VOICE`、`CANTONESE_QWEN_INSTRUCTION`、`CANTONESE_QWEN_LANG_HINTS`、`CANTONESE_QWEN_PROTOCOL`（`ws`/`http`）、`CANTONESE_QWEN_WS_URL`、`CANTONESE_QWEN_WORKSPACE`
 - 新舊域名：預設走 `wss://dashscope.aliyuncs.com/api-ws/v1/inference`；百煉建議用業務空間專屬域名 `wss://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/api-ws/v1/inference`，可用 `CANTONESE_QWEN_WS_URL` + `CANTONESE_QWEN_WORKSPACE` 切換
 - 北京與新加坡區域的 Key 不通用，預設走北京 `dashscope.aliyuncs.com`

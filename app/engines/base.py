@@ -37,6 +37,7 @@ class Engine:
     accepts_key: bool = False
     voice_free_text: bool = False
     accepts_instruction: bool = False
+    collapsible_fields: bool = False
     description: str = ""
     homepage: str = ""
     supports_rate: bool = False
@@ -63,6 +64,7 @@ class Engine:
             "accepts_key": self.accepts_key,
             "voice_free_text": self.voice_free_text,
             "accepts_instruction": self.accepts_instruction,
+            "collapsible_fields": self.collapsible_fields,
             "description": self.description,
             "homepage": self.homepage,
             "supports_rate": self.supports_rate,

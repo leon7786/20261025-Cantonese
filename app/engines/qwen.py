@@ -209,6 +209,7 @@ class QwenEngine(Engine):
     accepts_key = True
     accepts_instruction = True
     voice_free_text = True
+    collapsible_fields = True
     description = "百煉語音合成（WebSocket inference），方言靠 instruction 控制，例如「用廣東話朗讀」。"
     homepage = "https://help.aliyun.com/zh/model-studio/qwen-audio-3-0-tts-plus"
 

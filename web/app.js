@@ -91,26 +91,39 @@ function makeCard(engine) {
 
   const controls = el("div", "controls");
 
-  // voice select
+  // voice：可選清單，最後一項「自訂…」會展開文字輸入
   const voiceField = el("label", "field");
   voiceField.append(el("span", null, "音色"));
   let select;
+  let customVoice = null;
   if (engine.voice_free_text) {
-    select = el("input");
-    select.type = "text";
-    select.autocomplete = "off";
-    select.placeholder = (engine.voices && engine.voices[0] && engine.voices[0].id) || "voice name";
-    select.value = (engine.voices && engine.voices[0] && engine.voices[0].id) || "";
-    const listId = `voices-${engine.id}`;
-    select.setAttribute("list", listId);
-    const datalist = el("datalist");
-    datalist.id = listId;
-    (engine.voices || []).forEach((v) => {
-      const opt = el("option");
+    select = el("select");
+    (engine.voices || []).forEach((v, i) => {
+      const opt = el("option", null, v.label || v.id);
       opt.value = v.id;
-      datalist.append(opt);
+      if (i === 0) opt.selected = true;
+      select.append(opt);
     });
-    voiceField.append(select, datalist);
+    const customOpt = el("option", null, "自訂…");
+    customOpt.value = "__custom__";
+    select.append(customOpt);
+
+    customVoice = el("input");
+    customVoice.type = "text";
+    customVoice.autocomplete = "off";
+    customVoice.placeholder = "voice 名稱，例如 longanlingxin";
+    customVoice.hidden = true;
+    try {
+      customVoice.value = localStorage.getItem(`cantonese.customVoice.${engine.id}`) || "";
+    } catch { /* ignore */ }
+    customVoice.addEventListener("input", () => {
+      try { localStorage.setItem(`cantonese.customVoice.${engine.id}`, customVoice.value); } catch { /* ignore */ }
+    });
+    select.addEventListener("change", () => {
+      customVoice.hidden = select.value !== "__custom__";
+      if (!customVoice.hidden) customVoice.focus();
+    });
+    voiceField.append(select, customVoice);
   } else {
     select = el("select");
     (engine.voices || []).forEach((v, i) => {
@@ -121,11 +134,9 @@ function makeCard(engine) {
     });
     voiceField.append(select);
   }
-  controls.append(voiceField);
 
   // rate slider
   let rateInput = null;
-  let rateOut = null;
   if (engine.supports_rate) {
     const field = el("div", "field");
     field.append(el("span", null, "語速"));
@@ -136,11 +147,11 @@ function makeCard(engine) {
     rateInput.max = "30";
     rateInput.step = "5";
     rateInput.value = "0";
-    rateOut = el("output", null, "0%");
+    const rateOut = el("output", null, "0%");
     rateInput.addEventListener("input", () => { rateOut.textContent = `${rateInput.value}%`; });
     row.append(rateInput, rateOut);
     field.append(row);
-    controls.append(field);
+    if (!engine.collapsible_fields) controls.append(field);
   }
 
   let keyInput = null;
@@ -176,7 +187,18 @@ function makeCard(engine) {
       try { localStorage.setItem(`cantonese.instruction.${engine.id}`, instructionInput.value); } catch { /* ignore */ }
     });
     insField.append(instructionInput);
-    controls.append(insField);
+    // 收起模式：音色與指令一起放進 <details>
+    if (engine.collapsible_fields) {
+      const details = el("details", "advanced");
+      details.append(el("summary", null, "進階：音色 / 指令"));
+      details.append(voiceField, insField);
+      controls.append(details);
+    } else {
+      controls.append(insField);
+      controls.prepend(voiceField);
+    }
+  } else if (!engine.collapsible_fields) {
+    controls.prepend(voiceField);
   }
 
   const foot = el("div", "card-foot");
@@ -200,7 +222,7 @@ function makeCard(engine) {
     select.disabled = true;
     if (rateInput) rateInput.disabled = true;
   }
-  card._refs = { btn, meta, audio, error, select, rateInput, status, keyInput, instructionInput };
+  card._refs = { btn, meta, audio, error, select, customVoice, rateInput, status, keyInput, instructionInput };
 
   btn.addEventListener("click", () => handleSynth(card, engine));
 
@@ -226,10 +248,14 @@ async function handleSynth(card, engine, { fromAll = false } = {}) {
   setBusy(card, btn, true);
   meta.textContent = "合成中…";
   try {
+    let chosenVoice = card._refs.select.value;
+    if (chosenVoice === "__custom__") {
+      chosenVoice = (card._refs.customVoice && card._refs.customVoice.value.trim()) || "";
+    }
     const payload = {
       engine: engine.id,
       text,
-      voice: card._refs.select.value,
+      voice: chosenVoice,
       rate: card._refs.rateInput ? Number(card._refs.rateInput.value) : 0,
     };
     if (engine.accepts_key && card._refs.keyInput) {
