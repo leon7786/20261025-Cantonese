@@ -21,7 +21,10 @@ def main() -> int:
         for e in engines:
             print(f"  {e['id']:<14} available={e['available']!s:<5} {e['detail']}")
 
-        usable = [e["id"] for e in engines if e["available"]]
+        usable = [e["id"] for e in engines if e["available"] and not e.get("requires_key")]
+        skipped = [e["id"] for e in engines if e.get("requires_key")]
+        if skipped:
+            print("  skip (requires key):", ", ".join(skipped))
         if not usable:
             print("FAIL: 沒有可用引擎")
             return 1
