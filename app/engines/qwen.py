@@ -47,6 +47,9 @@ class QwenEngine(Engine):
     async def synth(
         self, text: str, voice: str, rate: int = 0, pitch: int = 0, api_key: str = ""
     ) -> tuple[bytes, str, str]:
+        if len(text) > 600:
+            raise TTSError("千問單次上限 600 字，請縮短文本")
+
         key = (api_key or config.DASHSCOPE_KEY).strip()
         if not key:
             raise TTSError("請先在卡片填入 DashScope API Key")
