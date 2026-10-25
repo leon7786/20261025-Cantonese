@@ -32,6 +32,7 @@ def env(name: str, default: str = "") -> str:
 
 CACHE_DIR = Path(env("CANTONESE_CACHE_DIR", str(BASE_DIR / ".cache")))
 MAX_TEXT_LEN = int(env("CANTONESE_MAX_TEXT", "2000"))
+RATE_LIMIT_PER_MIN = int(env("CANTONESE_RATE_LIMIT", "12"))
 SYNTH_TIMEOUT = float(env("CANTONESE_SYNTH_TIMEOUT", "120"))
 
 # Remote engine endpoints (empty means "not configured").

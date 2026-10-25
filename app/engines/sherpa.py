@@ -46,7 +46,10 @@ def _download(path: Path) -> None:
     archive = path.parent / "model.tar.bz2"
     urllib.request.urlretrieve(MODEL_URL, archive)
     with tarfile.open(archive, "r:bz2") as tar:
-        tar.extractall(path.parent, filter="data")
+        try:
+            tar.extractall(path.parent, filter="data")  # Python 3.12+
+        except TypeError:
+            tar.extractall(path.parent)
     archive.unlink(missing_ok=True)
 
 

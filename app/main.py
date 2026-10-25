@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import asyncio
 import time
+from collections import defaultdict, deque
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -16,6 +17,23 @@ from .engines.base import TTSError
 
 app = FastAPI(title="Cantonese TTS Playground", version="0.1.0")
 WEB_DIR = config.BASE_DIR / "web"
+
+_hits: dict[str, deque] = defaultdict(deque)
+
+
+@app.middleware("http")
+async def rate_limit(request: Request, call_next):
+    """每 IP 每分鐘限制 /api/tts 次數，避免公開部署時被刷爆付費 Key。"""
+    if request.url.path == "/api/tts" and config.RATE_LIMIT_PER_MIN > 0:
+        ip = request.headers.get("x-real-ip") or (request.client.host if request.client else "?")
+        now = time.monotonic()
+        bucket = _hits[ip]
+        while bucket and now - bucket[0] > 60:
+            bucket.popleft()
+        if len(bucket) >= config.RATE_LIMIT_PER_MIN:
+            return JSONResponse({"detail": "請求過於頻繁，請一分鐘後再試"}, status_code=429)
+        bucket.append(now)
+    return await call_next(request)
 
 
 class TTSRequest(BaseModel):
