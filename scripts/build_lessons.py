@@ -156,6 +156,35 @@ def cut_points(text: str, words: list[dict], total_ms: int) -> list[int]:
     return cuts
 
 
+def snap_cuts(audio: np.ndarray, cuts: list[int]) -> list[int]:
+    """把切點吸附到附近的靜音谷，避免時間戳誤差切斷尾音。"""
+    frame = int(SR * 0.01)          # 10ms
+    search = int(SR * 0.30)         # ±300ms
+    out = [cuts[0]]
+    for cut in cuts[1:-1]:
+        center = int(cut * SR / 1000)
+        lo, hi = max(0, center - search), min(len(audio), center + search)
+        if hi - lo < frame * 3:
+            out.append(cut)
+            continue
+        seg = audio[lo:hi]
+        n = len(seg) // frame
+        rms = np.array([
+            float(np.sqrt(np.mean(seg[i * frame:(i + 1) * frame] ** 2)))
+            for i in range(n)
+        ])
+        # 偏好靠近原切點、且能量低的框
+        idx = int(np.argmin(rms + 1e-4 * np.abs(np.arange(n) - n / 2)))
+        snapped = int((lo + idx * frame + frame / 2) / SR * 1000)
+        out.append(snapped)
+    out.append(cuts[-1])
+    # 保證遞增
+    for i in range(1, len(out) - 1):
+        if out[i] <= out[i - 1] + 80:
+            out[i] = out[i - 1] + 80
+    return out
+
+
 def write_wav(path: Path, samples: np.ndarray) -> None:
     fade = int(SR * 0.008)
     if len(samples) > fade * 2:
@@ -192,6 +221,7 @@ async def build() -> None:
         audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
         total_ms = int(len(audio) / SR * 1000)
         cuts = cut_points(text, words, total_ms)
+        cuts = snap_cuts(audio, cuts)
 
         segs = []
         for si, (zh, jy) in enumerate(zip(text_segments, jy_segments)):
