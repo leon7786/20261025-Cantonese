@@ -42,14 +42,16 @@ HOST=127.0.0.1 PORT=8000 ./.venv/bin/python -m app
 
 ## 已接入引擎
 
-| 引擎 | 類型 | 粵語來源 | 開箱可用 | 備註 |
+| 引擎 | 類型 | 費用 | 粵語來源 | 開箱可用 |
 |---|---|---|---|---|
-| [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 微軟 `zh-HK` 三個音色（曉曼／曉佳／雲龍） | ✅（需聯網） | 免費、音質穩定，屬在線服務封裝 |
-| [eSpeak NG](https://github.com/espeak-ng/espeak-ng) | 本地 | 內建 `yue` 語音，另有粵拼輸入變體 | 安裝後 ✅ | 共振峰合成，音質機械，作對照基線 |
-| 瀏覽器 Web Speech | 本地 | 作業系統 `zh-HK` 語音 | 視系統而定 | 不經伺服器，Chrome/Edge 支援較好 |
-| [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | `text_lang=yue` + 參考音頻 | 需配置 | 可克隆音色，需自行啟動 `api_v2` |
-| [CosyVoice 3](https://github.com/FunAudioLLM/CosyVoice) | 遠端 | 18+ 中文方言（含粵語） | 需配置 | 需自行啟動 FastAPI runtime |
-| OpenAI 兼容接口 | 遠端 | 由服務決定 | 需配置 | 任何 `/v1/audio/speech` 服務 |
+| [edge-tts](https://github.com/rany2/edge-tts) | 在線 | 免費 | 微軟 `zh-HK` 三個音色（曉曼／曉佳／雲龍） | ✅（需聯網） |
+| [eSpeak NG](https://github.com/espeak-ng/espeak-ng) | 本地 | 免費 | 內建 `yue` 語音，另有粵拼輸入變體 | 安裝後 ✅ |
+| 瀏覽器 Web Speech | 本地 | 免費 | 作業系統 `zh-HK` 語音 | 視系統而定 |
+| [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 遠端 | 免費（自架） | `text_lang=yue` + 參考音頻 | 需配置 |
+| [CosyVoice 3](https://github.com/FunAudioLLM/CosyVoice) | 遠端 | 免費（自架） | 18+ 中文方言（含粵語） | 需配置 |
+| OpenAI 兼容接口 | 遠端 | 需 API Key | 由服務決定 | 需配置 |
+
+頁面按費用分區排列：**免費引擎 → 免費但需自行部署 → 需要 API Key（置底）**。需要 Key 的引擎預設不參與「全部合成」，避免誤觸收費。
 
 ## 接入自建模型
 

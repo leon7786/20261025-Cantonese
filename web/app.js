@@ -66,12 +66,17 @@ function makeCard(engine) {
   const card = el("article", "card");
   card.dataset.id = engine.id;
   card.dataset.available = String(engine.available);
+  card.dataset.category = engine.category || "ready";
   if (!engine.available) card.classList.add("offline");
+  if (engine.category === "paid") card.classList.add("paid");
 
   const head = el("header", "card-head");
   const titleWrap = el("div", "card-title");
   const h2 = el("h2", null, engine.name);
-  const badge = el("span", `badge ${engine.kind}`, { local: "本地", online: "在線", remote: "需配置" }[engine.kind] || engine.kind);
+  const badgeText = engine.requires_key
+    ? "需 API Key"
+    : ({ local: "本地", online: "在線", remote: "需配置" }[engine.kind] || engine.kind);
+  const badge = el("span", `badge ${engine.requires_key ? "paid" : engine.kind}`, badgeText);
   titleWrap.append(h2, badge);
   const link = el("a", null, "GitHub ↗");
   link.href = engine.homepage;
@@ -283,7 +288,10 @@ async function runAll() {
   if (text.length > MAX_CHARS) return;
 
   const cards = [...document.querySelectorAll(".card")].filter(
-    (c) => c.dataset.id !== "browser" && c.dataset.available === "true",
+    (c) =>
+      c.dataset.id !== "browser" &&
+      c.dataset.category !== "paid" &&
+      c.dataset.available === "true",
   );
   if (!cards.length) return;
 
@@ -382,11 +390,29 @@ async function boot() {
     state.engines = [];
   }
 
-  const grid = $("#engines");
-  grid.innerHTML = "";
+  const root = $("#engines");
+  root.innerHTML = "";
 
-  state.engines.forEach((engine) => grid.append(makeCard(engine)));
-  grid.append(buildBrowserCard());
+  const GROUPS = [
+    { id: "ready", title: "免費引擎", note: "開箱即用：不需 API Key，也不需自架服務。" },
+    { id: "selfhost", title: "免費 · 需自行部署", note: "開源模型，需先啟動服務並在 .env 填入地址。" },
+    { id: "paid", title: "需要 API Key · 非免費", note: "按調用量收費，預設不參與「全部合成」。" },
+  ];
+
+  for (const group of GROUPS) {
+    const items = state.engines.filter((e) => (e.category || "ready") === group.id);
+    if (!items.length && group.id !== "paid") continue;
+
+    const section = el("section", "section");
+    section.dataset.group = group.id;
+    const head = el("div", "section-head");
+    head.append(el("h2", null, group.title), el("p", null, group.note));
+    const grid = el("div", "grid");
+    items.forEach((engine) => grid.append(makeCard(engine)));
+    if (group.id === "ready") grid.append(buildBrowserCard());
+    section.append(head, grid);
+    root.append(section);
+  }
 
   const available = state.engines.filter((e) => e.available).length;
   $("#statEngines").textContent = String(available + (browserVoices().length ? 1 : 0));
@@ -394,7 +420,7 @@ async function boot() {
   // System voices can arrive late (Chrome).
   if ("speechSynthesis" in window) {
     speechSynthesis.addEventListener("voiceschanged", () => {
-      const old = grid.querySelector('[data-id="browser"]');
+      const old = root.querySelector('[data-id="browser"]');
       if (old) old.replaceWith(buildBrowserCard());
     });
   }

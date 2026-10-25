@@ -19,7 +19,10 @@ class OpenAICompatEngine(Engine):
     name = "OpenAI 兼容接口"
     vendor = "自建 / 第三方"
     kind = "remote"
-    description = "任何實現 /v1/audio/speech 的服務（自架 VoxCPM、聚合網關等）都可接入。"
+    category = "paid"
+    free = False
+    requires_key = True
+    description = "任何實現 /v1/audio/speech 的服務（OpenAI、自架網關等），需自備 Key。"
     homepage = "https://platform.openai.com/docs/api-reference/audio"
     supports_rate = True
     supports_pitch = False

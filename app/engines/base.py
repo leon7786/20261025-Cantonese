@@ -31,6 +31,9 @@ class Engine:
     name: str = ""
     vendor: str = ""
     kind: str = "local"
+    category: str = "ready"          # ready | selfhost | paid
+    free: bool = True
+    requires_key: bool = False
     description: str = ""
     homepage: str = ""
     supports_rate: bool = False
@@ -51,6 +54,9 @@ class Engine:
             "name": self.name,
             "vendor": self.vendor,
             "kind": self.kind,
+            "category": self.category,
+            "free": self.free,
+            "requires_key": self.requires_key,
             "description": self.description,
             "homepage": self.homepage,
             "supports_rate": self.supports_rate,

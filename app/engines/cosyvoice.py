@@ -12,6 +12,7 @@ class CosyVoiceEngine(Engine):
     name = "CosyVoice 3"
     vendor = "FunAudioLLM / 本機服務"
     kind = "remote"
+    category = "selfhost"
     description = "阿里 24k★ 語音大模型，CosyVoice 3 覆蓋 18+ 中文方言（含粵語）；需自建 FastAPI 服務。"
     homepage = "https://github.com/FunAudioLLM/CosyVoice"
     supports_rate = False

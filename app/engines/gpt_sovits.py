@@ -12,6 +12,7 @@ class GptSovitsEngine(Engine):
     name = "GPT-SoVITS"
     vendor = "RVC-Boss / 本機服務"
     kind = "remote"
+    category = "selfhost"
     description = "59k★ 少樣本克隆框架，原生支援 yue 粵語；需自行啟動 api_v2 服務。"
     homepage = "https://github.com/RVC-Boss/GPT-SoVITS"
     supports_rate = False
