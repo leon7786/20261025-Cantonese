@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#f7f4ee" />
+<title>跟讀學粵語 · Cantonese TTS</title>
+<meta name="description" content="點一句聽一句，跟住粵拼學粵語。語音由 Qwen-Audio-3.0-TTS-Plus 生成。" />
+<link rel="stylesheet" href="/styles.css?v=20261026b" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣️</text></svg>" />
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="hero hero-compact">
+  <div class="hero-inner">
+    <nav class="topnav">
+      <a class="brand" href="/">粵語 TTS 實驗室</a>
+      <div class="navlinks">
+        <a href="/">對比實驗室</a>
+        <a href="/learn.html" class="active">跟讀學粵語</a>
+      </div>
+    </nav>
+    <h1>跟讀學粵語</h1>
+    <p class="lede">
+      點一句、聽一句，跟住粵拼慢慢讀。四篇文章由淺入深，涵蓋生活、吐槽、敘事與獨白。
+      語音由 <strong>Qwen-Audio-3.0-TTS-Plus（女聲）</strong> 生成。
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="composer learn-toolbar">
+    <div class="learn-controls">
+      <div class="inline-field">
+        <span>語速</span>
+        <div class="segmented" id="speed" role="group" aria-label="語速">
+          <button type="button" data-speed="normal" class="active">正常</button>
+          <button type="button" data-speed="slow">慢速</button>
+        </div>
+      </div>
+      <button id="playAll" class="btn primary" type="button">播放全篇</button>
+      <button id="stop" class="btn ghost" type="button" disabled>停止</button>
+      <span class="hint" id="status">點句子即播放</span>
+    </div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <audio id="player" class="learn-player" controls preload="none" hidden></audio>
+  </section>
+
+  <section class="learn-article">
+    <header class="article-head">
+      <h2 id="artTitle"></h2>
+      <span class="article-tag" id="artTag"></span>
+    </header>
+    <ol class="sentences" id="sentences"></ol>
+  </section>
+
+  <p class="disclaimer">
+    首次生成每句約 10 秒（Qwen 實時合成），之後同一句會命中伺服器快取。
+    粵拼只作發音提示，實際以音頻為準；如個別字讀音有出入，歡迎回報。
+  </p>
+</main>
+
+<footer class="foot">
+  <span>粵語 TTS 實驗室 · 跟讀頁</span>
+  <span class="dot">·</span>
+  <a href="/">返回對比實驗室</a>
+  <span class="dot">·</span>
+  <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">源碼</a>
+</footer>
+
+
+<script src="/articles.js?v=20261026b"></script>
+<script src="/learn.js?v=20261026b" defer></script>
+</body>
+</html>

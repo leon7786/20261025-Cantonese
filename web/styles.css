@@ -458,3 +458,120 @@ audio { width: 100%; height: 36px; margin-top: 2px; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* ---------- learn page ---------- */
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.navlinks { display: flex; gap: 6px; }
+.navlinks a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+.navlinks a:hover { color: var(--ink); background: #fff; }
+.navlinks a.active { color: var(--accent-strong); background: var(--accent-soft); }
+
+.hero-compact { padding-top: 44px; }
+.hero-compact h1 { font-size: clamp(28px, 3.6vw, 42px); margin-bottom: 10px; }
+
+.learn-toolbar { padding: 16px 18px; }
+.learn-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.inline-field { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dim); }
+.segmented {
+  display: inline-flex;
+  background: #f1ece2;
+  border-radius: 999px;
+  padding: 3px;
+}
+.segmented button {
+  border: 0;
+  background: transparent;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.segmented button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+#status[data-kind="error"] { color: var(--danger); }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font: inherit;
+  transition: 0.15s;
+}
+.tab-title { font-size: 13.5px; color: var(--ink); font-weight: 600; }
+.tab-count { font-size: 11px; color: var(--dim); }
+.tab:hover { border-color: var(--line-strong); }
+.tab.active { border-color: var(--accent-line); background: var(--accent-soft); }
+.tab.active .tab-title { color: var(--accent-strong); }
+
+.learn-article {
+  margin-top: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 22px 8px;
+  box-shadow: var(--shadow);
+}
+.article-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.article-head h2 { margin: 0; font-size: 20px; color: var(--ink); }
+.article-tag {
+  font-size: 12px;
+  color: var(--warm);
+  background: var(--warm-soft);
+  border: 1px solid var(--warm-line);
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.sentences { list-style: none; margin: 0; padding: 0; }
+.sentence {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 28px 64px;
+  gap: 10px;
+  align-items: start;
+  padding: 13px 10px;
+  border-top: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.sentence:hover { background: #fbf9f4; }
+.sentence:focus-visible { outline: 2px solid var(--accent-line); outline-offset: 2px; }
+.sent-num { color: #b9c0ca; font-size: 12px; font-variant-numeric: tabular-nums; padding-top: 5px; }
+.sent-zh { margin: 0; font-size: 17px; line-height: 1.7; color: var(--ink); }
+.sent-jy { margin: 4px 0 0; font-size: 12.5px; line-height: 1.65; color: var(--dim); word-break: break-word; }
+.sent-play { color: var(--accent); font-size: 14px; padding-top: 4px; text-align: center; }
+.sent-badge { font-size: 11px; color: var(--dim); text-align: right; padding-top: 5px; }
+.sentence.is-loading { background: #fdf8ee; }
+.sentence.is-playing { background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+.sentence.is-error { background: #fdeeee; }
+.sentence.is-error .sent-badge { color: var(--danger); }
+
+.learn-player { width: 100%; margin-top: 14px; height: 36px; }
+
+@media (max-width: 560px) {
+  .sentence { grid-template-columns: 26px minmax(0, 1fr) 24px; }
+  .sent-badge { display: none; }
+  .sent-zh { font-size: 15.5px; }
+}
