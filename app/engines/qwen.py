@@ -213,8 +213,6 @@ class QwenEngine(Engine):
     homepage = "https://help.aliyun.com/zh/model-studio/qwen-audio-3-0-tts-plus"
 
     async def probe(self) -> Probe:
-        if config.DASHSCOPE_KEY.startswith("sk-sp-"):
-            return Probe(True, "環境變數的 Key 屬 Coding Plan（sk-sp-），不能用於語音", VOICES)
         if config.DASHSCOPE_KEY:
             return Probe(True, "已由伺服器環境變數提供 Key", VOICES)
         return Probe(True, "填入百煉 API Key 後可用", VOICES)
@@ -234,11 +232,6 @@ class QwenEngine(Engine):
         key = (api_key or config.DASHSCOPE_KEY).strip()
         if not key:
             raise TTSError("請先在卡片填入百煉 API Key")
-        if key.startswith("sk-sp-"):
-            raise TTSError(
-                "這把 Key 屬 Coding Plan（sk-sp-…），其端點 coding.dashscope.aliyuncs.com 不提供語音合成；"
-                "請改用百煉控制台簽發的標準 API Key（sk-…）"
-            )
 
         voice = voice or config.QWEN_VOICE
         instruction = (instruction or config.QWEN_INSTRUCTION).strip()
