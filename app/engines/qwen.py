@@ -61,6 +61,20 @@ async def _connect(url: str, headers: dict):
         )
 
 
+async def _wait_event(ws, wanted: str, timeout: float = 20.0) -> dict:
+    """Read events until `wanted` arrives; return the matching event."""
+    while True:
+        raw = await asyncio.wait_for(ws.recv(), timeout=timeout)
+        if isinstance(raw, bytes):
+            continue
+        event = json.loads(raw)
+        if event.get("type") == wanted:
+            return event
+        if event.get("type") == "error":
+            err = event.get("error") or {}
+            raise TTSError(f"千問 API 錯誤：{err.get('message') or err.get('code') or err}")
+
+
 async def _synthesize(text: str, voice: str, key: str) -> bytes:
     url = f"{config.QWEN_WS_URL}?model={config.QWEN_MODEL}"
     headers = {"Authorization": f"Bearer {key}"}
@@ -76,6 +90,9 @@ async def _synthesize(text: str, voice: str, key: str) -> bytes:
     sample_rate = 24000
     try:
         async with ws:
+            # Handshake: wait for session.created before configuring the session.
+            await _wait_event(ws, "session.created")
+
             await ws.send(json.dumps({
                 "type": "session.update",
                 "session": {
@@ -86,6 +103,12 @@ async def _synthesize(text: str, voice: str, key: str) -> bytes:
                     "sample_rate": 24000,
                 },
             }))
+            # session.updated is optional; proceed if the server does not emit it.
+            try:
+                await _wait_event(ws, "session.updated", timeout=5.0)
+            except asyncio.TimeoutError:
+                pass
+
             await ws.send(json.dumps({"type": "input_text_buffer.append", "text": text}))
             await ws.send(json.dumps({"type": "input_text_buffer.commit"}))
 

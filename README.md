@@ -205,6 +205,8 @@ Qwen3-TTS 卡片帶一個 Key 輸入框：
 - 北京與新加坡區域的 Key 不通用，預設走北京 `dashscope.aliyuncs.com`
 - 需要 Key 的引擎不參與「全部合成」，避免誤觸計費
 
+沒有 Key 也可以測協議：`python scripts/mock_qwen_ws.py` 會起一個本地模擬 realtime 服務（回 1 秒正弦波），再用 `CANTONESE_QWEN_WS_URL=ws://127.0.0.1:8765/api-ws/v1/realtime` 啟動應用即可走完整條鏈路。
+
 > ⚠️ Qwen3-TTS 官方 `language_type` 只有中／英／日／韓／德／法／俄／西／葡／意，**沒有粵語**，粵字會用普通話音色讀。放進來是為了對照「普通話模型讀粵語」的效果。
 
 ## 注意事項
