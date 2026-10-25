@@ -12,6 +12,7 @@ from .edge import EdgeEngine
 from .ekho import EkhoEngine
 from .espeak import EspeakEngine
 from .gpt_sovits import GptSovitsEngine
+from .gtts import GTtsEngine
 from .openai_compat import OpenAICompatEngine
 from .sherpa import SherpaEngine
 
@@ -20,6 +21,7 @@ ENGINES: dict[str, Engine] = {
     for e in (
         EdgeEngine(),
         CantoEngine(),
+        GTtsEngine(),
         SherpaEngine(),
         EspeakEngine(),
         EkhoEngine(),

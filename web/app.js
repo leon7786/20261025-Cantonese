@@ -66,7 +66,7 @@ function makeCard(engine) {
   const card = el("article", "card");
   card.dataset.id = engine.id;
   card.dataset.available = String(engine.available);
-  card.dataset.category = engine.category || "ready";
+  card.dataset.category = engine.category || "baseline";
   if (!engine.available) card.classList.add("offline");
   if (engine.category === "paid") card.classList.add("paid");
 
@@ -262,6 +262,7 @@ function buildBrowserCard() {
   const voices = hasApi ? browserVoices() : [];
   const engine = {
     id: "browser",
+    category: "baseline",
     name: "瀏覽器語音",
     vendor: "Web Speech API",
     kind: "local",
@@ -394,7 +395,8 @@ async function boot() {
   root.innerHTML = "";
 
   const GROUPS = [
-    { id: "ready", title: "免費引擎", note: "開箱即用：不需 API Key，也不需自架服務。" },
+    { id: "quality", title: "免費 · 推薦音質", note: "自然度較好，優先比較這幾個。" },
+    { id: "baseline", title: "免費 · 基線對照", note: "小模型或傳統合成，音質明顯較舊，僅作對照。" },
     { id: "selfhost", title: "免費 · 需自行部署", note: "開源模型，需先啟動服務並在 .env 填入地址。" },
     { id: "paid", title: "需要 API Key · 非免費", note: "按調用量收費，預設不參與「全部合成」。" },
   ];
@@ -409,7 +411,7 @@ async function boot() {
     head.append(el("h2", null, group.title), el("p", null, group.note));
     const grid = el("div", "grid");
     items.forEach((engine) => grid.append(makeCard(engine)));
-    if (group.id === "ready") grid.append(buildBrowserCard());
+    if (group.id === "baseline") grid.append(buildBrowserCard());
     section.append(head, grid);
     root.append(section);
   }

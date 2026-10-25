@@ -98,7 +98,7 @@ class SherpaEngine(Engine):
     name = "sherpa-onnx"
     vendor = "k2-fsa · VITS"
     kind = "local"
-    category = "ready"
+    category = "baseline"
     description = "官方粵語 VITS 模型，ONNX Runtime 純 CPU，離線、體積細、速度最快。"
     homepage = "https://github.com/k2-fsa/sherpa-onnx"
     supports_rate = True

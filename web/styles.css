@@ -237,6 +237,8 @@ textarea::placeholder { color: #a7a094; }
 }
 .section-head p { margin: 0; color: var(--dim); font-size: 12.5px; }
 
+.section[data-group="baseline"] .section-head h2::before { background: #64748b; }
+.section[data-group="baseline"] .grid { grid-template-columns: repeat(auto-fill, minmax(460px, 1fr)); }
 .section[data-group="selfhost"] .section-head h2::before { background: #d97706; }
 .section[data-group="paid"] {
   margin-top: 6px;

@@ -20,6 +20,7 @@ class EdgeEngine(Engine):
     name = "edge-tts"
     vendor = "Microsoft Edge（zh-HK）"
     kind = "online"
+    category = "quality"
     description = "微軟 Edge 朗讀服務的粵語音色，免費、無需 GPU，但依賴網絡。"
     homepage = "https://github.com/rany2/edge-tts"
     supports_rate = True

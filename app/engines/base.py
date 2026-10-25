@@ -31,7 +31,7 @@ class Engine:
     name: str = ""
     vendor: str = ""
     kind: str = "local"
-    category: str = "ready"          # ready | selfhost | paid
+    category: str = "ready"          # quality | baseline | selfhost | paid
     free: bool = True
     requires_key: bool = False
     description: str = ""
