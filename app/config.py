@@ -44,11 +44,10 @@ COSYVOICE_SPK = env("CANTONESE_COSYVOICE_SPK", "中文女")
 
 # Qwen3-TTS on Alibaba Cloud DashScope (Beijing region by default).
 DASHSCOPE_KEY = env("CANTONESE_DASHSCOPE_KEY") or env("DASHSCOPE_API_KEY")
-QWEN_URL = env(
-    "CANTONESE_QWEN_URL",
-    "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+QWEN_WS_URL = env(
+    "CANTONESE_QWEN_WS_URL", "wss://dashscope.aliyuncs.com/api-ws/v1/realtime"
 )
-QWEN_MODEL = env("CANTONESE_QWEN_MODEL", "qwen3-tts-flash")
+QWEN_MODEL = env("CANTONESE_QWEN_MODEL", "qwen3-tts-flash-realtime")
 QWEN_LANG = env("CANTONESE_QWEN_LANG", "Chinese")
 
 OPENAI_TTS_URL = env("CANTONESE_OPENAI_URL")
