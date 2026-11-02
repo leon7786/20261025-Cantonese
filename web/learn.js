@@ -10,6 +10,7 @@
   const playBtn = $("playPause");
   const stopBtn = $("stop");
   const replayBtn = $("replay");
+  const speedEl = $("speed");
 
   const PUNCT = /[，。！？；：、,.!?;:]/;
   const LS = {
@@ -20,6 +21,7 @@
   const state = {
     articles: [],
     art: 0,
+    rate: 1,
     playing: false,     // 正在播（含「整篇」與「單句」）
     paused: false,
     single: false,      // 單句模式：播完即停
@@ -148,6 +150,12 @@
     if (node) node.classList.add("is-playing");
   }
 
+  function applyRate(rate) {
+    state.rate = rate;
+    player.playbackRate = rate;
+    player.defaultPlaybackRate = rate;
+  }
+
   function playSegment(i, single) {
     const art = current();
     const seg = art && art.segments[i];
@@ -162,6 +170,7 @@
 
     highlight(i);
     player.src = seg.audio;
+    applyRate(state.rate);
     player.play().catch(() => {});
     setStatus(`第 ${i + 1} 句`);
   }
@@ -232,6 +241,21 @@
     renderSidebar();
     renderArticle();
     syncButton();
+
+    try {
+      const saved = parseFloat(localStorage.getItem("cantonese.learn.rate") || "1");
+      if (saved >= 0.5 && saved <= 2) {
+        state.rate = saved;
+        speedEl.value = String(saved);
+      }
+    } catch { /* ignore */ }
+    applyRate(state.rate);
+    speedEl.addEventListener("change", () => {
+      const rate = parseFloat(speedEl.value) || 1;
+      applyRate(rate);
+      try { localStorage.setItem("cantonese.learn.rate", String(rate)); } catch { /* ignore */ }
+      setStatus(`語速 ${rate}×`);
+    });
 
     playBtn.addEventListener("click", togglePlay);
     stopBtn.addEventListener("click", () => stopPlayback());
