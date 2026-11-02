@@ -10,7 +10,7 @@
   const playBtn = $("playPause");
   const stopBtn = $("stop");
   const replayBtn = $("replay");
-  const speedEl = $("speed");
+  const speedBtns = [...document.querySelectorAll(".speed-seg button")];
 
   const PUNCT = /[，。！？；：、,.!?;:]/;
   const LS = {
@@ -242,19 +242,22 @@
     renderArticle();
     syncButton();
 
+    const setSpeed = (rate) => {
+      applyRate(rate);
+      speedBtns.forEach((btn) => btn.classList.toggle("active", Number(btn.dataset.rate) === rate));
+      try { localStorage.setItem("cantonese.learn.rate", String(rate)); } catch { /* ignore */ }
+    };
     try {
       const saved = parseFloat(localStorage.getItem("cantonese.learn.rate") || "1");
-      if (saved >= 0.5 && saved <= 2) {
-        state.rate = saved;
-        speedEl.value = String(saved);
-      }
+      if ([0.5, 0.75, 1].includes(saved)) state.rate = saved;
     } catch { /* ignore */ }
-    applyRate(state.rate);
-    speedEl.addEventListener("change", () => {
-      const rate = parseFloat(speedEl.value) || 1;
-      applyRate(rate);
-      try { localStorage.setItem("cantonese.learn.rate", String(rate)); } catch { /* ignore */ }
-      setStatus(`語速 ${rate}×`);
+    setSpeed(state.rate);
+    speedBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const rate = Number(btn.dataset.rate) || 1;
+        setSpeed(rate);
+        setStatus(`語速 ${rate}×`);
+      });
     });
 
     playBtn.addEventListener("click", togglePlay);
