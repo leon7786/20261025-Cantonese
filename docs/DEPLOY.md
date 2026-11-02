@@ -42,7 +42,7 @@ tail -f /var/log/cantonese-tts.log
 ├── learn.js
 ├── styles.css
 ├── lessons.json
-├── lessons/audio/*.wav   # 153 段
+├── lessons/audio/*.wav   # 231 段
 └── 404.html
 ```
 
@@ -122,4 +122,4 @@ rsync -av web/ root@192.168.32.232:/opt/1panel/www/sites/ccantonese-learning.dlf
   已加 `try/except TypeError` 兼容
 - 已安裝 `espeak-ng`；`canto-tts`、`ekho` 未安裝（顯示為不可用）
 - `sherpa-onnx` 首次合成會下載 108 MB 模型（已預熱）
-- 跟讀頁 14 篇 / 153 段音頻為靜態檔，不經過後端
+- 跟讀頁 21 篇 / 231 段音頻為靜態檔，不經過後端
