@@ -7,7 +7,6 @@
   const proseEl = $("prose");
   const titleEl = $("artTitle");
   const tagEl = $("artTag");
-  const metaEl = $("artMeta");
   const playBtn = $("playPause");
   const stopBtn = $("stop");
   const replayBtn = $("replay");
@@ -79,7 +78,7 @@
     state.articles.forEach((art, i) => {
       const btn = el("button", "side-item" + (i === state.art ? " active" : ""));
       btn.type = "button";
-      btn.append(el("span", "t", art.title), el("span", "c", `${art.segments.length} 句 · ${art.duration}s`));
+      btn.append(el("span", "t", art.title));
       btn.addEventListener("click", () => selectArticle(i, true));
       sidebarEl.append(btn);
     });
@@ -90,7 +89,6 @@
     if (!art) return;
     titleEl.textContent = art.title;
     tagEl.textContent = art.tag;
-    metaEl.textContent = `共 ${art.segments.length} 句 · ${art.duration}s`;
     proseEl.innerHTML = "";
 
     art.segments.forEach((seg, i) => {
@@ -165,7 +163,7 @@
     highlight(i);
     player.src = seg.audio;
     player.play().catch(() => {});
-    setStatus(`第 ${i + 1} / ${art.segments.length} 句`);
+    setStatus(`第 ${i + 1} 句`);
   }
 
   function onEnded() {
@@ -195,7 +193,7 @@
       state.paused = false;
       player.play().catch(() => {});
       syncButton();
-      setStatus(`第 ${state.index + 1} / ${current().segments.length} 句`);
+      setStatus(`第 ${state.index + 1} 句`);
       return;
     }
     playWhole();
@@ -240,7 +238,7 @@
     replayBtn.addEventListener("click", replay);
     player.addEventListener("ended", onEnded);
     player.addEventListener("play", () => {
-      if (!state.paused) setStatus(`第 ${state.index + 1} / ${current().segments.length} 句`);
+      if (!state.paused) setStatus(`第 ${state.index + 1} 句`);
     });
   }
 
