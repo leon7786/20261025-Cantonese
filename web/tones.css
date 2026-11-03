@@ -305,3 +305,47 @@
 @media (max-width: 380px) {
   .tone-line .jy { font-size: 9.5px; }
 }
+
+/* 九聲一覽：9 張小卡 */
+.tone-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tone-tcard {
+  padding: 10px 12px 9px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-soft);
+}
+
+.tone-tcard.is-enter { background: #fdf8ef; border-color: #ecdfc8; }
+
+.tt-top { display: flex; align-items: center; gap: 7px; }
+
+.tt-num {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.tt-name { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+
+.tt-ex { margin-top: 5px; font-size: 23px; line-height: 1.2; color: var(--ink); }
+.tt-ex i { margin-left: 4px; font-size: 11px; font-style: normal; color: var(--dim); }
+
+.tt-meta { margin-top: 2px; font-size: 11px; color: var(--dim); }
+
+@media (max-width: 600px) {
+  .tone-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+  .tone-tcard { padding: 8px 8px 7px; }
+  .tt-ex { font-size: 20px; }
+  .tt-meta { font-size: 10px; }
+}
