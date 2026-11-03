@@ -78,26 +78,22 @@ async def build(reuse: bool) -> None:
                 print(f"    {total_ms/1000:.1f}s", flush=True)
 
             tips_out = []
-            if item["id"] in TIP_AUDIO_IDS:
-                audio = read_wav(wav_path)
-                sb, se = speech_bounds(audio)
-                step = (se - sb) / len(spoken)
-                for ti, tip in enumerate(item.get("tips", [])):
-                    pos = spoken.find(tip["word"])
-                    if pos < 0:
-                        tips_out.append(dict(tip))
-                        continue
-                    s_ms = max(0, sb + pos * step - 25)
-                    e_ms = min(total_ms, sb + (pos + 1) * step + 45)
-                    if e_ms - s_ms < 150:
-                        e_ms = min(total_ms, s_ms + 150)
-                    chunk = audio[int(s_ms * bl.SR / 1000):int(e_ms * bl.SR / 1000)].copy()
+            for ti, tip in enumerate(item.get("tips", [])):
+                tip = dict(tip)
+                if item["id"] in TIP_AUDIO_IDS:
                     tname = f"{item['id']}-tip{ti}.wav"
-                    bl.write_wav(OUT_AUDIO / tname, chunk)
-                    tips_out.append({**tip, "audio": f"/tones/audio/{tname}",
-                                     "dur": round(len(chunk) / bl.SR, 2)})
-            else:
-                tips_out = [dict(t) for t in item.get("tips", [])]
+                    tpath = OUT_AUDIO / tname
+                    if reuse and tpath.exists():
+                        tip_ms = wav_ms(tpath)
+                    else:
+                        spoken_tip = f"{tip['word']}，{tip['note']}".replace("—", "，").replace("「", "").replace("」", "")
+                        print(f"    tip: {spoken_tip[:18]}…", flush=True)
+                        pcm, _ = await bl.synth(spoken_tip, env)
+                        tip_audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+                        bl.write_wav(tpath, tip_audio)
+                        tip_ms = int(len(tip_audio) / bl.SR * 1000)
+                    tip.update({"audio": f"/tones/audio/{tname}", "dur": round(tip_ms / 1000, 2)})
+                tips_out.append(tip)
 
             items.append({
                 **{k: item[k] for k in ("id", "title", "tag", "note", "phrase")},

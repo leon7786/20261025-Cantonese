@@ -55,7 +55,7 @@
     if (!item.tips || !item.tips.length) return null;
     const box = el("div", "tone-tips");
     const head = el("div", "tone-tips-head", "易讀錯 · 嘴型提示");
-    if (item.tips.some((t) => t.audio)) head.append(el("span", "tips-hint", "點提示聽讀音"));
+    if (item.tips.some((t) => t.audio)) head.append(el("span", "tips-hint", "點提示聽朗讀"));
     box.append(head);
     const ul = el("ul");
     item.tips.forEach((t) => {
@@ -64,7 +64,7 @@
       if (t.audio) {
         li.tabIndex = 0;
         li.setAttribute("role", "button");
-        li.setAttribute("aria-label", `聽「${t.word}」讀音`);
+        li.setAttribute("aria-label", `朗讀這條提示：${t.word}`);
         const go = () => play(t.audio, li, null, "");
         li.addEventListener("click", go);
         li.addEventListener("keydown", (e) => {
