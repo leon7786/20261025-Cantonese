@@ -49,6 +49,29 @@ def speech_bounds(audio: np.ndarray) -> tuple[int, int]:
     return start, end
 
 
+def add_pause(audio: np.ndarray, pause_ms: int = 360) -> np.ndarray:
+    """在「字」和後面的說明之間補一段靜音，避免連讀。"""
+    frame = int(bl.SR * 0.01)
+    n = len(audio) // frame
+    rms = np.array([float(np.sqrt(np.mean(audio[i * frame:(i + 1) * frame] ** 2))) for i in range(n)])
+    thresh = max(rms.max() * 0.05, 1e-4)
+    start = None
+    run = 0
+    for i, v in enumerate(rms):
+        if v < thresh and i * 10 > 200:
+            if start is None:
+                start = i
+            run += 1
+            if run >= 5:
+                break
+        else:
+            start, run = None, 0
+    if start is None:
+        return audio
+    cut = start * frame
+    return np.concatenate([audio[:cut], np.zeros(int(bl.SR * pause_ms / 1000), dtype=np.float32), audio[cut:]])
+
+
 def wav_ms(path: Path) -> int:
     with wave.open(str(path), "rb") as w:
         return int(w.getnframes() / w.getframerate() * 1000)
@@ -91,6 +114,7 @@ async def build(reuse: bool) -> None:
                         print(f"    tip: {spoken_tip[:18]}…", flush=True)
                         pcm, _ = await bl.synth(spoken_tip, env)
                         tip_audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+                        tip_audio = add_pause(tip_audio)
                         bl.write_wav(tpath, tip_audio)
                         tip_ms = int(len(tip_audio) / bl.SR * 1000)
                     tip.update({"audio": f"/tones/audio/{tname}", "dur": round(tip_ms / 1000, 2)})
