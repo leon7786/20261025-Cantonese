@@ -54,7 +54,7 @@
   function renderTips(item) {
     if (!item.tips || !item.tips.length) return null;
     const box = el("div", "tone-tips");
-    box.append(el("div", "tone-tips-head", "易讀錯 · 正確發音"));
+    box.append(el("div", "tone-tips-head", "易讀錯 · 嘴型提示"));
     const ul = el("ul");
     item.tips.forEach((t) => {
       const li = el("li");
