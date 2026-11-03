@@ -16,7 +16,7 @@ spec.loader.exec_module(bl)
 DATA = ROOT / "data" / "poems.json"
 OUT_JSON = ROOT / "web" / "poems.json"
 OUT_AUDIO = ROOT / "web" / "poems" / "audio"
-AUDIO_VER = "20261110c"
+AUDIO_VER = "20261110d"
 
 
 async def build(reuse: bool) -> None:
