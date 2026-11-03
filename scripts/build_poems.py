@@ -16,7 +16,7 @@ spec.loader.exec_module(bl)
 DATA = ROOT / "data" / "poems.json"
 OUT_JSON = ROOT / "web" / "poems.json"
 OUT_AUDIO = ROOT / "web" / "poems" / "audio"
-AUDIO_VER = "20261110k"
+AUDIO_VER = "20261111d"
 
 
 async def build(reuse: bool) -> None:
@@ -39,10 +39,13 @@ async def build(reuse: bool) -> None:
                 print(f"[{poem['id']}] {poem['title']} …", flush=True)
                 import numpy as np
                 pieces = []
+                poem_env = dict(env)
+                if poem.get("instruction"):
+                    poem_env["CANTONESE_QWEN_INSTRUCTION"] = poem["instruction"]
                 for ci, chunk in enumerate(chunks):
                     for a, b in (poem.get("replace") or {}).items():
                         chunk = chunk.replace(a, b)
-                    pcm, _ = await bl.synth(chunk, env)
+                    pcm, _ = await bl.synth(chunk, poem_env)
                     a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
                     pieces.append(a)
                     if ci < len(chunks) - 1:
