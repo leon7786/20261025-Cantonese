@@ -24,7 +24,7 @@ OUT_JSON = ROOT / "web" / "lessons.json"
 SR = 24000
 MODEL = "qwen-audio-3.0-tts-plus"
 VOICE = "longanlingxin"
-INSTRUCTION = "请用粤语朗读"
+INSTRUCTION = "请用广东话表达。"
 
 
 def load_env() -> dict:
