@@ -1,0 +1,185 @@
+/* 九聲六調頁面 */
+
+.tone-legend {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 22px 18px;
+  margin-bottom: 26px;
+  box-shadow: 0 1px 2px rgba(20, 32, 43, 0.04);
+}
+
+.tone-legend-head h2 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.tone-legend-head p {
+  margin: 0 0 16px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--dim);
+}
+
+.tone-scale {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.tone-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-soft);
+}
+
+.tone-cell b { font-size: 16px; color: var(--accent); }
+.tone-cell span { font-size: 11.5px; color: var(--ink); }
+.tone-cell i { font-size: 10.5px; color: var(--dim); font-style: normal; }
+.tone-cell em { font-size: 10.5px; color: var(--muted); font-style: normal; white-space: nowrap; }
+
+.tone-section { margin: 34px 0 8px; }
+
+.tone-section-head h2 {
+  margin: 0 0 4px;
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.tone-section-head p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--dim);
+}
+
+.tone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: 16px;
+}
+
+.tone-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 16px 13px;
+  box-shadow: 0 1px 2px rgba(20, 32, 43, 0.04);
+}
+
+.tone-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tone-tag {
+  font-size: 11px;
+  color: var(--warm);
+  background: var(--warm-soft);
+  border: 1px solid var(--warm-line);
+  border-radius: 999px;
+  padding: 2px 9px;
+  white-space: nowrap;
+}
+
+.tone-dur {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.tone-card h3 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.tone-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tone-chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 40px;
+  padding: 5px 6px 4px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--panel-soft);
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+}
+
+.tone-chip:hover { background: #fbf7ee; border-color: var(--line-strong); }
+.tone-chip:active { transform: translateY(1px); }
+.tone-chip .ch { font-size: 20px; line-height: 1.1; color: var(--ink); }
+.tone-chip .jy { font-size: 10px; color: var(--dim); letter-spacing: 0.01em; }
+
+.tone-chip.playing,
+.tone-chip.playing:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+.tone-chip.playing .ch,
+.tone-chip.playing .jy { color: var(--accent-strong); }
+
+.tone-note {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--dim);
+}
+
+.tone-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.tone-actions .btn { padding: 7px 13px; font-size: 12.5px; min-height: 34px; }
+
+.tone-status {
+  font-size: 11.5px;
+  color: var(--dim);
+}
+
+@media (max-width: 900px) {
+  .tone-scale { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .tone-legend { padding: 16px 14px 14px; border-radius: 14px; }
+  .tone-scale { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .tone-cell em { display: none; }
+  .tone-grid { grid-template-columns: 1fr; gap: 12px; }
+  .tone-card { padding: 14px 12px 11px; border-radius: 12px; }
+  .tone-card h3 { font-size: 17px; }
+  .tone-chip { min-width: 42px; padding: 5px 7px 4px; }
+  .tone-chip .ch { font-size: 19px; }
+  .tone-chip .jy { font-size: 10px; }
+  .tone-note { font-size: 12px; }
+}
+
+@media (max-width: 380px) {
+  .tone-chip .jy { font-size: 9px; }
+  .tone-chip { min-width: 38px; }
+}
