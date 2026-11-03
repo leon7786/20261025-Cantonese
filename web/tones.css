@@ -212,6 +212,32 @@
 
 .tone-tips ul { margin: 0; padding-left: 16px; }
 .tone-tips li { font-size: 12.5px; line-height: 1.8; color: var(--text); }
+
+.tips-hint {
+  float: right;
+  font-size: 10.5px;
+  font-weight: 400;
+  color: #a16207;
+}
+
+.tone-tips li.has-audio {
+  margin-left: -5px;
+  padding: 1px 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.tone-tips li.has-audio:hover { background: #fff4e4; }
+.tone-tips li.has-audio.playing { background: #fff; box-shadow: inset 0 0 0 1px #e6c9a8; }
+
+.tone-tips li.has-audio::after {
+  content: "▶";
+  margin-left: 5px;
+  font-size: 8px;
+  color: #b45309;
+  opacity: 0.55;
+}
 .tone-tips b.tip-word {
   display: inline-block;
   min-width: 1.6em;

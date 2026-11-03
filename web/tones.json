@@ -14,19 +14,27 @@
      "tips": [
       {
        "word": "五",
-       "note": "像应人一声「嗯」：舌根抬起、鼻子出气，别读成「母」。"
+       "note": "像应人一声「嗯」：舌根抬起、鼻子出气，别读成「母」。",
+       "audio": "/tones/audio/digits-tip0.wav",
+       "dur": 0.31
       },
       {
        "word": "七",
-       "note": "舌尖顶上牙床，像被烫到「啧」一下，立刻停。"
+       "note": "舌尖顶上牙床，像被烫到「啧」一下，立刻停。",
+       "audio": "/tones/audio/digits-tip1.wav",
+       "dur": 0.31
       },
       {
        "word": "八",
-       "note": "双唇闭紧再弹开，像小声说「巴」。"
+       "note": "双唇闭紧再弹开，像小声说「巴」。",
+       "audio": "/tones/audio/digits-tip2.wav",
+       "dur": 0.31
       },
       {
        "word": "六",
-       "note": "舌根顶住软腭，喉咙「咯」一下，像吞口水。"
+       "note": "舌根顶住软腭，喉咙「咯」一下，像吞口水。",
+       "audio": "/tones/audio/digits-tip3.wav",
+       "dur": 0.31
       }
      ],
      "audio": "/tones/audio/digits.wav",
@@ -79,11 +87,15 @@
      "tips": [
       {
        "word": "狸",
-       "note": "嘴角像笑一样往两边拉，舌尖抵上牙床，拖长说「黎」。"
+       "note": "嘴角像笑一样往两边拉，舌尖抵上牙床，拖长说「黎」。",
+       "audio": "/tones/audio/chicken-tip0.wav",
+       "dur": 0.32
       },
       {
        "word": "鹅",
-       "note": "像感冒「哦」一声，舌根后缩、鼻音出气。"
+       "note": "像感冒「哦」一声，舌根后缩、鼻音出气。",
+       "audio": "/tones/audio/chicken-tip1.wav",
+       "dur": 0.32
       }
      ],
      "audio": "/tones/audio/chicken.wav",

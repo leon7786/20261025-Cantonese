@@ -15,7 +15,7 @@
   function clearPlaying() {
     if (activeLine) activeLine.classList.remove("playing");
     activeLine = null;
-    root.querySelectorAll(".tone-line.playing").forEach((n) => n.classList.remove("playing"));
+    root.querySelectorAll(".playing").forEach((n) => n.classList.remove("playing"));
   }
 
   function play(url, line, status, label) {
@@ -54,11 +54,26 @@
   function renderTips(item) {
     if (!item.tips || !item.tips.length) return null;
     const box = el("div", "tone-tips");
-    box.append(el("div", "tone-tips-head", "易讀錯 · 嘴型提示"));
+    const head = el("div", "tone-tips-head", "易讀錯 · 嘴型提示");
+    if (item.tips.some((t) => t.audio)) head.append(el("span", "tips-hint", "點提示聽讀音"));
+    box.append(head);
     const ul = el("ul");
     item.tips.forEach((t) => {
-      const li = el("li");
+      const li = el("li", t.audio ? "has-audio" : null);
       li.append(el("b", "tip-word", t.word), el("span", null, ` — ${t.note}`));
+      if (t.audio) {
+        li.tabIndex = 0;
+        li.setAttribute("role", "button");
+        li.setAttribute("aria-label", `聽「${t.word}」讀音`);
+        const go = () => play(t.audio, li, null, "");
+        li.addEventListener("click", go);
+        li.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            go();
+          }
+        });
+      }
       ul.append(li);
     });
     box.append(ul);

@@ -13,6 +13,8 @@ import re
 import wave
 from pathlib import Path
 
+import numpy as np
+
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("bl", ROOT / "scripts" / "build_lessons.py")
 bl = importlib.util.module_from_spec(spec)
@@ -22,6 +24,28 @@ DATA = ROOT / "data" / "tones.json"
 OUT_JSON = ROOT / "web" / "tones.json"
 OUT_AUDIO = ROOT / "web" / "tones" / "audio"
 PUNCT = re.compile(r"[，。！？；：、,.!?;:]")
+
+
+TIP_AUDIO_IDS = {"digits", "chicken"}  # 先為前兩張卡的重點字做讀音
+
+
+def read_wav(path: Path) -> np.ndarray:
+    with wave.open(str(path), "rb") as w:
+        frames = w.readframes(w.getnframes())
+    return np.frombuffer(frames, dtype=np.int16).astype(np.float32) / 32768
+
+
+def speech_bounds(audio: np.ndarray) -> tuple[int, int]:
+    frame = int(bl.SR * 0.01)
+    n = len(audio) // frame
+    rms = np.array([float(np.sqrt(np.mean(audio[i * frame:(i + 1) * frame] ** 2))) for i in range(n)])
+    thresh = max(rms.max() * 0.06, 1e-4)
+    idx = np.where(rms > thresh)[0]
+    if not len(idx):
+        return 0, int(len(audio) / bl.SR * 1000)
+    start = max(0, int(idx[0] * frame / bl.SR * 1000) - 60)
+    end = min(int(len(audio) / bl.SR * 1000), int((idx[-1] + 1) * frame / bl.SR * 1000) + 80)
+    return start, end
 
 
 def wav_ms(path: Path) -> int:
@@ -53,9 +77,31 @@ async def build(reuse: bool) -> None:
                 bl.write_wav(wav_path, audio)
                 print(f"    {total_ms/1000:.1f}s", flush=True)
 
+            tips_out = []
+            if item["id"] in TIP_AUDIO_IDS:
+                audio = read_wav(wav_path)
+                sb, se = speech_bounds(audio)
+                step = (se - sb) / len(spoken)
+                for ti, tip in enumerate(item.get("tips", [])):
+                    pos = spoken.find(tip["word"])
+                    if pos < 0:
+                        tips_out.append(dict(tip))
+                        continue
+                    s_ms = max(0, sb + pos * step - 25)
+                    e_ms = min(total_ms, sb + (pos + 1) * step + 45)
+                    if e_ms - s_ms < 150:
+                        e_ms = min(total_ms, s_ms + 150)
+                    chunk = audio[int(s_ms * bl.SR / 1000):int(e_ms * bl.SR / 1000)].copy()
+                    tname = f"{item['id']}-tip{ti}.wav"
+                    bl.write_wav(OUT_AUDIO / tname, chunk)
+                    tips_out.append({**tip, "audio": f"/tones/audio/{tname}",
+                                     "dur": round(len(chunk) / bl.SR, 2)})
+            else:
+                tips_out = [dict(t) for t in item.get("tips", [])]
+
             items.append({
                 **{k: item[k] for k in ("id", "title", "tag", "note", "phrase")},
-                "tips": item.get("tips", []),
+                "tips": tips_out,
                 "audio": f"/tones/audio/{item['id']}.wav",
                 "duration": round(total_ms / 1000, 2),
                 "chars": [{"c": c, "jy": j} for (c, j) in item["chars"]],
