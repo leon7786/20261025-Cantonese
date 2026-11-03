@@ -349,3 +349,5 @@
   .tt-ex { font-size: 20px; }
   .tt-meta { font-size: 10px; }
 }
+
+.tone-boss .tone-grid { grid-template-columns: 1fr; max-width: 660px; }

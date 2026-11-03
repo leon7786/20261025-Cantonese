@@ -27,7 +27,8 @@ PUNCT = re.compile(r"[，。！？；：、,.!?;:]")
 
 
 TIP_AUDIO_IDS = {"digits", "chicken", "auntie", "beef", "crab", "rice",
-                 "buy-sell", "patrol", "tea", "flowers"}  # 全部卡片的提示都做朗讀
+                 "buy-sell", "patrol", "tea", "flowers",
+                 "jan-set", "entering-boss"}  # 全部卡片的提示都做朗讀
 
 
 def read_wav(path: Path) -> np.ndarray:

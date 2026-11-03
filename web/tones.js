@@ -31,7 +31,7 @@
   }
 
   function renderLine(item, status) {
-    const line = el("div", "tone-line" + (item.chars.length >= 8 ? " compact" : ""));
+    const line = el("div", "tone-line" + (item.chars.length >= 7 ? " compact" : ""));
     line.tabIndex = 0;
     line.setAttribute("role", "button");
     line.setAttribute("aria-label", `播放整段：${item.title}`);
@@ -118,7 +118,7 @@
     }
 
     (data.sections || []).forEach((sec) => {
-      const section = el("section", "tone-section");
+      const section = el("section", "tone-section" + (sec.id === "entering" ? " tone-boss" : ""));
       const head = el("div", "tone-section-head");
       const titleRow = el("div", "tone-section-title");
       titleRow.append(el("h2", null, sec.title), el("span", "tone-count", `${sec.items.length} 組`));

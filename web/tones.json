@@ -16,13 +16,13 @@
        "word": "五",
        "note": "好似隨口應人一聲「嗯」：舌根抬起、用鼻出氣，唔好讀成「母」。",
        "audio": "/tones/audio/digits-tip0.wav",
-       "dur": 6.87
+       "dur": 6.86
       },
       {
        "word": "七",
        "note": "舌尖頂實上牙床，好似辣親「嘖」一下，即刻收。",
        "audio": "/tones/audio/digits-tip1.wav",
-       "dur": 4.87
+       "dur": 4.84
       },
       {
        "word": "八",
@@ -34,7 +34,7 @@
        "word": "六",
        "note": "舌根頂住軟腭，喉嚨「咯」一下，好似吞口水。",
        "audio": "/tones/audio/digits-tip3.wav",
-       "dur": 5.56
+       "dur": 5.53
       }
      ],
      "audio": "/tones/audio/digits.wav",
@@ -79,6 +79,69 @@
      ]
     },
     {
+     "id": "jan-set",
+     "title": "因忍印人引刃，一日",
+     "tag": "同韻九聲",
+     "note": "前六個字同一個 jan 韻，1→6 順住落；「一」係高入，「日」係低入。（「認」讀 jing6，所以呢度用同韻嘅「刃」。）",
+     "phrase": "因忍印人引刃，一日",
+     "tips": [
+      {
+       "word": "刃",
+       "note": "舌尖抵住上牙床，聲帶振動，把聲低而平，唔好升高。",
+       "audio": "/tones/audio/jan-set-tip0.wav",
+       "dur": 6.7
+      },
+      {
+       "word": "一",
+       "note": "舌尖頂住上牙床，一碰即停，好似噎住一下。",
+       "audio": "/tones/audio/jan-set-tip1.wav",
+       "dur": 5.53
+      },
+      {
+       "word": "日",
+       "note": "聲音低沉，舌尖頂住上牙床，短促收住。",
+       "audio": "/tones/audio/jan-set-tip2.wav",
+       "dur": 5.09
+      }
+     ],
+     "audio": "/tones/audio/jan-set.wav",
+     "duration": 5.52,
+     "chars": [
+      {
+       "c": "因",
+       "jy": "jan1"
+      },
+      {
+       "c": "忍",
+       "jy": "jan2"
+      },
+      {
+       "c": "印",
+       "jy": "jan3"
+      },
+      {
+       "c": "人",
+       "jy": "jan4"
+      },
+      {
+       "c": "引",
+       "jy": "jan5"
+      },
+      {
+       "c": "刃",
+       "jy": "jan6"
+      },
+      {
+       "c": "一",
+       "jy": "jat1"
+      },
+      {
+       "c": "日",
+       "jy": "jat6"
+      }
+     ]
+    },
+    {
      "id": "chicken",
      "title": "鸡仔叫，鹅仔叫，狐狸叫",
      "tag": "童谣定调法",
@@ -89,13 +152,13 @@
        "word": "狸",
        "note": "嘴角好似笑咁向兩邊拉，舌尖抵住上牙床，拉長講「黎」。",
        "audio": "/tones/audio/chicken-tip0.wav",
-       "dur": 6.48
+       "dur": 6.31
       },
       {
        "word": "鹅",
        "note": "好似感冒「哦」一聲，舌根縮後、用鼻出氣。",
        "audio": "/tones/audio/chicken-tip1.wav",
-       "dur": 6.75
+       "dur": 6.74
       }
      ],
      "audio": "/tones/audio/chicken.wav",
@@ -141,26 +204,32 @@
     },
     {
      "id": "auntie",
-     "title": "周婶去买菜",
-     "tag": "市井俗语类",
-     "note": "經典市井句，用嚟對比口語連讀嘅聲調起伏。俗語版：「番鬼佬賣涼茶」。",
-     "phrase": "周婶去买菜",
+     "title": "周婶去黎买豉油",
+     "tag": "市井買菜版",
+     "note": "前六個字啱啱好 1→6，最後「油」返去第 4 聲；買豉油係廣東人日常。",
+     "phrase": "周婶去黎买豉油",
      "tips": [
       {
-       "word": "婶",
-       "note": "講完「三」即刻合埋嘴，好似「心」嘅收尾。",
+       "word": "豉",
+       "note": "第 6 聲低平：舌尖抵住上牙床，把聲壓低拖平。",
        "audio": "/tones/audio/auntie-tip0.wav",
-       "dur": 4.49
+       "dur": 6.54
       },
       {
-       "word": "买",
-       "note": "尾音好似反問「啊？」，向上挑。",
+       "word": "黎",
+       "note": "第 4 聲低降：聲音由低再沉落去，好似嘆氣。",
        "audio": "/tones/audio/auntie-tip1.wav",
-       "dur": 4.13
+       "dur": 6.23
+      },
+      {
+       "word": "油",
+       "note": "第 4 聲，同「黎」一樣低沉，尾音唔好升。",
+       "audio": "/tones/audio/auntie-tip2.wav",
+       "dur": 4.63
       }
      ],
      "audio": "/tones/audio/auntie.wav",
-     "duration": 1.68,
+     "duration": 2.0,
      "chars": [
       {
        "c": "周",
@@ -175,12 +244,20 @@
        "jy": "heoi3"
       },
       {
+       "c": "黎",
+       "jy": "lai4"
+      },
+      {
        "c": "买",
        "jy": "maai5"
       },
       {
-       "c": "菜",
-       "jy": "coi3"
+       "c": "豉",
+       "jy": "si6"
+      },
+      {
+       "c": "油",
+       "jy": "jau4"
       }
      ]
     },
@@ -195,13 +272,13 @@
        "word": "牛",
        "note": "先「嗯」一聲，舌根抬起，跟住滑去「由」。",
        "audio": "/tones/audio/beef-tip0.wav",
-       "dur": 5.55
+       "dur": 5.51
       },
       {
        "word": "腩",
        "note": "好似「南」咁，但係最後要合埋嘴，尾音向上挑。",
        "audio": "/tones/audio/beef-tip1.wav",
-       "dur": 5.11
+       "dur": 5.09
       }
      ],
      "audio": "/tones/audio/beef.wav",
@@ -244,13 +321,13 @@
        "word": "石",
        "note": "舌尖頂住上牙床，「塞」一下即刻停，好似煞掣。",
        "audio": "/tones/audio/crab-tip0.wav",
-       "dur": 5.36
+       "dur": 5.32
       },
       {
        "word": "砸",
        "note": "雙唇合實再彈開，「扎」一下，最後合埋嘴。",
        "audio": "/tones/audio/crab-tip1.wav",
-       "dur": 5.84
+       "dur": 5.76
       }
      ],
      "audio": "/tones/audio/crab.wav",
@@ -277,55 +354,6 @@
        "jy": "haai5"
       }
      ]
-    },
-    {
-     "id": "rice",
-     "title": "今朝去寻米饭",
-     "tag": "双闭口音练习",
-     "note": "「今」「尋」讀完要閉實雙唇，「飯」最後舌尖頂住上牙床。",
-     "phrase": "今朝去寻米饭",
-     "tips": [
-      {
-       "word": "寻",
-       "note": "好似「心」嘅收法：收尾合埋嘴，用鼻出氣。",
-       "audio": "/tones/audio/rice-tip0.wav",
-       "dur": 5.47
-      },
-      {
-       "word": "饭",
-       "note": "收尾舌尖頂住上牙床，唔好合埋嘴。",
-       "audio": "/tones/audio/rice-tip1.wav",
-       "dur": 5.07
-      }
-     ],
-     "audio": "/tones/audio/rice.wav",
-     "duration": 1.84,
-     "chars": [
-      {
-       "c": "今",
-       "jy": "gam1"
-      },
-      {
-       "c": "朝",
-       "jy": "ziu2"
-      },
-      {
-       "c": "去",
-       "jy": "heoi3"
-      },
-      {
-       "c": "寻",
-       "jy": "cam4"
-      },
-      {
-       "c": "米",
-       "jy": "mai5"
-      },
-      {
-       "c": "饭",
-       "jy": "faan6"
-      }
-     ]
     }
    ]
   },
@@ -345,13 +373,13 @@
        "word": "买",
        "note": "好似問人「啊？」，尾音向上挑。",
        "audio": "/tones/audio/buy-sell-tip0.wav",
-       "dur": 3.97
+       "dur": 3.96
       },
       {
        "word": "卖",
        "note": "好似嘆氣，把聲平平；同「買」只差高低。",
        "audio": "/tones/audio/buy-sell-tip1.wav",
-       "dur": 4.66
+       "dur": 4.69
       }
      ],
      "audio": "/tones/audio/buy-sell.wav",
@@ -395,13 +423,13 @@
        "note": "嘴唇好似吹口哨咁收圓。",
        "spoken": "掌",
        "audio": "/tones/audio/patrol-tip0.wav",
-       "dur": 3.46
+       "dur": 3.48
       },
       {
        "word": "巡",
        "note": "嘴唇收圓，好似「春」嘅圓唇版。",
        "audio": "/tones/audio/patrol-tip1.wav",
-       "dur": 4.39
+       "dur": 4.38
       }
      ],
      "audio": "/tones/audio/patrol.wav",
@@ -451,7 +479,7 @@
        "note": "嘴唇合埋，「啪」一聲彈開，把聲保持平，唔好升高。",
        "spoken": "炮",
        "audio": "/tones/audio/tea-tip1.wav",
-       "dur": 6.56
+       "dur": 6.59
       }
      ],
      "audio": "/tones/audio/tea.wav",
@@ -500,7 +528,7 @@
        "word": "面",
        "note": "收尾舌尖頂住上牙床，把聲平平。",
        "audio": "/tones/audio/flowers-tip1.wav",
-       "dur": 5.21
+       "dur": 5.19
       }
      ],
      "audio": "/tones/audio/flowers.wav",
@@ -529,6 +557,129 @@
       {
        "c": "面",
        "jy": "min6"
+      }
+     ]
+    },
+    {
+     "id": "rice",
+     "title": "今朝去寻米饭",
+     "tag": "双闭口音练习",
+     "note": "「今」「尋」讀完要閉實雙唇，「飯」最後舌尖頂住上牙床。",
+     "phrase": "今朝去寻米饭",
+     "tips": [
+      {
+       "word": "寻",
+       "note": "好似「心」嘅收法：收尾合埋嘴，用鼻出氣。",
+       "audio": "/tones/audio/rice-tip0.wav",
+       "dur": 5.46
+      },
+      {
+       "word": "饭",
+       "note": "收尾舌尖頂住上牙床，唔好合埋嘴。",
+       "audio": "/tones/audio/rice-tip1.wav",
+       "dur": 5.06
+      }
+     ],
+     "audio": "/tones/audio/rice.wav",
+     "duration": 1.84,
+     "chars": [
+      {
+       "c": "今",
+       "jy": "gam1"
+      },
+      {
+       "c": "朝",
+       "jy": "ziu2"
+      },
+      {
+       "c": "去",
+       "jy": "heoi3"
+      },
+      {
+       "c": "寻",
+       "jy": "cam4"
+      },
+      {
+       "c": "米",
+       "jy": "mai5"
+      },
+      {
+       "c": "饭",
+       "jy": "faan6"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "entering",
+   "title": "入聲闖關",
+   "subtitle": "三種入聲收尾一次過練：雙唇、舌尖、舌根。",
+   "items": [
+    {
+     "id": "entering-boss",
+     "title": "今日食乜？食十碗白粥！",
+     "tag": "入聲 Boss",
+     "note": "一句入面有齊三種入聲收尾：十（雙唇收）、日同乜（舌尖收）、食同白同粥（舌根收），專門練「急刹車」。",
+     "phrase": "今日食乜？食十碗白粥！",
+     "tips": [
+      {
+       "word": "十",
+       "note": "雙唇合實，短促收住，好似「十」一下即停。",
+       "audio": "/tones/audio/entering-boss-tip0.wav",
+       "dur": 4.99
+      },
+      {
+       "word": "乜",
+       "note": "舌尖頂住上牙床，短促收住，好似「乜」一聲即停。",
+       "audio": "/tones/audio/entering-boss-tip1.wav",
+       "dur": 6.15
+      },
+      {
+       "word": "白",
+       "note": "舌根頂住軟腭，短促收住，聲音低沉。",
+       "audio": "/tones/audio/entering-boss-tip2.wav",
+       "dur": 4.92
+      }
+     ],
+     "audio": "/tones/audio/entering-boss.wav",
+     "duration": 2.48,
+     "chars": [
+      {
+       "c": "今",
+       "jy": "gam1"
+      },
+      {
+       "c": "日",
+       "jy": "jat6"
+      },
+      {
+       "c": "食",
+       "jy": "sik6"
+      },
+      {
+       "c": "乜",
+       "jy": "mat1"
+      },
+      {
+       "c": "食",
+       "jy": "sik6"
+      },
+      {
+       "c": "十",
+       "jy": "sap6"
+      },
+      {
+       "c": "碗",
+       "jy": "wun2"
+      },
+      {
+       "c": "白",
+       "jy": "baak6"
+      },
+      {
+       "c": "粥",
+       "jy": "zuk1"
       }
      ]
     }
