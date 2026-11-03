@@ -262,3 +262,30 @@ docs/            截圖與本筆記
 - **canto-tts 多音色是實驗性的**：音高/音質有差，咬字仍由同一個聲學模型決定
 - **沒有 GPU**：CosyVoice2-Yue / GPT-SoVITS 只能做成自建適配，本機跑不動
 - 可做：串流播放（邊生成邊播）、逐字卡拉 OK 高亮、使用者上傳參考音頻解鎖更多音色
+
+---
+
+## 10. 粵語方言的模型限制（2026-11 查證）
+
+官方文檔寫明：Qwen-Audio-TTS 的方言靠 `instruction` 控制，例如「请讲上海话。」；
+而**明確列出支援粵語**的是 `qwen-audio-3.1-tts-flash` 的多語種/方言音色
+（`longanlingxin_v3.1`、`longanhuan_v3.1`、`longanfengyue_v3.1`、`xunanchuan_v3.1`），
+支援上海話、粵語、東北話、重慶話、陝西話、雲南話、寧波話、甘肅話八種方言。
+
+本專案的 Token Plan 端點實測：
+
+| 模型 | 結果 |
+|---|---|
+| `qwen-audio-3.1-tts-flash` / `-plus` | `Model not exist` |
+| `qwen-audio-3.0-tts-flash` | `Model not exist` |
+| `qwen-audio-3.0-tts-plus` + `longanlingxin` | 可用 |
+| `qwen-audio-3.0-tts-plus` + `longanlingxin_v3.1` | `Engine error 411`（音色不匹配） |
+
+結論：**目前只能用到 3.0-plus，它並非官方標示的粵語方言音色**，
+所以即使 instruction 寫「请讲广东话。」，長句仍會偶爾漂回普通話；
+短句（跟讀頁、聲調頁）問題不明顯，長詩（將進酒、滿江紅）較易出事。
+
+要徹底解決，兩條路：
+
+1. 換標準 DashScope Key（`sk-`），用 `qwen-audio-3.1-tts-flash` + `longanlingxin_v3.1`；
+2. 詩詞頁改用 edge-tts 的 `zh-HK` 音色（HiuMaan / HiuGaai / WanLung），保證粵語，代價是表現力較弱。
