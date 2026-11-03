@@ -686,6 +686,71 @@
    ]
   }
  ],
+ "tones": [
+  {
+   "n": 1,
+   "char": "詩",
+   "jy": "si1",
+   "audio": "/tones/audio/tone-1.wav",
+   "dur": 1.44
+  },
+  {
+   "n": 2,
+   "char": "史",
+   "jy": "si2",
+   "audio": "/tones/audio/tone-2.wav",
+   "dur": 1.04
+  },
+  {
+   "n": 3,
+   "char": "試",
+   "jy": "si3",
+   "audio": "/tones/audio/tone-3.wav",
+   "dur": 1.2
+  },
+  {
+   "n": 4,
+   "char": "時",
+   "jy": "si4",
+   "audio": "/tones/audio/tone-4.wav",
+   "dur": 0.96
+  },
+  {
+   "n": 5,
+   "char": "市",
+   "jy": "si5",
+   "audio": "/tones/audio/tone-5.wav",
+   "dur": 1.36
+  },
+  {
+   "n": 6,
+   "char": "事",
+   "jy": "si6",
+   "audio": "/tones/audio/tone-6.wav",
+   "dur": 1.52
+  },
+  {
+   "n": 7,
+   "char": "色",
+   "jy": "sik1",
+   "audio": "/tones/audio/tone-7.wav",
+   "dur": 1.28
+  },
+  {
+   "n": 8,
+   "char": "錫",
+   "jy": "sik3",
+   "audio": "/tones/audio/tone-8.wav",
+   "dur": 1.04
+  },
+  {
+   "n": 9,
+   "char": "食",
+   "jy": "sik6",
+   "audio": "/tones/audio/tone-9.wav",
+   "dur": 0.88
+  }
+ ],
  "mistakes": [
   {
    "id": "hei-fun",

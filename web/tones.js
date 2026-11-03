@@ -120,6 +120,23 @@
     return card;
   }
 
+  function bindToneCards() {
+    document.querySelectorAll(".tone-tcard").forEach((card, i) => {
+      const n = i + 1;
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `播放第 ${n} 聲例字`);
+      const go = () => play(`/tones/audio/tone-${n}.wav`, card, null, "");
+      card.addEventListener("click", go);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          go();
+        }
+      });
+    });
+  }
+
   async function init() {
     player.addEventListener("ended", clearPlaying);
     let data;
@@ -130,6 +147,8 @@
       root.textContent = "資料載入失敗";
       return;
     }
+
+    bindToneCards();
 
     (data.sections || []).forEach((sec) => {
       const section = el("section", "tone-section" + (sec.id === "entering" ? " tone-boss" : ""));

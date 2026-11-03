@@ -25,6 +25,18 @@ OUT_JSON = ROOT / "web" / "tones.json"
 OUT_AUDIO = ROOT / "web" / "tones" / "audio"
 PUNCT = re.compile(r"[，。！？；：、,.!?;:]")
 
+TONES = [
+    {"n": 1, "char": "詩", "jy": "si1"},
+    {"n": 2, "char": "史", "jy": "si2"},
+    {"n": 3, "char": "試", "jy": "si3"},
+    {"n": 4, "char": "時", "jy": "si4"},
+    {"n": 5, "char": "市", "jy": "si5"},
+    {"n": 6, "char": "事", "jy": "si6"},
+    {"n": 7, "char": "色", "jy": "sik1"},
+    {"n": 8, "char": "錫", "jy": "sik3"},
+    {"n": 9, "char": "食", "jy": "sik6"},
+]
+
 
 TIP_AUDIO_IDS = {"digits", "chicken", "auntie", "beef", "crab", "rice",
                  "buy-sell", "patrol", "tea", "flowers",
@@ -108,6 +120,11 @@ async def build(reuse: bool) -> None:
                 if item["id"] in TIP_AUDIO_IDS:
                     tname = f"{item['id']}-tip{ti}.wav"
                     tpath = OUT_AUDIO / tname
+                    if reuse and tpath.exists():
+                        tip_ms = wav_ms(tpath)
+                        tips_out.append({**tip, "audio": f"/tones/audio/{tname}", "dur": round(tip_ms / 1000, 2)})
+                        continue
+
                     if tpath.exists():
                         # 舊檔 = 字音 + 320ms 靜音 + 說明，取出說明重用
                         old = read_wav(tpath)
@@ -152,6 +169,20 @@ async def build(reuse: bool) -> None:
                 "chars": [{"c": c, "jy": j} for (c, j) in item["chars"]],
             })
         out["sections"].append({**{k: sec[k] for k in ("id", "title", "subtitle")}, "items": items})
+
+    tones = []
+    for t in TONES:
+        path = OUT_AUDIO / f"tone-{t['n']}.wav"
+        if reuse and path.exists():
+            ms = wav_ms(path)
+        else:
+            print(f"[tone] {t['char']} …", flush=True)
+            pcm, _ = await bl.synth(t.get("spoken", t["char"]), env)
+            a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+            bl.write_wav(path, a)
+            ms = int(len(a) / bl.SR * 1000)
+        tones.append({**t, "audio": f"/tones/audio/tone-{t['n']}.wav", "dur": round(ms / 1000, 2)})
+    out["tones"] = tones
 
     mistakes = []
     for m in data.get("mistakes", []):
