@@ -16,7 +16,7 @@ spec.loader.exec_module(bl)
 DATA = ROOT / "data" / "poems.json"
 OUT_JSON = ROOT / "web" / "poems.json"
 OUT_AUDIO = ROOT / "web" / "poems" / "audio"
-AUDIO_VER = "20261110d"
+AUDIO_VER = "20261110g"
 
 
 async def build(reuse: bool) -> None:
@@ -29,15 +29,23 @@ async def build(reuse: bool) -> None:
         poems = []
         for poem in sec["poems"]:
             title = re.sub(r"[（）()]", "，", poem["title"]).strip("，")
-            text = f"{title}。{poem['author']}。{''.join(poem['lines'])}"
+            head = f"{title}。{poem['author']}。"
+            parts = poem.get("parts") or ["".join(poem["lines"])]
+            chunks = [head + parts[0]] + parts[1:]
             path = OUT_AUDIO / f"{poem['id']}.wav"
             if reuse and path.exists():
                 ms = int(__import__("wave").open(str(path), "rb").getnframes() / __import__("wave").open(str(path), "rb").getframerate() * 1000)
             else:
                 print(f"[{poem['id']}] {poem['title']} …", flush=True)
-                pcm, _ = await bl.synth(text, env)
                 import numpy as np
-                audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+                pieces = []
+                for ci, chunk in enumerate(chunks):
+                    pcm, _ = await bl.synth(chunk, env)
+                    a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+                    pieces.append(a)
+                    if ci < len(chunks) - 1:
+                        pieces.append(np.zeros(int(bl.SR * 0.35), dtype=np.float32))
+                audio = np.concatenate(pieces)
                 bl.write_wav(path, audio)
                 ms = int(len(audio) / bl.SR * 1000)
             poems.append({**poem, "audio": f"/poems/audio/{poem['id']}.wav?v={AUDIO_VER}",
