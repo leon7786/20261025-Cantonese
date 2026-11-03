@@ -10,20 +10,43 @@
     return n;
   };
 
-  let active = null;
+  let active = null; // { card, btn }
+
+  function resetBtn(btn) {
+    btn.classList.remove("is-playing");
+    btn.textContent = "▶ 粵語朗讀";
+  }
 
   function clearPlaying() {
-    if (active) active.classList.remove("playing");
+    if (active) {
+      active.card.classList.remove("playing");
+      resetBtn(active.btn);
+    }
     active = null;
     root.querySelectorAll(".poem-card.playing").forEach((n) => n.classList.remove("playing"));
   }
 
-  function play(url, card) {
+  function toggle(poem, card, btn) {
+    const same = active && active.card === card;
+    if (same && !player.paused) {
+      player.pause();
+      btn.classList.remove("is-playing");
+      btn.textContent = "▶ 繼續";
+      return;
+    }
+    if (same && player.paused) {
+      player.play().catch(() => {});
+      btn.classList.add("is-playing");
+      btn.textContent = "⏸ 暫停";
+      return;
+    }
     clearPlaying();
+    active = { card, btn };
     card.classList.add("playing");
-    active = card;
+    btn.classList.add("is-playing");
+    btn.textContent = "⏸ 暫停";
     player.pause();
-    player.src = url;
+    player.src = poem.audio;
     player.play().catch(() => {});
   }
 
@@ -33,14 +56,14 @@
     head.append(el("span", "poem-title", poem.title), el("span", "poem-author", poem.author));
     const btn = el("button", "poem-play", "▶ 粵語朗讀");
     btn.type = "button";
-    btn.addEventListener("click", (e) => { e.stopPropagation(); play(poem.audio, card); });
+    btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(poem, card, btn); });
     head.append(btn);
 
     const body = el("button", "poem-body");
     body.type = "button";
     body.setAttribute("aria-label", `朗讀 ${poem.title}`);
     poem.lines.forEach((line) => body.append(el("span", "line", line), el("br")));
-    body.addEventListener("click", () => play(poem.audio, card));
+    body.addEventListener("click", () => toggle(poem, card, btn));
 
     card.append(head, body, el("p", "poem-note", poem.note));
     return card;

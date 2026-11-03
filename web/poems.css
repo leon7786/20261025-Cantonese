@@ -49,6 +49,11 @@
   white-space: nowrap;
 }
 .poem-play:hover { background: #fff; border-color: var(--accent-line); }
+.poem-play.is-playing {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
 
 .poem-body {
   display: block;
