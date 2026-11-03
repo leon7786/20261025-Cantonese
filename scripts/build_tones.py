@@ -110,11 +110,22 @@ async def build(reuse: bool) -> None:
                     if reuse and tpath.exists():
                         tip_ms = wav_ms(tpath)
                     else:
-                        spoken_tip = f"{tip['word']}，{tip['note']}".replace("—", "，").replace("「", "").replace("」", "")
-                        print(f"    tip: {spoken_tip[:18]}…", flush=True)
-                        pcm, _ = await bl.synth(spoken_tip, env)
-                        tip_audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
-                        tip_audio = add_pause(tip_audio)
+                        # 重點字由整句音頻切出，保證多音字讀音正確（例如「泡」paau3）
+                        full = read_wav(wav_path)
+                        sb, se = speech_bounds(full)
+                        step = (se - sb) / len(spoken)
+                        pos = spoken.find(tip["word"])
+                        if pos < 0:
+                            pos = 0
+                        s_ms = max(0, sb + pos * step - 20)
+                        e_ms = min(total_ms, sb + (pos + 1) * step + 60)
+                        word_a = full[int(s_ms * bl.SR / 1000):int(e_ms * bl.SR / 1000)].copy()
+                        # 說明單獨合成，兩段之間補 320ms 靜音
+                        print(f"    tip note: {tip['note'][:16]}…", flush=True)
+                        pcm, _ = await bl.synth(tip["note"], env)
+                        note_a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+                        gap = np.zeros(int(bl.SR * 0.32), dtype=np.float32)
+                        tip_audio = np.concatenate([word_a, gap, note_a])
                         bl.write_wav(tpath, tip_audio)
                         tip_ms = int(len(tip_audio) / bl.SR * 1000)
                     tip.update({"audio": f"/tones/audio/{tname}", "dur": round(tip_ms / 1000, 2)})
