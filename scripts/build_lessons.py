@@ -198,13 +198,22 @@ def write_wav(path: Path, samples: np.ndarray) -> None:
         w.writeframes(pcm.tobytes())
 
 
-async def build() -> None:
+async def build(only: set[int] | None = None) -> None:
     env = load_env()
     articles = json.loads(DATA.read_text(encoding="utf-8"))
     OUT_AUDIO.mkdir(parents=True, exist_ok=True)
 
+    prev: dict[int, dict] = {}
+    if only and OUT_JSON.exists():
+        old = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+        prev = {i: a for i, a in enumerate(old.get("articles", []))}
+
     lessons = {"model": MODEL, "voice": VOICE, "instruction": INSTRUCTION, "articles": []}
     for ai, art in enumerate(articles):
+        if only and ai not in only and ai in prev:
+            lessons["articles"].append(prev[ai])
+            print(f"[{ai+1}/{len(articles)}] {art['title']} … 沿用", flush=True)
+            continue
         text = art["text"]
         text_segments = segments_of(text)
         # 粵拼按「非標點字數」分配，避免頓號（、）在粵拼裡也是逗號而造成錯位
@@ -244,4 +253,8 @@ async def build() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(build())
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--only", type=int, nargs="*", help="只重建指定索引（0 起），其餘沿用現有 lessons.json")
+    args = parser.parse_args()
+    asyncio.run(build(set(args.only) if args.only else None))
