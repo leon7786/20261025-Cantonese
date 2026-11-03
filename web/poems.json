@@ -25,7 +25,7 @@
       "怒髮衝冠，憑欄處、瀟瀟雨歇。抬望眼、仰天長嘯，壯懷激烈。三十功名塵與土，八千里路雲和月。莫等閒、白了少年頭，空悲切。",
       "靖康恥，猶未雪。臣子恨，何時滅。駕長車，踏破賀蘭山缺。壯志飢餐胡虜肉，笑談渴飲匈奴血。待從頭、收拾舊山河，朝天闕。"
      ],
-     "audio": "/poems/audio/manjianghong.wav?v=20261111f",
+     "audio": "/poems/audio/manjianghong.wav?v=20261111g",
      "duration": 34.53
     },
     {
@@ -39,7 +39,7 @@
       "獨釣寒江雪。"
      ],
      "note": "绝、灭、雪 三个韵脚全部收 -t，舌尖顶住上牙龈即刻停，读完好似被冰雪冻结。",
-     "audio": "/poems/audio/jiangxue.wav?v=20261111f",
+     "audio": "/poems/audio/jiangxue.wav?v=20261111g",
      "duration": 9.57
     },
     {
@@ -53,7 +53,7 @@
       "霜葉紅於二月花。"
      ],
      "note": "斜、家、花 喺粤语全部收 -aa（caa4、gaa1、faa1），开口度一致；普通话读 xie、jia、hua，唔再押韵。",
-     "audio": "/poems/audio/shanxing.wav?v=20261111f",
+     "audio": "/poems/audio/shanxing.wav?v=20261111g",
      "duration": 12.53
     },
     {
@@ -67,7 +67,7 @@
       "獨愴然而涕下。"
      ],
      "note": "「不、独」短促入声，「悠悠」长音拉开，一短一长，读出天地苍茫、孤身一人嘅感觉。",
-     "audio": "/poems/audio/youzhoutai.wav?v=20261111f",
+     "audio": "/poems/audio/youzhoutai.wav?v=20261111g",
      "duration": 10.29
     },
     {
@@ -79,7 +79,7 @@
       "舉頭望明月，低頭思故鄉。"
      ],
      "note": "「月」系入声仄声；「白」「一」等入声字喺普通话变咗平声，粤语仍然短促，平仄对比先企得住。",
-     "audio": "/poems/audio/jingyesi.wav?v=20261111f",
+     "audio": "/poems/audio/jingyesi.wav?v=20261111g",
      "duration": 10.21
     },
     {
@@ -91,7 +91,7 @@
       "欲窮千里目，更上一層樓。"
      ],
      "note": "流、楼 系悠长平声；日、入、欲、目、一 暗藏短促入声。平声长、入声短，交替出极强节奏。",
-     "audio": "/poems/audio/guanque.wav?v=20261111f",
+     "audio": "/poems/audio/guanque.wav?v=20261111g",
      "duration": 10.37
     },
     {
@@ -105,7 +105,7 @@
       "輕舟已過萬重山。"
      ],
      "note": "间、还、山 喺粤语全部收 -aan，开口度一致；普通话分裂成 ian、uan、an，听感唔同。",
-     "audio": "/poems/audio/baidicheng.wav?v=20261111f",
+     "audio": "/poems/audio/baidicheng.wav?v=20261111g",
      "duration": 13.65
     },
     {
@@ -127,7 +127,7 @@
       "風急天高猿嘯哀，渚清沙白鳥飛回。無邊落木蕭蕭下，不盡長江滾滾來。",
       "萬里悲秋常作客，百年多病獨登臺。艱難苦恨繁霜鬢，潦倒新停濁酒杯。"
      ],
-     "audio": "/poems/audio/denggao.wav?v=20261111f",
+     "audio": "/poems/audio/denggao.wav?v=20261111g",
      "duration": 22.05
     },
     {
@@ -150,7 +150,7 @@
       "雁過也，正傷心，卻是舊時相識。滿地黃花堆積，憔悴損，如今有誰堪摘。守著窗兒，獨自怎生得黑。",
       "梧桐更兼細雨，到黃昏、點點滴滴。這次第，怎一個愁字了得。"
      ],
-     "audio": "/poems/audio/shengshengman.wav?v=20261111f",
+     "audio": "/poems/audio/shengshengman.wav?v=20261111g",
      "duration": 36.61
     },
     {
@@ -168,7 +168,7 @@
       "大江東去，浪淘盡，千古風流人物。故壘西邊，人道是，三國周郎赤壁。",
       "亂石穿空，驚濤拍岸，捲起千堆雪。江山如畫，一時多少豪傑。"
      ],
-     "audio": "/poems/audio/niannujiao.wav?v=20261111f",
+     "audio": "/poems/audio/niannujiao.wav?v=20261111g",
      "duration": 20.53
     },
     {
@@ -189,9 +189,9 @@
      "replace": {
       "歡": "寬"
      },
-     "instruction": "广东话",
-     "audio": "/poems/audio/jiangjinjiu.wav?v=20261111f",
-     "duration": 25.25
+     "instruction": "用广东话表达",
+     "audio": "/poems/audio/jiangjinjiu.wav?v=20261111g",
+     "duration": 24.93
     }
    ]
   }
