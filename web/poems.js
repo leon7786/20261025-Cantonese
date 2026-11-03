@@ -1,4 +1,4 @@
-/* 詩詞頁：分行顯示，點詩句或按鈕朗讀全首 */
+/* 詩詞頁：兩欄錯落排版，點詩句或按鈕朗讀 */
 (() => {
   const $ = (id) => document.getElementById(id);
   const player = $("poemPlayer");
@@ -10,11 +10,12 @@
     return n;
   };
 
+  let poems = [];
   let active = null; // { card, btn }
 
   function resetBtn(btn) {
     btn.classList.remove("is-playing");
-    btn.textContent = "▶ 粵語朗讀";
+    btn.textContent = "▶ 朗讀";
   }
 
   function clearPlaying() {
@@ -50,11 +51,14 @@
     player.play().catch(() => {});
   }
 
-  function renderPoem(poem) {
+  function renderPoem(poem, idx) {
     const card = el("article", "poem-card");
     const head = el("div", "poem-head");
-    head.append(el("span", "poem-title", `${poem.author}《${poem.title}》`));
-    const btn = el("button", "poem-play", "▶ 粵語朗讀");
+    head.append(
+      el("span", "poem-num", String(idx + 1).padStart(2, "0")),
+      el("span", "poem-title", `${poem.author}《${poem.title}》`)
+    );
+    const btn = el("button", "poem-play", "▶ 朗讀");
     btn.type = "button";
     btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(poem, card, btn); });
     head.append(btn);
@@ -62,12 +66,37 @@
     const body = el("button", "poem-body");
     body.type = "button";
     body.setAttribute("aria-label", `朗讀 ${poem.title}`);
-    poem.lines.forEach((line) => body.append(el("span", "line", line), el("br")));
+    poem.lines.forEach((line) => body.append(el("span", "line", line)));
     body.addEventListener("click", () => toggle(poem, card, btn));
 
-    card.append(head, body, el("p", "poem-note", poem.note));
+    const note = el("p", "poem-note", poem.note);
+    card.append(head, body, note);
     return card;
   }
+
+  function layout() {
+    clearPlaying();
+    root.innerHTML = "";
+    const twoCol = window.innerWidth >= 760;
+    if (!twoCol) {
+      const grid = el("div", "poem-grid single");
+      poems.forEach((p, i) => grid.append(renderPoem(p, i)));
+      root.append(grid);
+      return;
+    }
+    const wrap = el("div", "poem-columns");
+    const left = el("div", "poem-col");
+    const right = el("div", "poem-col");
+    poems.forEach((p, i) => (i % 2 === 0 ? left : right).append(renderPoem(p, i)));
+    wrap.append(left, right);
+    root.append(wrap);
+  }
+
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layout, 180);
+  });
 
   async function init() {
     player.addEventListener("ended", clearPlaying);
@@ -79,11 +108,8 @@
       root.textContent = "資料載入失敗";
       return;
     }
-    const grid = el("div", "poem-grid poem-grid-all");
-    (data.sections || []).forEach((sec) => {
-      sec.poems.forEach((poem) => grid.append(renderPoem(poem)));
-    });
-    root.append(grid);
+    poems = (data.sections || []).flatMap((sec) => sec.poems || []);
+    layout();
   }
 
   init();
