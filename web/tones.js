@@ -54,7 +54,7 @@
   function renderTips(item) {
     if (!item.tips || !item.tips.length) return null;
     const box = el("div", "tone-tips");
-    const head = el("div", "tone-tips-head", "易讀錯 · 嘴型貼士");
+    const head = el("div", "tone-tips-head", "嘴型提示");
     if (item.tips.some((t) => t.audio)) head.append(el("span", "tips-hint", "撳提示聽讀音"));
     box.append(head);
     const ul = el("ul");
