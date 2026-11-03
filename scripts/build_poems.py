@@ -27,7 +27,8 @@ async def build(reuse: bool) -> None:
     for sec in data["sections"]:
         poems = []
         for poem in sec["poems"]:
-            text = "".join(poem["lines"])
+            title = re.sub(r"[（）()]", "，", poem["title"]).strip("，")
+            text = f"{title}。{poem['author']}。{''.join(poem['lines'])}"
             path = OUT_AUDIO / f"{poem['id']}.wav"
             if reuse and path.exists():
                 ms = int(__import__("wave").open(str(path), "rb").getnframes() / __import__("wave").open(str(path), "rb").getframerate() * 1000)

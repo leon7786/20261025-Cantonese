@@ -17,7 +17,7 @@
      ],
      "note": "絕、滅、雪 三個韻腳全部收 -t，舌尖頂住上牙齦即刻停。每讀完一句，聲音好似被冰雪凍結，襯托萬籟俱寂嘅冷冽。",
      "audio": "/poems/audio/jiangxue.wav",
-     "duration": 7.09
+     "duration": 9.81
     },
     {
      "id": "manjianghong",
@@ -31,7 +31,7 @@
      ],
      "note": "歇、烈、月、切 全部收 -t，一韻到底。用粵語讀，每個韻腳都似重錘砸地，悲憤嘅爆發力比普通話強得多。",
      "audio": "/poems/audio/manjianghong.wav",
-     "duration": 15.97
+     "duration": 21.25
     },
     {
      "id": "guanque",
@@ -43,7 +43,7 @@
      ],
      "note": "流、樓 係悠長平聲；日、入、欲、目、一 暗藏短促入聲。平聲長、入聲短，交替出極強嘅節奏感。",
      "audio": "/poems/audio/guanque.wav",
-     "duration": 7.89
+     "duration": 10.37
     }
    ]
   },
@@ -64,7 +64,7 @@
      ],
      "note": "間、還、山 喺粵語全部收 -aan，開口度一致；普通話分裂成 ian、uan、an，聽感唔同，仲多咗個 u 介音。",
      "audio": "/poems/audio/baidicheng.wav",
-     "duration": 9.09
+     "duration": 14.21
     },
     {
      "id": "huixiang",
@@ -78,7 +78,7 @@
      ],
      "note": "回、衰、來 喺粵語全部以 -i 韻尾收音（wui4、seoi1、loi4），同屬中古灰哈韻部；普通話讀 ui、ai，唔再押韻。",
      "audio": "/poems/audio/huixiang.wav",
-     "duration": 8.37
+     "duration": 12.45
     },
     {
      "id": "chile",
@@ -90,7 +90,7 @@
      ],
      "note": "下、野 喺粵語仍然近 aa 韻；普通話讀 xia、ye，完全風馬牛不相及。",
      "audio": "/poems/audio/chile.wav",
-     "duration": 5.17
+     "duration": 8.45
     }
    ]
   },
@@ -111,7 +111,7 @@
      ],
      "note": "深、心、金、簪 全部收 -m，讀完雙唇自然合埋，聲音喺胸腔同鼻腔共鳴；普通話變晒 -n，「簪」仲直接脫韻。",
      "audio": "/poems/audio/chunwang.wav",
-     "duration": 14.85
+     "duration": 18.61
     },
     {
      "id": "shengshengman",
@@ -124,7 +124,7 @@
      ],
      "note": "心、識、積、摘 等字閉口、入聲交錯，粵語保留雙唇收尾同短促停頓，讀出嗰種欲言又止嘅愁。",
      "audio": "/poems/audio/shengshengman.wav",
-     "duration": 13.97
+     "duration": 17.97
     }
    ]
   },
@@ -143,7 +143,7 @@
      ],
      "note": "「月」係入聲仄聲；「白」、「一」等入聲字喺普通話變咗平聲，粵語仍然短促，平仄對比先至企得住。",
      "audio": "/poems/audio/jingyesi.wav",
-     "duration": 7.49
+     "duration": 10.13
     },
     {
      "id": "shanju",
@@ -155,7 +155,7 @@
      ],
      "note": "石、竹 喺粵語係地道入聲（仄聲），普通話讀第 2 聲（平聲），所以用普通話讀呢兩句，平仄完全亂套。",
      "audio": "/poems/audio/shanju.wav",
-     "duration": 7.89
+     "duration": 11.25
     }
    ]
   }
