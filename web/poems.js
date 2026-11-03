@@ -56,21 +56,25 @@
     const head = el("div", "poem-head");
     head.append(
       el("span", "poem-num", String(idx + 1).padStart(2, "0")),
-      el("span", "poem-title", `${poem.author}《${poem.title}》`)
+      el("h3", "poem-title", `《${poem.title}》`),
+      el("span", "poem-author", poem.author)
     );
-    const btn = el("button", "poem-play", "▶ 朗讀");
-    btn.type = "button";
-    btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(poem, card, btn); });
-    head.append(btn);
 
     const body = el("button", "poem-body");
     body.type = "button";
     body.setAttribute("aria-label", `朗讀 ${poem.title}`);
     poem.lines.forEach((line) => body.append(el("span", "line", line)));
+
+    const btn = el("button", "poem-play", "▶ 朗讀");
+    btn.type = "button";
+    btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(poem, card, btn); });
     body.addEventListener("click", () => toggle(poem, card, btn));
 
+    const actions = el("div", "poem-actions");
+    actions.append(btn);
+
     const note = el("p", "poem-note", poem.note);
-    card.append(head, body, note);
+    card.append(head, body, actions, note);
     return card;
   }
 
