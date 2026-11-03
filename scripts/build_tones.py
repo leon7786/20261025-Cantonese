@@ -26,7 +26,8 @@ OUT_AUDIO = ROOT / "web" / "tones" / "audio"
 PUNCT = re.compile(r"[，。！？；：、,.!?;:]")
 
 
-TIP_AUDIO_IDS = {"digits", "chicken"}  # 先為前兩張卡的重點字做讀音
+TIP_AUDIO_IDS = {"digits", "chicken", "auntie", "beef", "crab", "rice",
+                 "buy-sell", "patrol", "tea", "flowers"}  # 全部卡片的提示都做朗讀
 
 
 def read_wav(path: Path) -> np.ndarray:

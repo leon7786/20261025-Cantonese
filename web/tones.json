@@ -148,11 +148,15 @@
      "tips": [
       {
        "word": "婶",
-       "note": "講完「三」即刻閉嘴，好似「心」嘅收尾。"
+       "note": "講完「三」即刻閉嘴，好似「心」嘅收尾。",
+       "audio": "/tones/audio/auntie-tip0.wav",
+       "dur": 4.77
       },
       {
        "word": "买",
-       "note": "尾音好似反問「啊？」，向上挑。"
+       "note": "尾音好似反問「啊？」，向上挑。",
+       "audio": "/tones/audio/auntie-tip1.wav",
+       "dur": 3.89
       }
      ],
      "audio": "/tones/audio/auntie.wav",
@@ -189,11 +193,15 @@
      "tips": [
       {
        "word": "牛",
-       "note": "先「嗯」一聲（舌根抬起），再滑去「由」。"
+       "note": "先「嗯」一聲（舌根抬起），再滑去「由」。",
+       "audio": "/tones/audio/beef-tip0.wav",
+       "dur": 2.69
       },
       {
        "word": "腩",
-       "note": "好似「南」但最後閉嘴，尾音向上挑。"
+       "note": "好似「南」但最後閉嘴，尾音向上挑。",
+       "audio": "/tones/audio/beef-tip1.wav",
+       "dur": 4.21
       }
      ],
      "audio": "/tones/audio/beef.wav",
@@ -234,11 +242,15 @@
      "tips": [
       {
        "word": "石",
-       "note": "舌尖頂住上牙床，「塞」一下即刻停，好似煞車。"
+       "note": "舌尖頂住上牙床，「塞」一下即刻停，好似煞車。",
+       "audio": "/tones/audio/crab-tip0.wav",
+       "dur": 4.93
       },
       {
        "word": "砸",
-       "note": "雙唇閉實再彈開，「扎」一下，最後閉嘴。"
+       "note": "雙唇閉實再彈開，「扎」一下，最後閉嘴。",
+       "audio": "/tones/audio/crab-tip1.wav",
+       "dur": 5.25
       }
      ],
      "audio": "/tones/audio/crab.wav",
@@ -275,11 +287,15 @@
      "tips": [
       {
        "word": "寻",
-       "note": "好似「心」嘅收法：結尾閉嘴，用鼻出氣。"
+       "note": "好似「心」嘅收法：結尾閉嘴，用鼻出氣。",
+       "audio": "/tones/audio/rice-tip0.wav",
+       "dur": 4.29
       },
       {
        "word": "饭",
-       "note": "結尾舌尖頂住上牙床，唔好閉嘴。"
+       "note": "結尾舌尖頂住上牙床，唔好閉嘴。",
+       "audio": "/tones/audio/rice-tip1.wav",
+       "dur": 4.45
       }
      ],
      "audio": "/tones/audio/rice.wav",
@@ -327,11 +343,15 @@
      "tips": [
       {
        "word": "买",
-       "note": "好似問「啊？」，尾音向上挑。"
+       "note": "好似問「啊？」，尾音向上挑。",
+       "audio": "/tones/audio/buy-sell-tip0.wav",
+       "dur": 3.01
       },
       {
        "word": "卖",
-       "note": "好似嘆氣，聲音平平；同「買」只差高低。"
+       "note": "好似嘆氣，聲音平平；同「買」只差高低。",
+       "audio": "/tones/audio/buy-sell-tip1.wav",
+       "dur": 5.41
       }
      ],
      "audio": "/tones/audio/buy-sell.wav",
@@ -372,11 +392,15 @@
      "tips": [
       {
        "word": "长",
-       "note": "嘴唇好似吹口哨咁收圓。"
+       "note": "嘴唇好似吹口哨咁收圓。",
+       "audio": "/tones/audio/patrol-tip0.wav",
+       "dur": 3.73
       },
       {
        "word": "巡",
-       "note": "嘴唇收圓，好似「春」嘅圓唇版。"
+       "note": "嘴唇收圓，好似「春」嘅圓唇版。",
+       "audio": "/tones/audio/patrol-tip1.wav",
+       "dur": 4.61
       }
      ],
      "audio": "/tones/audio/patrol.wav",
@@ -417,11 +441,15 @@
      "tips": [
       {
        "word": "水",
-       "note": "嘴唇好似吹蠟燭咁收圓。"
+       "note": "嘴唇好似吹蠟燭咁收圓。",
+       "audio": "/tones/audio/tea-tip0.wav",
+       "dur": 3.41
       },
       {
        "word": "泡",
-       "note": "雙唇「啪」一下彈開，聲音平平。"
+       "note": "雙唇「啪」一下彈開，聲音平平。",
+       "audio": "/tones/audio/tea-tip1.wav",
+       "dur": 4.45
       }
      ],
      "audio": "/tones/audio/tea.wav",
@@ -462,11 +490,15 @@
      "tips": [
       {
        "word": "花",
-       "note": "上齒咬下唇吹氣，好似吹蠟燭。"
+       "note": "上齒咬下唇吹氣，好似吹蠟燭。",
+       "audio": "/tones/audio/flowers-tip0.wav",
+       "dur": 4.53
       },
       {
        "word": "面",
-       "note": "結尾舌尖頂住上牙床，聲音平平。"
+       "note": "結尾舌尖頂住上牙床，聲音平平。",
+       "audio": "/tones/audio/flowers-tip1.wav",
+       "dur": 4.61
       }
      ],
      "audio": "/tones/audio/flowers.wav",
