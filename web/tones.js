@@ -10,19 +10,19 @@
     return n;
   };
 
-  let activeChip = null;
+  let activeLine = null;
 
   function clearPlaying() {
-    if (activeChip) activeChip.classList.remove("playing");
-    activeChip = null;
-    root.querySelectorAll(".tone-chip.playing").forEach((n) => n.classList.remove("playing"));
+    if (activeLine) activeLine.classList.remove("playing");
+    activeLine = null;
+    root.querySelectorAll(".tone-line.playing").forEach((n) => n.classList.remove("playing"));
   }
 
-  function play(url, chip, status, label) {
+  function play(url, line, status, label) {
     clearPlaying();
-    if (chip) {
-      chip.classList.add("playing");
-      activeChip = chip;
+    if (line) {
+      line.classList.add("playing");
+      activeLine = line;
     }
     player.pause();
     player.src = url;
@@ -30,15 +30,41 @@
     if (status) status.textContent = label;
   }
 
-  function renderChar(item, chip, status) {
-    const btn = el("button", "tone-chip");
-    btn.type = "button";
-    btn.setAttribute("aria-label", `${chip.c} ${chip.jy}`);
-    btn.append(el("span", "ch", chip.c), el("span", "jy", chip.jy));
-    btn.addEventListener("click", () => {
-      play(chip.audio, btn, status, `${chip.c} ${chip.jy} · ${chip.dur}s`);
+  function renderLine(item, status) {
+    const line = el("div", "tone-line");
+    line.tabIndex = 0;
+    line.setAttribute("role", "button");
+    line.setAttribute("aria-label", `播放整段：${item.title}`);
+    item.chars.forEach((ch) => {
+      const unit = el("span", "unit");
+      unit.append(el("span", "ch", ch.c), el("span", "jy", ch.jy));
+      line.append(unit);
     });
-    return btn;
+    const go = () => play(item.audio, line, status, `整段播放中 · ${item.duration}s`);
+    line.addEventListener("click", go);
+    line.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        go();
+      }
+    });
+    return line;
+  }
+
+  function renderTips(item) {
+    if (!item.tips || !item.tips.length) return null;
+    const box = el("div", "tone-tips");
+    box.append(el("div", "tone-tips-head", "易讀錯 · 正確發音"));
+    const ul = el("ul");
+    item.tips.forEach((t) => {
+      const li = el("li");
+      const word = el("b", null, t.word);
+      const jy = el("span", "jy", t.jy);
+      li.append(word, jy, el("span", null, ` — ${t.note}`));
+      ul.append(li);
+    });
+    box.append(ul);
+    return box;
   }
 
   function renderItem(item) {
@@ -47,16 +73,17 @@
     top.append(el("span", "tone-tag", item.tag), el("span", "tone-dur", `整句 ${item.duration}s`));
     card.append(top, el("h3", null, item.title));
 
-    const chips = el("div", "tone-chips");
     const status = el("span", "tone-status");
-    item.chars.forEach((ch) => chips.append(renderChar(item, ch, status)));
-    card.append(chips, el("p", "tone-note", item.note));
+    card.append(renderLine(item, status), el("p", "tone-note", item.note));
+
+    const tips = renderTips(item);
+    if (tips) card.append(tips);
 
     const actions = el("div", "tone-actions");
-    const all = el("button", "btn ghost", "▶ 整句播放");
+    const all = el("button", "btn ghost", "▶ 整段播放");
     all.type = "button";
     all.addEventListener("click", () => {
-      play(item.audio, null, status, `整句播放中 · ${item.duration}s`);
+      play(item.audio, card.querySelector(".tone-line"), status, `整段播放中 · ${item.duration}s`);
     });
     actions.append(all, status);
     card.append(actions);

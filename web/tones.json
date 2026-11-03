@@ -11,62 +11,66 @@
      "tag": "9 声全包版",
      "note": "在数字 1–6 调基础上，加上「七（高入）、八（中入）、六（低入）」，9 个数字一口气练完九声六调。七、八、六 在口语里也常标 7 / 8 / 9。",
      "phrase": "三九四零五二七八六",
+     "tips": [
+      {
+       "word": "五",
+       "jy": "ng5",
+       "note": "鼻音聲母 ng-，唔係 m-"
+      },
+      {
+       "word": "七",
+       "jy": "cat1",
+       "note": "高入，-t 收尾要短促"
+      },
+      {
+       "word": "八",
+       "jy": "baat3",
+       "note": "中入，-t 收尾"
+      },
+      {
+       "word": "六",
+       "jy": "luk6",
+       "note": "低入，-k 收尾"
+      }
+     ],
      "audio": "/tones/audio/digits.wav",
      "duration": 2.32,
      "chars": [
       {
        "c": "三",
-       "jy": "saam1",
-       "audio": "/tones/audio/digits-0.wav",
-       "dur": 0.28
+       "jy": "saam1"
       },
       {
        "c": "九",
-       "jy": "gau2",
-       "audio": "/tones/audio/digits-1.wav",
-       "dur": 0.29
+       "jy": "gau2"
       },
       {
        "c": "四",
-       "jy": "sei3",
-       "audio": "/tones/audio/digits-2.wav",
-       "dur": 0.29
+       "jy": "sei3"
       },
       {
        "c": "零",
-       "jy": "ling4",
-       "audio": "/tones/audio/digits-3.wav",
-       "dur": 0.29
+       "jy": "ling4"
       },
       {
        "c": "五",
-       "jy": "ng5",
-       "audio": "/tones/audio/digits-4.wav",
-       "dur": 0.29
+       "jy": "ng5"
       },
       {
        "c": "二",
-       "jy": "ji6",
-       "audio": "/tones/audio/digits-5.wav",
-       "dur": 0.29
+       "jy": "ji6"
       },
       {
        "c": "七",
-       "jy": "cat1",
-       "audio": "/tones/audio/digits-6.wav",
-       "dur": 0.29
+       "jy": "cat1"
       },
       {
        "c": "八",
-       "jy": "baat3",
-       "audio": "/tones/audio/digits-7.wav",
-       "dur": 0.29
+       "jy": "baat3"
       },
       {
        "c": "六",
-       "jy": "luk6",
-       "audio": "/tones/audio/digits-8.wav",
-       "dur": 0.29
+       "jy": "luk6"
       }
      ]
     },
@@ -76,62 +80,56 @@
      "tag": "童谣定调法",
      "note": "广州人教细路分声调嘅童谣：鸡(1)、仔(2)、叫(3)、鹅(4)，一句就听到前四声嘅高低落差。「狸」口语可读 lei4 / lei2。",
      "phrase": "鸡仔叫，鹅仔叫，狐狸叫",
+     "tips": [
+      {
+       "word": "狸",
+       "jy": "lei4",
+       "note": "唔讀 lei5；口語亦有人讀 lei2"
+      },
+      {
+       "word": "鵝",
+       "jy": "ngo4",
+       "note": "ng- 鼻音聲母"
+      }
+     ],
      "audio": "/tones/audio/chicken.wav",
      "duration": 2.56,
      "chars": [
       {
        "c": "鸡",
-       "jy": "gai1",
-       "audio": "/tones/audio/chicken-0.wav",
-       "dur": 0.3
+       "jy": "gai1"
       },
       {
        "c": "仔",
-       "jy": "zai2",
-       "audio": "/tones/audio/chicken-1.wav",
-       "dur": 0.3
+       "jy": "zai2"
       },
       {
        "c": "叫",
-       "jy": "giu3",
-       "audio": "/tones/audio/chicken-2.wav",
-       "dur": 0.3
+       "jy": "giu3"
       },
       {
        "c": "鹅",
-       "jy": "ngo4",
-       "audio": "/tones/audio/chicken-3.wav",
-       "dur": 0.3
+       "jy": "ngo4"
       },
       {
        "c": "仔",
-       "jy": "zai2",
-       "audio": "/tones/audio/chicken-4.wav",
-       "dur": 0.3
+       "jy": "zai2"
       },
       {
        "c": "叫",
-       "jy": "giu3",
-       "audio": "/tones/audio/chicken-5.wav",
-       "dur": 0.3
+       "jy": "giu3"
       },
       {
        "c": "狐",
-       "jy": "wu4",
-       "audio": "/tones/audio/chicken-6.wav",
-       "dur": 0.3
+       "jy": "wu4"
       },
       {
        "c": "狸",
-       "jy": "lei4",
-       "audio": "/tones/audio/chicken-7.wav",
-       "dur": 0.3
+       "jy": "lei4"
       },
       {
        "c": "叫",
-       "jy": "giu3",
-       "audio": "/tones/audio/chicken-8.wav",
-       "dur": 0.3
+       "jy": "giu3"
       }
      ]
     },
@@ -141,38 +139,40 @@
      "tag": "市井俗语类",
      "note": "经典市井句，用嚟对比口语连读时嘅声调起伏。同源嘅俗语版系「番鬼佬卖凉茶」（faan1 gwai2 lou2 maai6 loeng4 caa4）。",
      "phrase": "周婶去买菜",
+     "tips": [
+      {
+       "word": "嬸",
+       "jy": "sam2",
+       "note": "-m 閉口收尾"
+      },
+      {
+       "word": "買",
+       "jy": "maai5",
+       "note": "第 5 聲低升，唔好讀成第 6 聲"
+      }
+     ],
      "audio": "/tones/audio/auntie.wav",
      "duration": 1.68,
      "chars": [
       {
        "c": "周",
-       "jy": "zau1",
-       "audio": "/tones/audio/auntie-0.wav",
-       "dur": 0.35
+       "jy": "zau1"
       },
       {
        "c": "婶",
-       "jy": "sam2",
-       "audio": "/tones/audio/auntie-1.wav",
-       "dur": 0.35
+       "jy": "sam2"
       },
       {
        "c": "去",
-       "jy": "heoi3",
-       "audio": "/tones/audio/auntie-2.wav",
-       "dur": 0.35
+       "jy": "heoi3"
       },
       {
        "c": "买",
-       "jy": "maai5",
-       "audio": "/tones/audio/auntie-3.wav",
-       "dur": 0.35
+       "jy": "maai5"
       },
       {
        "c": "菜",
-       "jy": "coi3",
-       "audio": "/tones/audio/auntie-4.wav",
-       "dur": 0.35
+       "jy": "coi3"
       }
      ]
     },
@@ -182,44 +182,44 @@
      "tag": "茶餐厅定调句",
      "note": "极力推荐：除「一 jat1」顺带练高入声，1→2→3→4→5→6 严丝合缝，而且全系茶餐厅高频词。第 4 声「牛」练 ng- 鼻音声母，第 5 声「腩」练 -m 闭口尾。俗语版：「一身好武艺，打死大笨象」。",
      "phrase": "一碗靓牛腩面",
+     "tips": [
+      {
+       "word": "牛",
+       "jy": "ngau4",
+       "note": "ng- 鼻音聲母，唔係 au4"
+      },
+      {
+       "word": "腩",
+       "jy": "naam5",
+       "note": "-m 閉口，第 5 聲低升"
+      }
+     ],
      "audio": "/tones/audio/beef.wav",
      "duration": 2.4,
      "chars": [
       {
        "c": "一",
-       "jy": "jat1",
-       "audio": "/tones/audio/beef-0.wav",
-       "dur": 0.32
+       "jy": "jat1"
       },
       {
        "c": "碗",
-       "jy": "wun2",
-       "audio": "/tones/audio/beef-1.wav",
-       "dur": 0.32
+       "jy": "wun2"
       },
       {
        "c": "靓",
-       "jy": "leng3",
-       "audio": "/tones/audio/beef-2.wav",
-       "dur": 0.32
+       "jy": "leng3"
       },
       {
        "c": "牛",
-       "jy": "ngau4",
-       "audio": "/tones/audio/beef-3.wav",
-       "dur": 0.32
+       "jy": "ngau4"
       },
       {
        "c": "腩",
-       "jy": "naam5",
-       "audio": "/tones/audio/beef-4.wav",
-       "dur": 0.32
+       "jy": "naam5"
       },
       {
        "c": "面",
-       "jy": "min6",
-       "audio": "/tones/audio/beef-5.wav",
-       "dur": 0.32
+       "jy": "min6"
       }
      ]
     },
@@ -229,38 +229,40 @@
      "tag": "低音 + 入声名句",
      "note": "广东俗语，专练最难发准嘅第 6 声低平调同第 9 声低入声：石 -k、砸 -p，两个字都要短促收住。",
      "phrase": "大石砸死蟹",
+     "tips": [
+      {
+       "word": "石",
+       "jy": "sek6",
+       "note": "-k 入聲，短促收住"
+      },
+      {
+       "word": "砸",
+       "jy": "zaap6",
+       "note": "-p 入聲，雙唇收緊"
+      }
+     ],
      "audio": "/tones/audio/crab.wav",
      "duration": 2.0,
      "chars": [
       {
        "c": "大",
-       "jy": "daai6",
-       "audio": "/tones/audio/crab-0.wav",
-       "dur": 0.36
+       "jy": "daai6"
       },
       {
        "c": "石",
-       "jy": "sek6",
-       "audio": "/tones/audio/crab-1.wav",
-       "dur": 0.36
+       "jy": "sek6"
       },
       {
        "c": "砸",
-       "jy": "zaap6",
-       "audio": "/tones/audio/crab-2.wav",
-       "dur": 0.36
+       "jy": "zaap6"
       },
       {
        "c": "死",
-       "jy": "sei2",
-       "audio": "/tones/audio/crab-3.wav",
-       "dur": 0.36
+       "jy": "sei2"
       },
       {
        "c": "蟹",
-       "jy": "haai5",
-       "audio": "/tones/audio/crab-4.wav",
-       "dur": 0.36
+       "jy": "haai5"
       }
      ]
     },
@@ -270,44 +272,44 @@
      "tag": "双闭口音练习",
      "note": "今 gam1 同 寻 cam4 读完要闭紧双唇（-m），最后 饭 faan6 舌尖顶齿龈（-n）。",
      "phrase": "今朝去寻米饭",
+     "tips": [
+      {
+       "word": "尋",
+       "jy": "cam4",
+       "note": "-m 閉口收尾"
+      },
+      {
+       "word": "飯",
+       "jy": "faan6",
+       "note": "-n 舌尖抵齒齦"
+      }
+     ],
      "audio": "/tones/audio/rice.wav",
      "duration": 1.84,
      "chars": [
       {
        "c": "今",
-       "jy": "gam1",
-       "audio": "/tones/audio/rice-0.wav",
-       "dur": 0.32
+       "jy": "gam1"
       },
       {
        "c": "朝",
-       "jy": "ziu2",
-       "audio": "/tones/audio/rice-1.wav",
-       "dur": 0.32
+       "jy": "ziu2"
       },
       {
        "c": "去",
-       "jy": "heoi3",
-       "audio": "/tones/audio/rice-2.wav",
-       "dur": 0.32
+       "jy": "heoi3"
       },
       {
        "c": "寻",
-       "jy": "cam4",
-       "audio": "/tones/audio/rice-3.wav",
-       "dur": 0.32
+       "jy": "cam4"
       },
       {
        "c": "米",
-       "jy": "mai5",
-       "audio": "/tones/audio/rice-4.wav",
-       "dur": 0.32
+       "jy": "mai5"
       },
       {
        "c": "饭",
-       "jy": "faan6",
-       "audio": "/tones/audio/rice-5.wav",
-       "dur": 0.32
+       "jy": "faan6"
       }
      ]
     }
@@ -324,44 +326,44 @@
      "tag": "5、6 声对比",
      "note": "「买 maai5」同「卖 maai6」同音不同调，放喺句尾连读，瞬间分清楚 5 声低升同 6 声低平。",
      "phrase": "周总去谈买卖",
+     "tips": [
+      {
+       "word": "買",
+       "jy": "maai5",
+       "note": "第 5 聲低升"
+      },
+      {
+       "word": "賣",
+       "jy": "maai6",
+       "note": "第 6 聲低平，同「買」只差聲調"
+      }
+     ],
      "audio": "/tones/audio/buy-sell.wav",
      "duration": 1.92,
      "chars": [
       {
        "c": "周",
-       "jy": "zau1",
-       "audio": "/tones/audio/buy-sell-0.wav",
-       "dur": 0.33
+       "jy": "zau1"
       },
       {
        "c": "总",
-       "jy": "zung2",
-       "audio": "/tones/audio/buy-sell-1.wav",
-       "dur": 0.33
+       "jy": "zung2"
       },
       {
        "c": "去",
-       "jy": "heoi3",
-       "audio": "/tones/audio/buy-sell-2.wav",
-       "dur": 0.33
+       "jy": "heoi3"
       },
       {
        "c": "谈",
-       "jy": "taam4",
-       "audio": "/tones/audio/buy-sell-3.wav",
-       "dur": 0.33
+       "jy": "taam4"
       },
       {
        "c": "买",
-       "jy": "maai5",
-       "audio": "/tones/audio/buy-sell-4.wav",
-       "dur": 0.33
+       "jy": "maai5"
       },
       {
        "c": "卖",
-       "jy": "maai6",
-       "audio": "/tones/audio/buy-sell-5.wav",
-       "dur": 0.33
+       "jy": "maai6"
       }
      ]
     },
@@ -371,44 +373,44 @@
      "tag": "n / l 终极检验",
      "note": "第 4 字「拿 naa4」系鼻音 n-，第 5 字「冷 laang5」系边音 l-，第 6 字「饭 faan6」系咬唇 f-，一句测三个易混声母。",
      "phrase": "多手去拿冷饭",
+     "tips": [
+      {
+       "word": "拿",
+       "jy": "naa4",
+       "note": "n- 鼻音，唔好讀成 laa4"
+      },
+      {
+       "word": "冷",
+       "jy": "laang5",
+       "note": "l- 邊音，第 5 聲"
+      }
+     ],
      "audio": "/tones/audio/cold-rice.wav",
      "duration": 2.4,
      "chars": [
       {
        "c": "多",
-       "jy": "do1",
-       "audio": "/tones/audio/cold-rice-0.wav",
-       "dur": 0.31
+       "jy": "do1"
       },
       {
        "c": "手",
-       "jy": "sau2",
-       "audio": "/tones/audio/cold-rice-1.wav",
-       "dur": 0.31
+       "jy": "sau2"
       },
       {
        "c": "去",
-       "jy": "heoi3",
-       "audio": "/tones/audio/cold-rice-2.wav",
-       "dur": 0.31
+       "jy": "heoi3"
       },
       {
        "c": "拿",
-       "jy": "naa4",
-       "audio": "/tones/audio/cold-rice-3.wav",
-       "dur": 0.31
+       "jy": "naa4"
       },
       {
        "c": "冷",
-       "jy": "laang5",
-       "audio": "/tones/audio/cold-rice-4.wav",
-       "dur": 0.31
+       "jy": "laang5"
       },
       {
        "c": "饭",
-       "jy": "faan6",
-       "audio": "/tones/audio/cold-rice-5.wav",
-       "dur": 0.31
+       "jy": "faan6"
       }
      ]
     },
@@ -418,44 +420,44 @@
      "tag": "圆唇韵母",
      "note": "「长 zoeng2」练粤语特有韵母 -oeng；「巡 ceon4」练圆唇 -eon；「路 lou6」巩固边音 l-。",
      "phrase": "班长去巡马路",
+     "tips": [
+      {
+       "word": "長",
+       "jy": "zoeng2",
+       "note": "-oeng 韻母，唔好讀成 coeng4"
+      },
+      {
+       "word": "巡",
+       "jy": "ceon4",
+       "note": "-eon 圓唇韻母"
+      }
+     ],
      "audio": "/tones/audio/patrol.wav",
      "duration": 1.68,
      "chars": [
       {
        "c": "班",
-       "jy": "baan1",
-       "audio": "/tones/audio/patrol-0.wav",
-       "dur": 0.3
+       "jy": "baan1"
       },
       {
        "c": "长",
-       "jy": "zoeng2",
-       "audio": "/tones/audio/patrol-1.wav",
-       "dur": 0.3
+       "jy": "zoeng2"
       },
       {
        "c": "去",
-       "jy": "heoi3",
-       "audio": "/tones/audio/patrol-2.wav",
-       "dur": 0.3
+       "jy": "heoi3"
       },
       {
        "c": "巡",
-       "jy": "ceon4",
-       "audio": "/tones/audio/patrol-3.wav",
-       "dur": 0.3
+       "jy": "ceon4"
       },
       {
        "c": "马",
-       "jy": "maa5",
-       "audio": "/tones/audio/patrol-4.wav",
-       "dur": 0.3
+       "jy": "maa5"
       },
       {
        "c": "路",
-       "jy": "lou6",
-       "audio": "/tones/audio/patrol-5.wav",
-       "dur": 0.3
+       "jy": "lou6"
       }
      ]
     },
@@ -465,44 +467,39 @@
      "tag": "平舌音优势",
      "note": "前三字 s- / z- / z- 全系平舌音；「命」口语白读 meng6（文读 ming6，都系第 6 声）。",
      "phrase": "烧酒醉人老命",
+     "tips": [
+      {
+       "word": "命",
+       "jy": "meng6",
+       "note": "口語白讀 meng6；文讀 ming6"
+      }
+     ],
      "audio": "/tones/audio/drunk.wav",
      "duration": 1.92,
      "chars": [
       {
        "c": "烧",
-       "jy": "siu1",
-       "audio": "/tones/audio/drunk-0.wav",
-       "dur": 0.34
+       "jy": "siu1"
       },
       {
        "c": "酒",
-       "jy": "zau2",
-       "audio": "/tones/audio/drunk-1.wav",
-       "dur": 0.34
+       "jy": "zau2"
       },
       {
        "c": "醉",
-       "jy": "zeoi3",
-       "audio": "/tones/audio/drunk-2.wav",
-       "dur": 0.34
+       "jy": "zeoi3"
       },
       {
        "c": "人",
-       "jy": "jan4",
-       "audio": "/tones/audio/drunk-3.wav",
-       "dur": 0.34
+       "jy": "jan4"
       },
       {
        "c": "老",
-       "jy": "lou5",
-       "audio": "/tones/audio/drunk-4.wav",
-       "dur": 0.34
+       "jy": "lou5"
       },
       {
        "c": "命",
-       "jy": "meng6",
-       "audio": "/tones/audio/drunk-5.wav",
-       "dur": 0.34
+       "jy": "meng6"
       }
      ]
     },
@@ -512,44 +509,44 @@
      "tag": "h- 声母",
      "note": "「开 hoi1」同「限 haan6」都系纯喉部呼气，严禁带出 f / h 混淆嘅唇齿摩擦。",
      "phrase": "开水烫人冇限",
+     "tips": [
+      {
+       "word": "冇",
+       "jy": "mou5",
+       "note": "第 5 聲低升"
+      },
+      {
+       "word": "限",
+       "jy": "haan6",
+       "note": "h- 喉音，唔好讀成 faan6"
+      }
+     ],
      "audio": "/tones/audio/boiling.wav",
      "duration": 2.16,
      "chars": [
       {
        "c": "开",
-       "jy": "hoi1",
-       "audio": "/tones/audio/boiling-0.wav",
-       "dur": 0.34
+       "jy": "hoi1"
       },
       {
        "c": "水",
-       "jy": "seoi2",
-       "audio": "/tones/audio/boiling-1.wav",
-       "dur": 0.34
+       "jy": "seoi2"
       },
       {
        "c": "烫",
-       "jy": "tong3",
-       "audio": "/tones/audio/boiling-2.wav",
-       "dur": 0.34
+       "jy": "tong3"
       },
       {
        "c": "人",
-       "jy": "jan4",
-       "audio": "/tones/audio/boiling-3.wav",
-       "dur": 0.34
+       "jy": "jan4"
       },
       {
        "c": "冇",
-       "jy": "mou5",
-       "audio": "/tones/audio/boiling-4.wav",
-       "dur": 0.34
+       "jy": "mou5"
       },
       {
        "c": "限",
-       "jy": "haan6",
-       "audio": "/tones/audio/boiling-5.wav",
-       "dur": 0.34
+       "jy": "haan6"
       }
      ]
     },
@@ -559,44 +556,44 @@
      "tag": "生活高频词",
      "note": "「煲水」「老豆（爸爸）」都系极高频生活词；「水 seoi2」重点练 -eoi 韵母。",
      "phrase": "煲水泡茶老豆",
+     "tips": [
+      {
+       "word": "水",
+       "jy": "seoi2",
+       "note": "-eoi 圓唇韻母"
+      },
+      {
+       "word": "泡",
+       "jy": "paau3",
+       "note": "第 3 聲中平"
+      }
+     ],
      "audio": "/tones/audio/tea.wav",
      "duration": 2.08,
      "chars": [
       {
        "c": "煲",
-       "jy": "bou1",
-       "audio": "/tones/audio/tea-0.wav",
-       "dur": 0.37
+       "jy": "bou1"
       },
       {
        "c": "水",
-       "jy": "seoi2",
-       "audio": "/tones/audio/tea-1.wav",
-       "dur": 0.37
+       "jy": "seoi2"
       },
       {
        "c": "泡",
-       "jy": "paau3",
-       "audio": "/tones/audio/tea-2.wav",
-       "dur": 0.37
+       "jy": "paau3"
       },
       {
        "c": "茶",
-       "jy": "caa4",
-       "audio": "/tones/audio/tea-3.wav",
-       "dur": 0.37
+       "jy": "caa4"
       },
       {
        "c": "老",
-       "jy": "lou5",
-       "audio": "/tones/audio/tea-4.wav",
-       "dur": 0.37
+       "jy": "lou5"
       },
       {
        "c": "豆",
-       "jy": "dau6",
-       "audio": "/tones/audio/tea-5.wav",
-       "dur": 0.37
+       "jy": "dau6"
       }
      ]
     },
@@ -606,44 +603,44 @@
      "tag": "f- 与 -n",
      "note": "「花 faa1」咬下唇；后四个字「盼、人、面」连续三个前鼻音 -n 收尾，训练舌尖连续抵龈。",
      "phrase": "花姐盼人买面",
+     "tips": [
+      {
+       "word": "花",
+       "jy": "faa1",
+       "note": "f- 上齒咬下唇"
+      },
+      {
+       "word": "面",
+       "jy": "min6",
+       "note": "-n 收尾"
+      }
+     ],
      "audio": "/tones/audio/flowers.wav",
      "duration": 2.4,
      "chars": [
       {
        "c": "花",
-       "jy": "faa1",
-       "audio": "/tones/audio/flowers-0.wav",
-       "dur": 0.32
+       "jy": "faa1"
       },
       {
        "c": "姐",
-       "jy": "ze2",
-       "audio": "/tones/audio/flowers-1.wav",
-       "dur": 0.32
+       "jy": "ze2"
       },
       {
        "c": "盼",
-       "jy": "paan3",
-       "audio": "/tones/audio/flowers-2.wav",
-       "dur": 0.32
+       "jy": "paan3"
       },
       {
        "c": "人",
-       "jy": "jan4",
-       "audio": "/tones/audio/flowers-3.wav",
-       "dur": 0.32
+       "jy": "jan4"
       },
       {
        "c": "买",
-       "jy": "maai5",
-       "audio": "/tones/audio/flowers-4.wav",
-       "dur": 0.32
+       "jy": "maai5"
       },
       {
        "c": "面",
-       "jy": "min6",
-       "audio": "/tones/audio/flowers-5.wav",
-       "dur": 0.32
+       "jy": "min6"
       }
      ]
     },
@@ -653,44 +650,44 @@
      "tag": "新人 / 菜鸟",
      "note": "「新仔」指新人 / 菜鸟；「新 san1」练 -n，「烂 laan5」练边音 l-，注意「烂」系第 5 声低升，唔好照普通话读成第 4 / 6 声。",
      "phrase": "新仔去锄烂地",
+     "tips": [
+      {
+       "word": "爛",
+       "jy": "laan5",
+       "note": "第 5 聲低升，唔好讀成第 4 或第 6 聲"
+      },
+      {
+       "word": "新",
+       "jy": "san1",
+       "note": "-n 收尾"
+      }
+     ],
      "audio": "/tones/audio/newbie.wav",
      "duration": 2.48,
      "chars": [
       {
        "c": "新",
-       "jy": "san1",
-       "audio": "/tones/audio/newbie-0.wav",
-       "dur": 0.33
+       "jy": "san1"
       },
       {
        "c": "仔",
-       "jy": "zai2",
-       "audio": "/tones/audio/newbie-1.wav",
-       "dur": 0.33
+       "jy": "zai2"
       },
       {
        "c": "去",
-       "jy": "heoi3",
-       "audio": "/tones/audio/newbie-2.wav",
-       "dur": 0.33
+       "jy": "heoi3"
       },
       {
        "c": "锄",
-       "jy": "co4",
-       "audio": "/tones/audio/newbie-3.wav",
-       "dur": 0.33
+       "jy": "co4"
       },
       {
        "c": "烂",
-       "jy": "laan5",
-       "audio": "/tones/audio/newbie-4.wav",
-       "dur": 0.33
+       "jy": "laan5"
       },
       {
        "c": "地",
-       "jy": "dei6",
-       "audio": "/tones/audio/newbie-5.wav",
-       "dur": 0.33
+       "jy": "dei6"
       }
      ]
     }

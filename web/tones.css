@@ -105,39 +105,58 @@
   color: var(--ink);
 }
 
-.tone-chips {
+.tone-line {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 8px 14px;
+  padding: 10px 12px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 10px;
+  background: var(--panel-soft);
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
 }
 
-.tone-chip {
+.tone-line:hover { background: #fbf7ee; border-color: var(--accent-line); }
+.tone-line:focus-visible { outline: 2px solid var(--accent-line); outline-offset: 2px; }
+
+.tone-line.playing,
+.tone-line.playing:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+
+.tone-line .unit {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 1px;
-  min-width: 40px;
-  padding: 5px 6px 4px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: var(--panel-soft);
-  cursor: pointer;
-  font: inherit;
-  transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
 }
 
-.tone-chip:hover { background: #fbf7ee; border-color: var(--line-strong); }
-.tone-chip:active { transform: translateY(1px); }
-.tone-chip .ch { font-size: 20px; line-height: 1.1; color: var(--ink); }
-.tone-chip .jy { font-size: 10px; color: var(--dim); letter-spacing: 0.01em; }
+.tone-line .ch { font-size: 22px; line-height: 1.15; color: var(--ink); }
+.tone-line .jy { font-size: 10.5px; color: var(--dim); }
+.tone-line.playing .ch,
+.tone-line.playing .jy { color: var(--accent-strong); }
 
-.tone-chip.playing,
-.tone-chip.playing:hover {
-  background: var(--accent-soft);
-  border-color: var(--accent-line);
+.tone-tips {
+  padding: 9px 11px 8px;
+  border-left: 3px solid var(--warm-line);
+  border-radius: 8px;
+  background: var(--warm-soft);
 }
-.tone-chip.playing .ch,
-.tone-chip.playing .jy { color: var(--accent-strong); }
+
+.tone-tips-head {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--warm);
+  margin-bottom: 3px;
+  letter-spacing: 0.02em;
+}
+
+.tone-tips ul { margin: 0; padding-left: 16px; }
+.tone-tips li { font-size: 12px; line-height: 1.75; color: var(--dim); }
+.tone-tips b { color: var(--ink); font-weight: 600; }
+.tone-tips .jy { color: var(--accent-strong); font-size: 11px; margin-left: 3px; }
 
 .tone-note {
   margin: 0;
@@ -173,13 +192,12 @@
   .tone-grid { grid-template-columns: 1fr; gap: 12px; }
   .tone-card { padding: 14px 12px 11px; border-radius: 12px; }
   .tone-card h3 { font-size: 17px; }
-  .tone-chip { min-width: 42px; padding: 5px 7px 4px; }
-  .tone-chip .ch { font-size: 19px; }
-  .tone-chip .jy { font-size: 10px; }
+  .tone-line { gap: 7px 11px; padding: 9px 10px; }
+  .tone-line .ch { font-size: 20px; }
+  .tone-line .jy { font-size: 10px; }
   .tone-note { font-size: 12px; }
 }
 
 @media (max-width: 380px) {
-  .tone-chip .jy { font-size: 9px; }
-  .tone-chip { min-width: 38px; }
+  .tone-line .jy { font-size: 9.5px; }
 }
