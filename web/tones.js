@@ -71,10 +71,12 @@
     const card = el("article", "tone-card");
     const top = el("div", "tone-top");
     top.append(el("span", "tone-tag", item.tag), el("span", "tone-dur", `整句 ${item.duration}s`));
-    card.append(top, el("h3", null, item.title));
+    card.append(top);
 
     const status = el("span", "tone-status");
-    card.append(renderLine(item, status), el("p", "tone-note", item.note));
+    const line = renderLine(item, status);
+    line.title = item.title;
+    card.append(line, el("p", "tone-note", item.note));
 
     const tips = renderTips(item);
     if (tips) card.append(tips);
@@ -105,7 +107,9 @@
     (data.sections || []).forEach((sec) => {
       const section = el("section", "tone-section");
       const head = el("div", "tone-section-head");
-      head.append(el("h2", null, sec.title), el("p", null, sec.subtitle));
+      const titleRow = el("div", "tone-section-title");
+      titleRow.append(el("h2", null, sec.title), el("span", "tone-count", `${sec.items.length} 組`));
+      head.append(titleRow, el("p", null, sec.subtitle));
       const grid = el("div", "tone-grid");
       sec.items.forEach((item) => grid.append(renderItem(item)));
       section.append(head, grid);
