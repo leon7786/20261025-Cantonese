@@ -58,9 +58,7 @@
     const ul = el("ul");
     item.tips.forEach((t) => {
       const li = el("li");
-      const word = el("b", null, t.word);
-      const jy = el("span", "jy", t.jy);
-      li.append(word, jy, el("span", null, ` — ${t.note}`));
+      li.append(el("b", null, t.word), el("span", null, ` — ${t.note}`));
       ul.append(li);
     });
     box.append(ul);
