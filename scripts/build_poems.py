@@ -16,6 +16,7 @@ spec.loader.exec_module(bl)
 DATA = ROOT / "data" / "poems.json"
 OUT_JSON = ROOT / "web" / "poems.json"
 OUT_AUDIO = ROOT / "web" / "poems" / "audio"
+AUDIO_VER = "20261110c"
 
 
 async def build(reuse: bool) -> None:
@@ -39,7 +40,7 @@ async def build(reuse: bool) -> None:
                 audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
                 bl.write_wav(path, audio)
                 ms = int(len(audio) / bl.SR * 1000)
-            poems.append({**poem, "audio": f"/poems/audio/{poem['id']}.wav",
+            poems.append({**poem, "audio": f"/poems/audio/{poem['id']}.wav?v={AUDIO_VER}",
                           "duration": round(ms / 1000, 2)})
         out["sections"].append({**{k: sec[k] for k in ("id", "title", "intro")}, "poems": poems})
 
