@@ -31,7 +31,7 @@
   }
 
   function renderLine(item, status) {
-    const line = el("div", "tone-line");
+    const line = el("div", "tone-line" + (item.chars.length >= 8 ? " compact" : ""));
     line.tabIndex = 0;
     line.setAttribute("role", "button");
     line.setAttribute("aria-label", `播放整段：${item.title}`);
