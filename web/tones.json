@@ -8,33 +8,33 @@
     {
      "id": "digits",
      "title": "三九四零五二七八六",
-     "tag": "9 声全包版",
-     "note": "1–6 調加七（高入）、八（中入）、六（低入），一口氣練完九聲六調。",
+     "tag": "九聲全包",
+     "note": "1–6 調之外，加埋七（高入）、八（中入）、六（低入），九個數字一口氣練完九聲六調。",
      "phrase": "三九四零五二七八六",
      "tips": [
       {
        "word": "五",
-       "note": "好似應人一聲「嗯」：舌根抬起、用鼻出氣，唔好讀成「母」。",
+       "note": "好似隨口應人一聲「嗯」：舌根抬起、用鼻出氣，唔好讀成「母」。",
        "audio": "/tones/audio/digits-tip0.wav",
-       "dur": 6.85
+       "dur": 7.97
       },
       {
        "word": "七",
-       "note": "舌尖頂住上牙床，好似被燙到「嘖」一下，即刻停。",
+       "note": "舌尖頂實上牙床，好似辣親「嘖」一下，即刻收。",
        "audio": "/tones/audio/digits-tip1.wav",
-       "dur": 5.89
+       "dur": 5.33
       },
       {
        "word": "八",
-       "note": "雙唇閉實再彈開，好似細聲講「巴」。",
+       "note": "雙唇合實再彈開，好似細細聲講「巴」。",
        "audio": "/tones/audio/digits-tip2.wav",
-       "dur": 4.61
+       "dur": 5.73
       },
       {
        "word": "六",
        "note": "舌根頂住軟腭，喉嚨「咯」一下，好似吞口水。",
        "audio": "/tones/audio/digits-tip3.wav",
-       "dur": 4.93
+       "dur": 5.09
       }
      ],
      "audio": "/tones/audio/digits.wav",
