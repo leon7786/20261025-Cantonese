@@ -116,10 +116,6 @@
       if (node) node.classList.add("is-visited");
     });
 
-    if (state.last && state.last.art === state.art) {
-      const node = segEl(state.last.seg);
-      if (node) setTimeout(() => node.scrollIntoView({ block: "center", behavior: "smooth" }), 60);
-    }
   }
 
   function selectArticle(i, autoplay = false) {

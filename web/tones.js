@@ -114,11 +114,9 @@
     playBtn.addEventListener("click", () => play(m.audio, card, null, ""));
     head.append(el("span", "mk-word", m.word), el("span", "mk-jy", m.jy), playBtn);
 
-    const why = el("p", "mk-line");
-    why.append(el("b", null, "點解易錯"), document.createTextNode("：" + m.why));
     const how = el("p", "mk-line");
     how.append(el("b", null, "正確嘴型"), document.createTextNode("：" + m.how));
-    card.append(head, why, how);
+    card.append(head, how);
     return card;
   }
 
