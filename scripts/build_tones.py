@@ -153,6 +153,21 @@ async def build(reuse: bool) -> None:
             })
         out["sections"].append({**{k: sec[k] for k in ("id", "title", "subtitle")}, "items": items})
 
+    mistakes = []
+    for m in data.get("mistakes", []):
+        path = OUT_AUDIO / f"mistake-{m['id']}.wav"
+        if reuse and path.exists():
+            ms = wav_ms(path)
+        else:
+            print(f"[mistake] {m['word']} …", flush=True)
+            pcm, _ = await bl.synth(m.get("spoken", m["word"]), env)
+            a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+            bl.write_wav(path, a)
+            ms = int(len(a) / bl.SR * 1000)
+        mistakes.append({**m, "audio": f"/tones/audio/mistake-{m['id']}.wav",
+                         "dur": round(ms / 1000, 2)})
+    out["mistakes"] = mistakes
+
     OUT_JSON.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print("wrote", OUT_JSON)
 

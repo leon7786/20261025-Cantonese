@@ -106,6 +106,22 @@
     return card;
   }
 
+  function renderMistake(m) {
+    const card = el("article", "mistake-card");
+    const head = el("div", "mk-head");
+    const playBtn = el("button", "mk-play", "▶ 聽讀音");
+    playBtn.type = "button";
+    playBtn.addEventListener("click", () => play(m.audio, card, null, ""));
+    head.append(el("span", "mk-word", m.word), el("span", "mk-jy", m.jy), playBtn);
+
+    const why = el("p", "mk-line");
+    why.append(el("b", null, "點解易錯"), document.createTextNode("：" + m.why));
+    const how = el("p", "mk-line");
+    how.append(el("b", null, "正確嘴型"), document.createTextNode("：" + m.how));
+    card.append(head, why, how);
+    return card;
+  }
+
   async function init() {
     player.addEventListener("ended", clearPlaying);
     let data;
@@ -128,6 +144,18 @@
       section.append(head, grid);
       root.append(section);
     });
+
+    if (data.mistakes && data.mistakes.length) {
+      const section = el("section", "tone-section tone-mistakes");
+      const head = el("div", "tone-section-head");
+      const titleRow = el("div", "tone-section-title");
+      titleRow.append(el("h2", null, "常讀錯"), el("span", "tone-count", `${data.mistakes.length} 個`));
+      head.append(titleRow, el("p", null, "呢啲字好多人讀錯。點一下個詞聽正確讀音，再睇嘴型提示。"));
+      const grid = el("div", "mistake-grid");
+      data.mistakes.forEach((m) => grid.append(renderMistake(m)));
+      section.append(head, grid);
+      root.append(section);
+    }
   }
 
   init();
