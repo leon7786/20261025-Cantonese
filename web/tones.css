@@ -212,7 +212,20 @@
 
 .tone-tips ul { margin: 0; padding-left: 16px; }
 .tone-tips li { font-size: 12.5px; line-height: 1.8; color: var(--text); }
-.tone-tips b { color: var(--ink); font-weight: 600; }
+.tone-tips b.tip-word {
+  display: inline-block;
+  min-width: 1.6em;
+  text-align: center;
+  padding: 0 6px;
+  margin-right: 4px;
+  border: 1px solid #e6c9a8;
+  border-radius: 5px;
+  background: #fff;
+  color: #7a3f06;
+  font-weight: 700;
+  line-height: 1.65;
+  box-shadow: 0 1px 0 rgba(122, 63, 6, 0.08);
+}
 .tone-tips .jy { color: var(--accent-strong); font-size: 11.5px; margin-left: 3px; }
 
 .tone-note {
