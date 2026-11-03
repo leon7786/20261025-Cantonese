@@ -24,7 +24,7 @@ OUT_JSON = ROOT / "web" / "lessons.json"
 SR = 24000
 MODEL = "qwen-audio-3.0-tts-plus"
 VOICE = "longanlingxin"
-INSTRUCTION = "请用广东话表达。"
+INSTRUCTION = "请用粤语朗读"
 
 
 def load_env() -> dict:
@@ -46,11 +46,11 @@ async def synth(text: str, env: dict) -> tuple[bytes, list[dict]]:
             "header": {**head, "action": "run-task"},
             "payload": {
                 "task_group": "audio", "task": "tts", "function": "SpeechSynthesizer",
-                "model": MODEL,
+                "model": env.get("CANTONESE_QWEN_MODEL", MODEL),
                 "parameters": {
-                    "text_type": "PlainText", "voice": VOICE, "format": "pcm",
+                    "text_type": "PlainText", "voice": env.get("CANTONESE_QWEN_VOICE", VOICE), "format": "pcm",
                     "sample_rate": SR, "word_timestamp_enabled": True,
-                    "instruction": INSTRUCTION,
+                    "instruction": env.get("CANTONESE_QWEN_INSTRUCTION", INSTRUCTION),
                 },
                 "input": {},
             },
@@ -208,7 +208,7 @@ async def build(only: set[int] | None = None) -> None:
         old = json.loads(OUT_JSON.read_text(encoding="utf-8"))
         prev = {i: a for i, a in enumerate(old.get("articles", []))}
 
-    lessons = {"model": MODEL, "voice": VOICE, "instruction": INSTRUCTION, "articles": []}
+    lessons = {"model": env.get("CANTONESE_QWEN_MODEL", MODEL), "voice": VOICE, "instruction": env.get("CANTONESE_QWEN_INSTRUCTION", INSTRUCTION), "articles": []}
     for ai, art in enumerate(articles):
         if only and ai not in only and ai in prev:
             lessons["articles"].append(prev[ai])

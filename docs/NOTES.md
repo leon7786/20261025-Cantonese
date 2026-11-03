@@ -77,7 +77,7 @@ finish-task   {input:{}}
 - `format` 可選 `pcm` / `wav` / `mp3` / `opus`；選 `pcm` 後自己封 WAV 最穩
 - `sample_rate` 可選 8000–48000，預設 22050
 - 音色屬模型：3.0-plus 是 `longanlingxin`（女）/ `longanlufeng`（男），不能跨模型混用
-- **粵語不在 `language_hints` 裡**，方言靠 `instruction`，官方句式是「请用广东话表达。」
+- **粵語不在 `language_hints` 裡**，方言靠 `instruction`，目前用「请用粤语朗读」
 - 文本裡可以直接塞情感/擬聲標籤（`[laughing]` 之類），不用額外參數
 
 ### 3.3 字級時間戳：能拿到，但別太信
