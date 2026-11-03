@@ -16,7 +16,7 @@ spec.loader.exec_module(bl)
 DATA = ROOT / "data" / "poems.json"
 OUT_JSON = ROOT / "web" / "poems.json"
 OUT_AUDIO = ROOT / "web" / "poems" / "audio"
-AUDIO_VER = "20261110h"
+AUDIO_VER = "20261110i"
 
 
 async def build(reuse: bool) -> None:
@@ -40,6 +40,8 @@ async def build(reuse: bool) -> None:
                 import numpy as np
                 pieces = []
                 for ci, chunk in enumerate(chunks):
+                    for a, b in (poem.get("replace") or {}).items():
+                        chunk = chunk.replace(a, b)
                     pcm, _ = await bl.synth(chunk, env)
                     a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
                     pieces.append(a)
