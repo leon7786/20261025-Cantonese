@@ -58,7 +58,7 @@
 }
 
 .poem-card::after {
-  content: "詩";
+  content: "诗";
   position: absolute;
   right: 14px;
   bottom: 4px;

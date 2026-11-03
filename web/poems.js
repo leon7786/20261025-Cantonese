@@ -1,4 +1,4 @@
-/* 詩詞頁：兩欄錯落排版，點詩句或按鈕朗讀 */
+/* 诗词页：两栏错落排版，点诗句或按钮朗读 */
 (() => {
   const $ = (id) => document.getElementById(id);
   const player = $("poemPlayer");
@@ -15,7 +15,7 @@
 
   function resetBtn(btn) {
     btn.classList.remove("is-playing");
-    btn.textContent = "▶ 朗讀";
+    btn.textContent = "▶ 朗读";
   }
 
   function clearPlaying() {
@@ -32,20 +32,20 @@
     if (same && !player.paused) {
       player.pause();
       btn.classList.remove("is-playing");
-      btn.textContent = "▶ 繼續";
+      btn.textContent = "▶ 继续";
       return;
     }
     if (same && player.paused) {
       player.play().catch(() => {});
       btn.classList.add("is-playing");
-      btn.textContent = "⏸ 暫停";
+      btn.textContent = "⏸ 暂停";
       return;
     }
     clearPlaying();
     active = { card, btn };
     card.classList.add("playing");
     btn.classList.add("is-playing");
-    btn.textContent = "⏸ 暫停";
+    btn.textContent = "⏸ 暂停";
     player.pause();
     player.src = poem.audio;
     player.play().catch(() => {});
@@ -62,10 +62,10 @@
 
     const body = el("button", "poem-body");
     body.type = "button";
-    body.setAttribute("aria-label", `朗讀 ${poem.title}`);
+    body.setAttribute("aria-label", `朗读 ${poem.title}`);
     poem.lines.forEach((line) => body.append(el("span", "line", line)));
 
-    const btn = el("button", "poem-play", "▶ 朗讀");
+    const btn = el("button", "poem-play", "▶ 朗读");
     btn.type = "button";
     btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(poem, card, btn); });
     body.addEventListener("click", () => toggle(poem, card, btn));
@@ -109,7 +109,7 @@
       const resp = await fetch("/poems.json", { cache: "no-cache" });
       data = await resp.json();
     } catch {
-      root.textContent = "資料載入失敗";
+      root.textContent = "资料载入失败";
       return;
     }
     poems = (data.sections || []).flatMap((sec) => sec.poems || []);
