@@ -53,7 +53,7 @@
   function renderPoem(poem) {
     const card = el("article", "poem-card");
     const head = el("div", "poem-head");
-    head.append(el("span", "poem-title", poem.title), el("span", "poem-author", poem.author));
+    head.append(el("span", "poem-title", `${poem.author}《${poem.title}》`));
     const btn = el("button", "poem-play", "▶ 粵語朗讀");
     btn.type = "button";
     btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(poem, card, btn); });
@@ -79,15 +79,11 @@
       root.textContent = "資料載入失敗";
       return;
     }
+    const grid = el("div", "poem-grid poem-grid-all");
     (data.sections || []).forEach((sec) => {
-      const section = el("section", "poem-section");
-      const head = el("div", "poem-section-head");
-      head.append(el("h2", null, sec.title), el("p", null, sec.intro));
-      const grid = el("div", "poem-grid");
-      sec.poems.forEach((p) => grid.append(renderPoem(p)));
-      section.append(head, grid);
-      root.append(section);
+      sec.poems.forEach((poem) => grid.append(renderPoem(poem)));
     });
+    root.append(grid);
   }
 
   init();

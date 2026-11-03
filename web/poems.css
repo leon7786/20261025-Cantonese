@@ -10,6 +10,7 @@
 .poem-intro p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.85; color: var(--muted); }
 .poem-intro p:last-child { margin-bottom: 0; }
 
+.poem-grid-all { margin-top: 4px; }
 .poem-section { margin: 38px 0 6px; }
 .poem-section-head h2 { margin: 0 0 5px; font-size: 20px; color: var(--ink); }
 .poem-section-head p { margin: 0 0 16px; font-size: 13px; line-height: 1.8; color: var(--dim); }
