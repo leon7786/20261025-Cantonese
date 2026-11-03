@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#f7f4ee" />
+<title>詩詞與粵語聲調 · 粵語 TTS</title>
+<meta name="description" content="用粵語朗讀古詩詞：入聲押韻、元音推移、閉口韻與平仄，點一下聽全文。" />
+<link rel="stylesheet" href="/styles.css?v=20261109a" />
+<link rel="stylesheet" href="/poems.css?v=20261109a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>" />
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="hero hero-compact">
+  <div class="hero-inner">
+    <h1>詩詞與粵語聲調</h1>
+    <div class="navlinks navlinks-inline">
+      <a href="/tones.html">九聲六調</a>
+      <a href="/poems.html" class="active">詩詞</a>
+      <a href="/learn.html">跟讀學粵語</a>
+    </div>
+    <p class="lede">
+      粵語承咗中古漢語嘅語音骨架，唐詩宋詞嘅平仄、入聲同閉口韻，用粵語讀往往更原汁原味。點一首詩，聽完成首。
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="poem-intro">
+    <h2>聲調對粵語文化嘅塑造：協音與填詞</h2>
+    <p>唐詩宋詞講究「平仄」：平聲悠長，仄聲短促。普通話因為「入派三聲」同濁音清化，讀某些古詩會唔押韻、平仄失調；粵語保留咗入聲同閉口韻，讀起上嚟頓挫分明，更接近當時嘅聲韻。</p>
+    <p>下面分四組：入聲押韻、元音推移、閉口韻、平仄失調。每首都可以點擊聽粵語全文，下面有簡短說明。</p>
+  </section>
+
+  <div id="poemSections"></div>
+</main>
+
+<footer class="foot">
+  <span>粵語 TTS 實驗室 · 詩詞頁</span>
+  <span class="dot">·</span>
+  <a href="https://github.com/leon7786/20261025-Cantonese" target="_blank" rel="noreferrer">源碼</a>
+</footer>
+
+<audio id="poemPlayer" preload="none"></audio>
+<script src="/poems.js?v=20261109a" defer></script>
+</body>
+</html>
