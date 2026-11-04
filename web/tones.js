@@ -55,7 +55,7 @@
     if (!item.tips || !item.tips.length) return null;
     const box = el("div", "tone-tips");
     const head = el("div", "tone-tips-head", "嘴型提示");
-    if (item.tips.some((t) => t.audio)) head.append(el("span", "tips-hint", "撳提示聽讀音"));
+    if (item.tips.some((t) => t.audio)) head.append(el("span", "tips-hint", "撳提示听读音"));
     box.append(head);
     const ul = el("ul");
     item.tips.forEach((t) => {
@@ -109,13 +109,13 @@
   function renderMistake(m) {
     const card = el("article", "mistake-card");
     const head = el("div", "mk-head");
-    const playBtn = el("button", "mk-play", "▶ 聽讀音");
+    const playBtn = el("button", "mk-play", "▶ 听读音");
     playBtn.type = "button";
     playBtn.addEventListener("click", () => play(m.audio, card, null, ""));
     head.append(el("span", "mk-word", m.word), el("span", "mk-jy", m.jy), playBtn);
 
     const how = el("p", "mk-line");
-    how.append(el("b", null, "正確嘴型"), document.createTextNode("：" + m.how));
+    how.append(el("b", null, "正确嘴型"), document.createTextNode("：" + m.how));
     card.append(head, how);
     return card;
   }
