@@ -79,69 +79,6 @@
      ]
     },
     {
-     "id": "jan-set",
-     "title": "因忍印人引刃，一日",
-     "tag": "同韻九聲",
-     "note": "前六个字同一个 jan 韵，1→6 顺住落；「一」系高入，「日」系低入。（「认」读 jing6，所以呢度用同韵嘅「刃」。）",
-     "phrase": "因忍印人引刃，一日",
-     "tips": [
-      {
-       "word": "刃",
-       "note": "舌尖抵住上牙床，声带振动，把声低而平，唔好升高。",
-       "audio": "/tones/audio/jan-set-tip0.wav?v=20261112a",
-       "dur": 6.79
-      },
-      {
-       "word": "一",
-       "note": "舌尖顶住上牙床，一碰即停，好似噎住一下。",
-       "audio": "/tones/audio/jan-set-tip1.wav?v=20261112a",
-       "dur": 5.21
-      },
-      {
-       "word": "日",
-       "note": "声音低沉，舌尖顶住上牙床，短促收住。",
-       "audio": "/tones/audio/jan-set-tip2.wav?v=20261112a",
-       "dur": 5.53
-      }
-     ],
-     "audio": "/tones/audio/jan-set.wav?v=20261112a",
-     "duration": 3.6,
-     "chars": [
-      {
-       "c": "因",
-       "jy": "jan1"
-      },
-      {
-       "c": "忍",
-       "jy": "jan2"
-      },
-      {
-       "c": "印",
-       "jy": "jan3"
-      },
-      {
-       "c": "人",
-       "jy": "jan4"
-      },
-      {
-       "c": "引",
-       "jy": "jan5"
-      },
-      {
-       "c": "刃",
-       "jy": "jan6"
-      },
-      {
-       "c": "一",
-       "jy": "jat1"
-      },
-      {
-       "c": "日",
-       "jy": "jat6"
-      }
-     ]
-    },
-    {
      "id": "chicken",
      "title": "鸡仔叫，鹅仔叫，狐狸叫",
      "tag": "童谣定调法",
