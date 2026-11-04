@@ -16,7 +16,8 @@ spec.loader.exec_module(bl)
 DATA = ROOT / "data" / "poems.json"
 OUT_JSON = ROOT / "web" / "poems.json"
 OUT_AUDIO = ROOT / "web" / "poems" / "audio"
-AUDIO_VER = "20261111h"
+AUDIO_VER = "20261112c"
+VOICE = "longanlufeng"  # 男聲
 
 
 async def build(reuse: bool) -> None:
@@ -40,6 +41,7 @@ async def build(reuse: bool) -> None:
                 import numpy as np
                 pieces = []
                 poem_env = dict(env)
+                poem_env["CANTONESE_QWEN_VOICE"] = poem.get("voice", VOICE)
                 if poem.get("instruction"):
                     poem_env["CANTONESE_QWEN_INSTRUCTION"] = poem["instruction"]
                 for ci, chunk in enumerate(chunks):
