@@ -24,6 +24,7 @@ DATA = ROOT / "data" / "tones.json"
 OUT_JSON = ROOT / "web" / "tones.json"
 OUT_AUDIO = ROOT / "web" / "tones" / "audio"
 PUNCT = re.compile(r"[，。！？；：、,.!?;:]")
+AUDIO_VER = "20261112a"
 
 TONES = [
     {"n": 1, "char": "詩", "jy": "si1"},
@@ -101,6 +102,9 @@ async def build(reuse: bool) -> None:
         for item in sec["items"]:
             spoken = PUNCT.sub("", item["phrase"])
             assert len(spoken) == len(item["chars"]), (item["id"], len(spoken), len(item["chars"]))
+            item_env = dict(env)
+            if item.get("instruction"):
+                item_env["CANTONESE_QWEN_INSTRUCTION"] = item["instruction"]
             wav_path = OUT_AUDIO / f"{item['id']}.wav"
 
             if reuse and wav_path.exists():
@@ -108,7 +112,7 @@ async def build(reuse: bool) -> None:
                 print(f"[{item['id']}] 沿用 {total_ms/1000:.1f}s", flush=True)
             else:
                 print(f"[{item['id']}] {spoken} …", flush=True)
-                pcm, _words = await bl.synth(spoken, env)
+                pcm, _words = await bl.synth(spoken, item_env)
                 audio = __import__("numpy").frombuffer(pcm, dtype=__import__("numpy").int16).astype(__import__("numpy").float32) / 32768
                 total_ms = int(len(audio) / bl.SR * 1000)
                 bl.write_wav(wav_path, audio)
@@ -122,7 +126,7 @@ async def build(reuse: bool) -> None:
                     tpath = OUT_AUDIO / tname
                     if reuse and tpath.exists():
                         tip_ms = wav_ms(tpath)
-                        tips_out.append({**tip, "audio": f"/tones/audio/{tname}", "dur": round(tip_ms / 1000, 2)})
+                        tips_out.append({**tip, "audio": f"/tones/audio/{tname}?v={AUDIO_VER}", "dur": round(tip_ms / 1000, 2)})
                         continue
 
                     if tpath.exists():
@@ -142,13 +146,13 @@ async def build(reuse: bool) -> None:
 
                     if note_a is None:
                         print(f"    tip note: {tip['note'][:16]}…", flush=True)
-                        pcm, _ = await bl.synth(tip["note"], env)
+                        pcm, _ = await bl.synth(tip["note"], item_env)
                         note_a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
 
                     # 框框字單獨合成，避免切到隔籬字
                     word_text = tip.get("spoken", tip["word"])
                     print(f"    tip word: {word_text}", flush=True)
-                    pcm_w, _ = await bl.synth(word_text, env)
+                    pcm_w, _ = await bl.synth(word_text, item_env)
                     word_a = np.frombuffer(pcm_w, dtype=np.int16).astype(np.float32) / 32768
                     nz = np.where(np.abs(word_a) > 0.004)[0]
                     if len(nz):
@@ -158,13 +162,13 @@ async def build(reuse: bool) -> None:
                     tip_audio = np.concatenate([word_a, gap_a, note_a])
                     bl.write_wav(tpath, tip_audio)
                     tip_ms = int(len(tip_audio) / bl.SR * 1000)
-                    tip.update({"audio": f"/tones/audio/{tname}", "dur": round(tip_ms / 1000, 2)})
+                    tip.update({"audio": f"/tones/audio/{tname}?v={AUDIO_VER}", "dur": round(tip_ms / 1000, 2)})
                 tips_out.append(tip)
 
             items.append({
                 **{k: item[k] for k in ("id", "title", "tag", "note", "phrase")},
                 "tips": tips_out,
-                "audio": f"/tones/audio/{item['id']}.wav",
+                "audio": f"/tones/audio/{item['id']}.wav?v={AUDIO_VER}",
                 "duration": round(total_ms / 1000, 2),
                 "chars": [{"c": c, "jy": j} for (c, j) in item["chars"]],
             })
@@ -181,7 +185,7 @@ async def build(reuse: bool) -> None:
             a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
             bl.write_wav(path, a)
             ms = int(len(a) / bl.SR * 1000)
-        tones.append({**t, "audio": f"/tones/audio/tone-{t['n']}.wav", "dur": round(ms / 1000, 2)})
+        tones.append({**t, "audio": f"/tones/audio/tone-{t['n']}.wav?v={AUDIO_VER}", "dur": round(ms / 1000, 2)})
     out["tones"] = tones
 
     mistakes = []
@@ -195,7 +199,7 @@ async def build(reuse: bool) -> None:
             a = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
             bl.write_wav(path, a)
             ms = int(len(a) / bl.SR * 1000)
-        mistakes.append({**m, "audio": f"/tones/audio/mistake-{m['id']}.wav",
+        mistakes.append({**m, "audio": f"/tones/audio/mistake-{m['id']}.wav?v={AUDIO_VER}",
                          "dur": round(ms / 1000, 2)})
     out["mistakes"] = mistakes
 

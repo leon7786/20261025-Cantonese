@@ -15,29 +15,29 @@
       {
        "word": "五",
        "note": "好似隨口應人一聲「嗯」：舌根抬起、用鼻出氣，唔好讀成「母」。",
-       "audio": "/tones/audio/digits-tip0.wav",
+       "audio": "/tones/audio/digits-tip0.wav?v=20261112a",
        "dur": 6.86
       },
       {
        "word": "七",
        "note": "舌尖頂實上牙床，好似辣親「嘖」一下，即刻收。",
-       "audio": "/tones/audio/digits-tip1.wav",
+       "audio": "/tones/audio/digits-tip1.wav?v=20261112a",
        "dur": 4.81
       },
       {
        "word": "八",
        "note": "雙唇合實再彈開，好似細細聲講「巴」。",
-       "audio": "/tones/audio/digits-tip2.wav",
+       "audio": "/tones/audio/digits-tip2.wav?v=20261112a",
        "dur": 4.82
       },
       {
        "word": "六",
        "note": "舌根頂住軟腭，喉嚨「咯」一下，好似吞口水。",
-       "audio": "/tones/audio/digits-tip3.wav",
+       "audio": "/tones/audio/digits-tip3.wav?v=20261112a",
        "dur": 5.53
       }
      ],
-     "audio": "/tones/audio/digits.wav",
+     "audio": "/tones/audio/digits.wav?v=20261112a",
      "duration": 2.32,
      "chars": [
       {
@@ -88,24 +88,24 @@
       {
        "word": "刃",
        "note": "舌尖抵住上牙床，聲帶振動，把聲低而平，唔好升高。",
-       "audio": "/tones/audio/jan-set-tip0.wav",
-       "dur": 6.76
+       "audio": "/tones/audio/jan-set-tip0.wav?v=20261112a",
+       "dur": 6.79
       },
       {
        "word": "一",
        "note": "舌尖頂住上牙床，一碰即停，好似噎住一下。",
-       "audio": "/tones/audio/jan-set-tip1.wav",
-       "dur": 5.8
+       "audio": "/tones/audio/jan-set-tip1.wav?v=20261112a",
+       "dur": 5.21
       },
       {
        "word": "日",
        "note": "聲音低沉，舌尖頂住上牙床，短促收住。",
-       "audio": "/tones/audio/jan-set-tip2.wav",
-       "dur": 5.09
+       "audio": "/tones/audio/jan-set-tip2.wav?v=20261112a",
+       "dur": 5.53
       }
      ],
-     "audio": "/tones/audio/jan-set.wav",
-     "duration": 5.52,
+     "audio": "/tones/audio/jan-set.wav?v=20261112a",
+     "duration": 3.6,
      "chars": [
       {
        "c": "因",
@@ -151,17 +151,17 @@
       {
        "word": "狸",
        "note": "嘴角好似笑咁向兩邊拉，舌尖抵住上牙床，拉長講「黎」。",
-       "audio": "/tones/audio/chicken-tip0.wav",
+       "audio": "/tones/audio/chicken-tip0.wav?v=20261112a",
        "dur": 6.46
       },
       {
        "word": "鹅",
        "note": "好似感冒「哦」一聲，舌根縮後、用鼻出氣。",
-       "audio": "/tones/audio/chicken-tip1.wav",
+       "audio": "/tones/audio/chicken-tip1.wav?v=20261112a",
        "dur": 6.74
       }
      ],
-     "audio": "/tones/audio/chicken.wav",
+     "audio": "/tones/audio/chicken.wav?v=20261112a",
      "duration": 2.56,
      "chars": [
       {
@@ -212,23 +212,23 @@
       {
        "word": "豉",
        "note": "第 6 聲低平：舌尖抵住上牙床，把聲壓低拖平。",
-       "audio": "/tones/audio/auntie-tip0.wav",
+       "audio": "/tones/audio/auntie-tip0.wav?v=20261112a",
        "dur": 6.49
       },
       {
        "word": "黎",
        "note": "第 4 聲低降：聲音由低再沉落去，好似嘆氣。",
-       "audio": "/tones/audio/auntie-tip1.wav",
+       "audio": "/tones/audio/auntie-tip1.wav?v=20261112a",
        "dur": 6.22
       },
       {
        "word": "油",
        "note": "第 4 聲，同「黎」一樣低沉，尾音唔好升。",
-       "audio": "/tones/audio/auntie-tip2.wav",
+       "audio": "/tones/audio/auntie-tip2.wav?v=20261112a",
        "dur": 4.62
       }
      ],
-     "audio": "/tones/audio/auntie.wav",
+     "audio": "/tones/audio/auntie.wav?v=20261112a",
      "duration": 2.0,
      "chars": [
       {
@@ -271,17 +271,17 @@
       {
        "word": "牛",
        "note": "先「嗯」一聲，舌根抬起，跟住滑去「由」。",
-       "audio": "/tones/audio/beef-tip0.wav",
+       "audio": "/tones/audio/beef-tip0.wav?v=20261112a",
        "dur": 5.51
       },
       {
        "word": "腩",
        "note": "好似「南」咁，但係最後要合埋嘴，尾音向上挑。",
-       "audio": "/tones/audio/beef-tip1.wav",
+       "audio": "/tones/audio/beef-tip1.wav?v=20261112a",
        "dur": 5.09
       }
      ],
-     "audio": "/tones/audio/beef.wav",
+     "audio": "/tones/audio/beef.wav?v=20261112a",
      "duration": 2.4,
      "chars": [
       {
@@ -320,17 +320,17 @@
       {
        "word": "石",
        "note": "舌尖頂住上牙床，「塞」一下即刻停，好似煞掣。",
-       "audio": "/tones/audio/crab-tip0.wav",
+       "audio": "/tones/audio/crab-tip0.wav?v=20261112a",
        "dur": 5.32
       },
       {
        "word": "砸",
        "note": "雙唇合實再彈開，「扎」一下，最後合埋嘴。",
-       "audio": "/tones/audio/crab-tip1.wav",
+       "audio": "/tones/audio/crab-tip1.wav?v=20261112a",
        "dur": 5.81
       }
      ],
-     "audio": "/tones/audio/crab.wav",
+     "audio": "/tones/audio/crab.wav?v=20261112a",
      "duration": 2.0,
      "chars": [
       {
@@ -372,17 +372,17 @@
       {
        "word": "买",
        "note": "好似問人「啊？」，尾音向上挑。",
-       "audio": "/tones/audio/buy-sell-tip0.wav",
+       "audio": "/tones/audio/buy-sell-tip0.wav?v=20261112a",
        "dur": 3.95
       },
       {
        "word": "卖",
        "note": "好似嘆氣，把聲平平；同「買」只差高低。",
-       "audio": "/tones/audio/buy-sell-tip1.wav",
+       "audio": "/tones/audio/buy-sell-tip1.wav?v=20261112a",
        "dur": 4.68
       }
      ],
-     "audio": "/tones/audio/buy-sell.wav",
+     "audio": "/tones/audio/buy-sell.wav?v=20261112a",
      "duration": 1.92,
      "chars": [
       {
@@ -422,17 +422,17 @@
        "word": "长",
        "note": "嘴唇好似吹口哨咁收圓。",
        "spoken": "掌",
-       "audio": "/tones/audio/patrol-tip0.wav",
+       "audio": "/tones/audio/patrol-tip0.wav?v=20261112a",
        "dur": 3.45
       },
       {
        "word": "巡",
        "note": "嘴唇收圓，好似「春」嘅圓唇版。",
-       "audio": "/tones/audio/patrol-tip1.wav",
+       "audio": "/tones/audio/patrol-tip1.wav?v=20261112a",
        "dur": 4.38
       }
      ],
-     "audio": "/tones/audio/patrol.wav",
+     "audio": "/tones/audio/patrol.wav?v=20261112a",
      "duration": 1.68,
      "chars": [
       {
@@ -471,18 +471,18 @@
       {
        "word": "水",
        "note": "嘴唇好似吹蠟燭咁收圓。",
-       "audio": "/tones/audio/tea-tip0.wav",
+       "audio": "/tones/audio/tea-tip0.wav?v=20261112a",
        "dur": 3.35
       },
       {
        "word": "泡",
        "note": "嘴唇合埋，「啪」一聲彈開，把聲保持平，唔好升高。",
        "spoken": "炮",
-       "audio": "/tones/audio/tea-tip1.wav",
+       "audio": "/tones/audio/tea-tip1.wav?v=20261112a",
        "dur": 6.56
       }
      ],
-     "audio": "/tones/audio/tea.wav",
+     "audio": "/tones/audio/tea.wav?v=20261112a",
      "duration": 2.08,
      "chars": [
       {
@@ -521,17 +521,17 @@
       {
        "word": "花",
        "note": "上排牙咬住下唇吹氣，好似吹蠟燭。",
-       "audio": "/tones/audio/flowers-tip0.wav",
+       "audio": "/tones/audio/flowers-tip0.wav?v=20261112a",
        "dur": 4.63
       },
       {
        "word": "面",
        "note": "收尾舌尖頂住上牙床，把聲平平。",
-       "audio": "/tones/audio/flowers-tip1.wav",
+       "audio": "/tones/audio/flowers-tip1.wav?v=20261112a",
        "dur": 5.21
       }
      ],
-     "audio": "/tones/audio/flowers.wav",
+     "audio": "/tones/audio/flowers.wav?v=20261112a",
      "duration": 2.4,
      "chars": [
       {
@@ -570,17 +570,17 @@
       {
        "word": "寻",
        "note": "好似「心」嘅收法：收尾合埋嘴，用鼻出氣。",
-       "audio": "/tones/audio/rice-tip0.wav",
+       "audio": "/tones/audio/rice-tip0.wav?v=20261112a",
        "dur": 5.45
       },
       {
        "word": "饭",
        "note": "收尾舌尖頂住上牙床，唔好合埋嘴。",
-       "audio": "/tones/audio/rice-tip1.wav",
+       "audio": "/tones/audio/rice-tip1.wav?v=20261112a",
        "dur": 5.06
       }
      ],
-     "audio": "/tones/audio/rice.wav",
+     "audio": "/tones/audio/rice.wav?v=20261112a",
      "duration": 1.84,
      "chars": [
       {
@@ -626,23 +626,23 @@
       {
        "word": "十",
        "note": "雙唇合實，短促收住，好似「十」一下即停。",
-       "audio": "/tones/audio/entering-boss-tip0.wav",
+       "audio": "/tones/audio/entering-boss-tip0.wav?v=20261112a",
        "dur": 5.0
       },
       {
        "word": "乜",
        "note": "舌尖頂住上牙床，短促收住，好似「乜」一聲即停。",
-       "audio": "/tones/audio/entering-boss-tip1.wav",
+       "audio": "/tones/audio/entering-boss-tip1.wav?v=20261112a",
        "dur": 6.15
       },
       {
        "word": "白",
        "note": "舌根頂住軟腭，短促收住，聲音低沉。",
-       "audio": "/tones/audio/entering-boss-tip2.wav",
+       "audio": "/tones/audio/entering-boss-tip2.wav?v=20261112a",
        "dur": 4.92
       }
      ],
-     "audio": "/tones/audio/entering-boss.wav",
+     "audio": "/tones/audio/entering-boss.wav?v=20261112a",
      "duration": 2.48,
      "chars": [
       {
@@ -691,63 +691,63 @@
    "n": 1,
    "char": "詩",
    "jy": "si1",
-   "audio": "/tones/audio/tone-1.wav",
+   "audio": "/tones/audio/tone-1.wav?v=20261112a",
    "dur": 1.44
   },
   {
    "n": 2,
    "char": "史",
    "jy": "si2",
-   "audio": "/tones/audio/tone-2.wav",
+   "audio": "/tones/audio/tone-2.wav?v=20261112a",
    "dur": 1.04
   },
   {
    "n": 3,
    "char": "試",
    "jy": "si3",
-   "audio": "/tones/audio/tone-3.wav",
+   "audio": "/tones/audio/tone-3.wav?v=20261112a",
    "dur": 1.2
   },
   {
    "n": 4,
    "char": "時",
    "jy": "si4",
-   "audio": "/tones/audio/tone-4.wav",
+   "audio": "/tones/audio/tone-4.wav?v=20261112a",
    "dur": 0.96
   },
   {
    "n": 5,
    "char": "市",
    "jy": "si5",
-   "audio": "/tones/audio/tone-5.wav",
+   "audio": "/tones/audio/tone-5.wav?v=20261112a",
    "dur": 1.36
   },
   {
    "n": 6,
    "char": "事",
    "jy": "si6",
-   "audio": "/tones/audio/tone-6.wav",
+   "audio": "/tones/audio/tone-6.wav?v=20261112a",
    "dur": 1.52
   },
   {
    "n": 7,
    "char": "色",
    "jy": "sik1",
-   "audio": "/tones/audio/tone-7.wav",
+   "audio": "/tones/audio/tone-7.wav?v=20261112a",
    "dur": 1.28
   },
   {
    "n": 8,
    "char": "錫",
    "jy": "sik3",
-   "audio": "/tones/audio/tone-8.wav",
+   "audio": "/tones/audio/tone-8.wav?v=20261112a",
    "dur": 1.04
   },
   {
    "n": 9,
    "char": "食",
    "jy": "sik6",
-   "audio": "/tones/audio/tone-9.wav",
+   "audio": "/tones/audio/tone-9.wav?v=20261112a",
    "dur": 0.88
   }
  ],
@@ -758,7 +758,7 @@
    "jy": "hei2 fun1",
    "why": "好多人將「歡」讀成喉嚨呼氣嘅「婚」，聽落變咗「喜婚」。",
    "how": "「喜」用喉嚨輕輕呵氣；到「歡」要上排牙咬住下唇吹氣，收尾舌尖頂住上牙齦。",
-   "audio": "/tones/audio/mistake-hei-fun.wav",
+   "audio": "/tones/audio/mistake-hei-fun.wav?v=20261112a",
    "dur": 1.44
   },
   {
@@ -767,7 +767,7 @@
    "jy": "naam4 jan4",
    "why": "鼻音同邊音唔分，讀成「藍人」；或者讀完唔記得合嘴，變咗「蘭人」。",
    "how": "「男」起音啲氣要經鼻腔，個口擘大拉長 aa，最尾雙唇實一實合埋，再擘開讀「人」。",
-   "audio": "/tones/audio/mistake-naam-jan.wav",
+   "audio": "/tones/audio/mistake-naam-jan.wav?v=20261112a",
    "dur": 1.52
   },
   {
@@ -776,7 +776,7 @@
    "jy": "hoeng1 gong2",
    "why": "受普通話影響，中間夾硬加咗個 i 音，讀成「hiang 港」。",
    "how": "忘掉個 i！讀「香」一開口嘴唇就要嘟圓（似普通話「靴」尾個口型），最後舌根後縮收鼻音。",
-   "audio": "/tones/audio/mistake-hoeng-gong.wav",
+   "audio": "/tones/audio/mistake-hoeng-gong.wav?v=20261112a",
    "dur": 1.2
   },
   {
@@ -785,7 +785,7 @@
    "jy": "faat3 daat6",
    "why": "冇咗入聲，兩個字拖長讀，變咗「花達」。",
    "how": "兩個字都係舌尖急刹車。「發」上牙咬下唇起音，讀完 aa 舌尖即刻頂住上牙齦截氣；「達」一樣，一讀完即刻頂死急停，淨係做口型唔出聲。",
-   "audio": "/tones/audio/mistake-faat-daat.wav",
+   "audio": "/tones/audio/mistake-faat-daat.wav?v=20261112a",
    "dur": 1.52
   },
   {
@@ -794,7 +794,7 @@
    "jy": "gam1 jat6",
    "why": "「今」唔記得合嘴讀成「根」，「日」個尾又拖長。",
    "how": "一合一頂：讀完「今」上下唇即刻合埋；彈開讀「日」，一發完音舌尖即刻頂住上牙齦急停。",
-   "audio": "/tones/audio/mistake-gam-jat.wav",
+   "audio": "/tones/audio/mistake-gam-jat.wav?v=20261112a",
    "dur": 1.44
   },
   {
@@ -804,7 +804,7 @@
    "spoken": "自肌",
    "why": "照字典讀成第 2 聲「己」，聽落唔夠地道。",
    "how": "口語變調：「自」壓到最低平（第 6 聲），「己」直接飆上最高平（第 1 聲），嘴角微微拉扁，由最低跳去最高。",
-   "audio": "/tones/audio/mistake-zi-gei.wav",
+   "audio": "/tones/audio/mistake-zi-gei.wav?v=20261112a",
    "dur": 0.96
   },
   {
@@ -813,7 +813,7 @@
    "jy": "haang4 gaai1",
    "why": "長短音唔分，個口擘得唔夠大，讀成短音「衡雞」。",
    "how": "兩個字都係長 aa！下巴向下跌、個口擘大，拉長嚟讀；「行」收鼻音，「街」擘大再滑去 i。",
-   "audio": "/tones/audio/mistake-haang-gaai.wav",
+   "audio": "/tones/audio/mistake-haang-gaai.wav?v=20261112a",
    "dur": 1.28
   },
   {
@@ -822,7 +822,7 @@
    "jy": "dim2 gaai2",
    "why": "「點」冇合嘴，讀成「典解」。",
    "how": "「點」舌尖彈開起音，雙唇要好快合埋（聲調同時上揚）；合嘴後即刻擘大讀「解」。",
-   "audio": "/tones/audio/mistake-dim-gaai.wav",
+   "audio": "/tones/audio/mistake-dim-gaai.wav?v=20261112a",
    "dur": 0.88
   },
   {
@@ -831,7 +831,7 @@
    "jy": "syut3 gou1",
    "why": "「雪」嘴冇撮圓，又漏咗入聲急停。",
    "how": "先發 s-，嘴唇撮圓讀 yu（似普通話 ü），舌尖即刻頂實上牙齦急刹，唔好拖長，再接高平嘅「糕」。",
-   "audio": "/tones/audio/mistake-syut-gou.wav",
+   "audio": "/tones/audio/mistake-syut-gou.wav?v=20261112a",
    "dur": 1.12
   },
   {
@@ -840,7 +840,7 @@
    "jy": "sik6 faan6",
    "why": "「食」冇喉嚨急停，「飯」又冇咬唇。",
    "how": "「食」低音起，發完 i 舌根向後頂住軟腭，好似哽魚骨咁塞住喉嚨急停；跟住上牙咬下唇讀「飯」，舌尖頂上牙齦收尾。",
-   "audio": "/tones/audio/mistake-sik-faan.wav",
+   "audio": "/tones/audio/mistake-sik-faan.wav?v=20261112a",
    "dur": 1.84
   }
  ]
