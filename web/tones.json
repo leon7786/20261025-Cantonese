@@ -1,6 +1,80 @@
 {
  "sections": [
   {
+   "id": "entering",
+   "title": "入聲闖關",
+   "subtitle": "三种入声收尾一次过练：双唇、舌尖、舌根。",
+   "items": [
+    {
+     "id": "entering-boss",
+     "title": "今日食乜？食十碗白粥！",
+     "tag": "入聲 Boss",
+     "note": "一句入面有齐三种入声收尾：十（双唇收）、日同乜（舌尖收）、食同白同粥（舌根收），专门练「急刹车」。",
+     "phrase": "今日食乜？食十碗白粥！",
+     "tips": [
+      {
+       "word": "十",
+       "note": "双唇合实，短促收住，好似「十」一下即停。",
+       "audio": "/tones/audio/entering-boss-tip0.wav?v=20261112a",
+       "dur": 5.0
+      },
+      {
+       "word": "乜",
+       "note": "舌尖顶住上牙床，短促收住，好似「乜」一声即停。",
+       "audio": "/tones/audio/entering-boss-tip1.wav?v=20261112a",
+       "dur": 6.15
+      },
+      {
+       "word": "白",
+       "note": "舌根顶住软腭，短促收住，声音低沉。",
+       "audio": "/tones/audio/entering-boss-tip2.wav?v=20261112a",
+       "dur": 4.92
+      }
+     ],
+     "audio": "/tones/audio/entering-boss.wav?v=20261112a",
+     "duration": 2.48,
+     "chars": [
+      {
+       "c": "今",
+       "jy": "gam1"
+      },
+      {
+       "c": "日",
+       "jy": "jat6"
+      },
+      {
+       "c": "食",
+       "jy": "sik6"
+      },
+      {
+       "c": "乜",
+       "jy": "mat1"
+      },
+      {
+       "c": "食",
+       "jy": "sik6"
+      },
+      {
+       "c": "十",
+       "jy": "sap6"
+      },
+      {
+       "c": "碗",
+       "jy": "wun2"
+      },
+      {
+       "c": "白",
+       "jy": "baak6"
+      },
+      {
+       "c": "粥",
+       "jy": "zuk1"
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "nine",
    "title": "九声口诀 · 数字定调",
    "subtitle": "先用数字将 1–6 声嘅高低钉死，再加三个入声，九声一次过练完。",
@@ -543,80 +617,6 @@
       {
        "c": "饭",
        "jy": "faan6"
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "entering",
-   "title": "入聲闖關",
-   "subtitle": "三种入声收尾一次过练：双唇、舌尖、舌根。",
-   "items": [
-    {
-     "id": "entering-boss",
-     "title": "今日食乜？食十碗白粥！",
-     "tag": "入聲 Boss",
-     "note": "一句入面有齐三种入声收尾：十（双唇收）、日同乜（舌尖收）、食同白同粥（舌根收），专门练「急刹车」。",
-     "phrase": "今日食乜？食十碗白粥！",
-     "tips": [
-      {
-       "word": "十",
-       "note": "双唇合实，短促收住，好似「十」一下即停。",
-       "audio": "/tones/audio/entering-boss-tip0.wav?v=20261112a",
-       "dur": 5.0
-      },
-      {
-       "word": "乜",
-       "note": "舌尖顶住上牙床，短促收住，好似「乜」一声即停。",
-       "audio": "/tones/audio/entering-boss-tip1.wav?v=20261112a",
-       "dur": 6.15
-      },
-      {
-       "word": "白",
-       "note": "舌根顶住软腭，短促收住，声音低沉。",
-       "audio": "/tones/audio/entering-boss-tip2.wav?v=20261112a",
-       "dur": 4.92
-      }
-     ],
-     "audio": "/tones/audio/entering-boss.wav?v=20261112a",
-     "duration": 2.48,
-     "chars": [
-      {
-       "c": "今",
-       "jy": "gam1"
-      },
-      {
-       "c": "日",
-       "jy": "jat6"
-      },
-      {
-       "c": "食",
-       "jy": "sik6"
-      },
-      {
-       "c": "乜",
-       "jy": "mat1"
-      },
-      {
-       "c": "食",
-       "jy": "sik6"
-      },
-      {
-       "c": "十",
-       "jy": "sap6"
-      },
-      {
-       "c": "碗",
-       "jy": "wun2"
-      },
-      {
-       "c": "白",
-       "jy": "baak6"
-      },
-      {
-       "c": "粥",
-       "jy": "zuk1"
       }
      ]
     }
