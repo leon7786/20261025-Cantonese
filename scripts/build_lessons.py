@@ -22,7 +22,7 @@ DATA = ROOT / "data" / "articles.json"
 OUT_AUDIO = ROOT / "web" / "lessons" / "audio"
 OUT_JSON = ROOT / "web" / "lessons.json"
 SR = 24000
-AUDIO_VER = "20261123c"
+AUDIO_VER = "20261123d"
 MODEL = "qwen-audio-3.0-tts-plus"
 VOICE = "longanlingxin"
 INSTRUCTION = "请用广东话表达。"
@@ -146,7 +146,16 @@ def cut_points(text: str, words: list[dict], total_ms: int) -> list[int]:
     offset = 0
     for seg in segments[:-1]:
         offset += len(seg)
-        cuts.append(time_at(offset))
+        prev_end, next_begin = None, None
+        for s0, e0, w0 in spans:
+            if s0 <= offset - 1 < e0:
+                prev_end = int(w0["end_time"])
+            if s0 <= offset < e0:
+                next_begin = int(w0["begin_time"])
+        if prev_end is not None and next_begin is not None and next_begin >= prev_end:
+            cuts.append((prev_end + next_begin) // 2)
+        else:
+            cuts.append(time_at(offset))
     cuts.append(total_ms)
     assert len(cuts) == len(segments) + 1, (len(cuts), len(segments))
 
@@ -158,28 +167,35 @@ def cut_points(text: str, words: list[dict], total_ms: int) -> list[int]:
 
 
 def snap_cuts(audio: np.ndarray, cuts: list[int]) -> list[int]:
-    """把切點吸附到附近的靜音谷，避免時間戳誤差切斷尾音。"""
-    frame = int(SR * 0.01)          # 10ms
-    search = int(SR * 0.30)         # ±300ms
+    """把切點吸附到附近最接近的靜音段中心，避免切斷字尾或帶入下一個字。"""
+    frame = int(SR * 0.01)
+    n = len(audio) // frame
+    rms = np.array([float(np.sqrt(np.mean(audio[i * frame:(i + 1) * frame] ** 2))) for i in range(n)])
+    thresh = max(float(rms.max()) * 0.06, 1e-4)
+
+    runs, start = [], None
+    for i, v in enumerate(rms):
+        if v < thresh and start is None:
+            start = i
+        elif v >= thresh and start is not None:
+            if (i - start) * 10 >= 60:
+                runs.append((start * 10, i * 10))
+            start = None
+    if start is not None and (n - start) * 10 >= 60:
+        runs.append((start * 10, n * 10))
+
     out = [cuts[0]]
     for cut in cuts[1:-1]:
-        center = int(cut * SR / 1000)
-        lo, hi = max(0, center - search), min(len(audio), center + search)
-        if hi - lo < frame * 3:
-            out.append(cut)
-            continue
-        seg = audio[lo:hi]
-        n = len(seg) // frame
-        rms = np.array([
-            float(np.sqrt(np.mean(seg[i * frame:(i + 1) * frame] ** 2)))
-            for i in range(n)
-        ])
-        # 偏好靠近原切點、且能量低的框
-        idx = int(np.argmin(rms + 1e-4 * np.abs(np.arange(n) - n / 2)))
-        snapped = int((lo + idx * frame + frame / 2) / SR * 1000)
-        out.append(snapped)
+        best = None
+        for a0, a1 in runs:
+            center = (a0 + a1) // 2
+            if abs(center - cut) <= 600:
+                score = abs(center - cut) - min(a1 - a0, 240) * 0.15
+                if best is None or score < best[0]:
+                    best = (score, center)
+        out.append(best[1] if best else cut)
     out.append(cuts[-1])
-    # 保證遞增
+
     for i in range(1, len(out) - 1):
         if out[i] <= out[i - 1] + 80:
             out[i] = out[i - 1] + 80
