@@ -22,6 +22,7 @@ DATA = ROOT / "data" / "articles.json"
 OUT_AUDIO = ROOT / "web" / "lessons" / "audio"
 OUT_JSON = ROOT / "web" / "lessons.json"
 SR = 24000
+AUDIO_VER = "20261123a"
 MODEL = "qwen-audio-3.0-tts-plus"
 VOICE = "longanlingxin"
 INSTRUCTION = "请用广东话表达。"
@@ -236,7 +237,7 @@ async def build(only: set[int] | None = None) -> None:
                 total_ms += int(len(chunk) / SR * 1000)
                 segs.append({
                     "zh": zh, "jy": jy.strip(),
-                    "audio": f"/lessons/audio/{name}",
+                    "audio": f"/lessons/audio/{name}?v={AUDIO_VER}",
                     "dur": round(len(chunk) / SR, 2),
                 })
             lessons["articles"].append({"title": art["title"], "tag": art["tag"], "segments": segs,
@@ -260,7 +261,7 @@ async def build(only: set[int] | None = None) -> None:
             write_wav(OUT_AUDIO / name, chunk)
             segs.append({
                 "zh": zh, "jy": jy.strip(),
-                "audio": f"/lessons/audio/{name}",
+                "audio": f"/lessons/audio/{name}?v={AUDIO_VER}",
                 "dur": round(len(chunk) / SR, 2),
             })
         lessons["articles"].append({"title": art["title"], "tag": art["tag"], "segments": segs,
