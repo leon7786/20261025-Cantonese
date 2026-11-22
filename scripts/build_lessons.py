@@ -22,7 +22,7 @@ DATA = ROOT / "data" / "articles.json"
 OUT_AUDIO = ROOT / "web" / "lessons" / "audio"
 OUT_JSON = ROOT / "web" / "lessons.json"
 SR = 24000
-AUDIO_VER = "20261123a"
+AUDIO_VER = "20261123c"
 MODEL = "qwen-audio-3.0-tts-plus"
 VOICE = "longanlingxin"
 INSTRUCTION = "请用广东话表达。"
@@ -240,9 +240,17 @@ async def build(only: set[int] | None = None) -> None:
                     "audio": f"/lessons/audio/{name}?v={AUDIO_VER}",
                     "dur": round(len(chunk) / SR, 2),
                 })
+            # 另存一份整篇自然朗讀，供「全文播放」使用
+            pcm_full, _w = await synth(text, env)
+            full_audio = np.frombuffer(pcm_full, dtype=np.int16).astype(np.float32) / 32768
+            full_name = f"a{ai}full.wav"
+            write_wav(OUT_AUDIO / full_name, full_audio)
+            full_ms = int(len(full_audio) / SR * 1000)
             lessons["articles"].append({"title": art["title"], "tag": art["tag"], "segments": segs,
-                                        "duration": round(total_ms / 1000, 2)})
-            print(f"    {len(segs)} 段, {total_ms/1000:.1f}s", flush=True)
+                                        "duration": round(total_ms / 1000, 2),
+                                        "full": f"/lessons/audio/{full_name}?v={AUDIO_VER}",
+                                        "full_duration": round(full_ms / 1000, 2)})
+            print(f"    {len(segs)} 段, {total_ms/1000:.1f}s（全文 {full_ms/1000:.1f}s）", flush=True)
             continue
 
         print(f"[{ai+1}/{len(articles)}] {art['title']} …", flush=True)

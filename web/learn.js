@@ -25,6 +25,7 @@
     playing: false,     // 正在播（含「整篇」與「單句」）
     paused: false,
     single: false,      // 單句模式：播完即停
+    mode: "segments",   // segments：逐句；full：整篇自然朗讀
     index: 0,
     visited: {},        // { articleIndex: [segIndex, ...] }
     last: null,         // { art, seg }
@@ -132,7 +133,20 @@
   }
 
   function playWhole() {
+    const art = current();
     stopPlayback({ quiet: true });
+    if (art && art.full) {
+      state.mode = "full";
+      state.index = 0;
+      state.playing = true;
+      state.paused = false;
+      syncButton();
+      player.src = art.full;
+      applyRate(state.rate);
+      player.play().catch(() => {});
+      setStatus("全文播放");
+      return;
+    }
     playSegment(0, false);
   }
 
@@ -157,6 +171,7 @@
     const seg = art && art.segments[i];
     if (!seg) return;
 
+    state.mode = "segments";
     state.index = i;
     if (single) markVisited(i);
     state.single = Boolean(single);
@@ -174,6 +189,16 @@
   function onEnded() {
     const art = current();
     if (!state.playing) return;
+
+    if (state.mode === "full") {
+      state.playing = false;
+      state.paused = false;
+      state.mode = "segments";
+      highlight(-1);
+      syncButton();
+      setStatus("全篇播放完畢");
+      return;
+    }
 
     if (state.single || state.index + 1 >= art.segments.length) {
       state.playing = false;
@@ -198,7 +223,7 @@
       state.paused = false;
       player.play().catch(() => {});
       syncButton();
-      setStatus(`第 ${state.index + 1} 句`);
+      setStatus(state.mode === "full" ? "全文播放" : `第 ${state.index + 1} 句`);
       return;
     }
     playWhole();
@@ -208,6 +233,7 @@
     state.playing = false;
     state.paused = false;
     state.single = false;
+    state.mode = "segments";
     state.index = 0;
     player.pause();
     player.removeAttribute("src");
@@ -261,7 +287,8 @@
     replayBtn.addEventListener("click", replay);
     player.addEventListener("ended", onEnded);
     player.addEventListener("play", () => {
-      if (!state.paused) setStatus(`第 ${state.index + 1} 句`);
+      if (state.paused) return;
+      setStatus(state.mode === "full" ? "全文播放" : `第 ${state.index + 1} 句`);
     });
   }
 
