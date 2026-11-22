@@ -91,7 +91,7 @@ async def synth(text: str, env: dict) -> tuple[bytes, list[dict]]:
         return bytes(pcm), words
 
 
-PUNCT_RE = re.compile(r"[，。！？；：、,.!?;:;；\"'“”‘’《》〈〉（）()「」『』…—]")
+PUNCT_RE = re.compile(r"[，。！？；：、,.!?;:;；\"'“”‘’《》〈〉（）()「」『』…—\-－]")
 
 
 LATIN_RE = re.compile(r"[A-Za-z0-9]+")
@@ -217,7 +217,7 @@ async def build(only: set[int] | None = None) -> None:
         text = art["text"]
         text_segments = segments_of(text)
         # 粵拼按「非標點字數」分配，避免頓號（、）在粵拼裡也是逗號而造成錯位
-        jy_tokens = [t for t in art["jyutping"].split() if not re.fullmatch(r"[，。！？；：、,.!?;:;；\"'“”‘’《》〈〉（）()…—]+", t)]
+        jy_tokens = [t for t in art["jyutping"].split() if not re.fullmatch(r"[，。！？；：、,.!?;:;；\"'“”‘’《》〈〉（）()…—\-－]+", t)]
         jy_segments, cursor = [], 0
         for seg in text_segments:
             count = char_count(seg)
