@@ -52,7 +52,7 @@ GitHub 上「支援粵語」的 TTS 專案不少，但質素、部署成本、�
 python scripts/build_lessons.py
 ```
 
-文章原文與粵拼在 `data/articles.json`，改完重跑腳本即可；`web/lessons.json` 是生成的清單（578 段，約 1373 秒）。
+文章原文與粵拼在 `data/articles.json`，改完重跑腳本即可；`web/lessons.json` 是生成的清單（578 段，約 1377 秒）。
 
 ## 九聲六調
 

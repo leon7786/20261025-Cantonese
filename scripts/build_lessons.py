@@ -225,6 +225,25 @@ async def build(only: set[int] | None = None) -> None:
             cursor += count
         assert cursor == len(jy_tokens), (art["title"], cursor, len(jy_tokens))
 
+        if art.get("segment_synth"):
+            print(f"[{ai+1}/{len(articles)}] {art['title']} …（逐句合成）", flush=True)
+            segs, total_ms = [], 0
+            for si, (zh, jy) in enumerate(zip(text_segments, jy_segments)):
+                pcm, _words = await synth(zh, env)
+                chunk = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
+                name = f"a{ai}s{si}.wav"
+                write_wav(OUT_AUDIO / name, chunk)
+                total_ms += int(len(chunk) / SR * 1000)
+                segs.append({
+                    "zh": zh, "jy": jy.strip(),
+                    "audio": f"/lessons/audio/{name}",
+                    "dur": round(len(chunk) / SR, 2),
+                })
+            lessons["articles"].append({"title": art["title"], "tag": art["tag"], "segments": segs,
+                                        "duration": round(total_ms / 1000, 2)})
+            print(f"    {len(segs)} 段, {total_ms/1000:.1f}s", flush=True)
+            continue
+
         print(f"[{ai+1}/{len(articles)}] {art['title']} …", flush=True)
         pcm, words = await synth(text, env)
         audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
